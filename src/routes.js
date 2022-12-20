@@ -23,6 +23,9 @@ import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
+import MachinesCardView from "views/MachineCardView/MachinesCardView.js";
+import Charts from "views/Charts/Charts.js";
+
 
 const dashboardRoutes = [
   {
@@ -80,6 +83,20 @@ const dashboardRoutes = [
     name: "Notifications",
     icon: "nc-icon nc-bell-55",
     component: Notifications,
+    layout: "/admin"
+  },
+  {
+    path: "/MachinesCardView",
+    name: "machinesCardView",
+    icon: "nc-icon nc-bell-55",
+    component: MachinesCardView,
+    layout: "/admin"
+  },
+  {
+    path: "/Charts",
+    name: "charts",
+    icon: "nc-icon nc-bell-55",
+    component: Charts,
     layout: "/admin"
   }
 ];
