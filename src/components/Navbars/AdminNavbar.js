@@ -89,10 +89,10 @@ function Header() {
                 className="m-0"
               >
                 <i className="nc-icon nc-planet"></i>
-                <span className="notification">5</span>
+                {/* <span className="notification">5</span> */}
                 <span className="d-lg-none ml-1">Notification</span>
               </Dropdown.Toggle>
-              <Dropdown.Menu>
+              {/* <Dropdown.Menu>
                 <Dropdown.Item
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
@@ -123,7 +123,7 @@ function Header() {
                 >
                   Another notification
                 </Dropdown.Item>
-              </Dropdown.Menu>
+              </Dropdown.Menu> */}
             </Dropdown>
             <Nav.Item>
               <Nav.Link

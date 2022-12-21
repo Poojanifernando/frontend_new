@@ -16,18 +16,23 @@ import {
   Tooltip,
 } from "react-bootstrap";
 
+import MachinesCardView from "components/MachineCardView/MachinesCardView.js";
+
+
+import DashboardForm from "components/Forms/DashboardForm.js";
+
 
 
 function Dashboard() {
   return (
     <>
       <Container fluid>
-        {/**card row start */}
-
-        <MachinesCardView/>
         
+        {/**card row start */}
+        <DashboardForm />
+        <MachinesCardView />
+        {/**card row End */}
 
-         {/**card row End */}
       </Container>
     </>
   );
