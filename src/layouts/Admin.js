@@ -27,6 +27,8 @@ import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
 
+
+
 function Admin() {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
@@ -65,6 +67,9 @@ function Admin() {
     <>
       <div className="wrapper">
         <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
+
+
+
         <div className="main-panel" ref={mainPanel}>
           <AdminNavbar />
           <div className="content">
