@@ -23,15 +23,21 @@ import DashboardForm from "components/Forms/DashboardForm.js";
 
 
 
+
+
+
 function Dashboard() {
   return (
     <>
       <Container fluid>
         
         {/**card row start */}
-        <DashboardForm />
+        {/* <DashboardForm /> */}
+        
         <MachinesCardView />
         {/**card row End */}
+
+        {/* <Login/> */}
 
       </Container>
     </>

@@ -6,6 +6,7 @@ import Icons from "views/Icons.js";
 import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
+import CustomerRegister from "views/CustomerRegister";
 // import MachinesCardView from "views/MachineCardView/MachinesCardView.js";
 // import Charts from "views/Charts/Charts.js";
 // import DashboardForm from "views/Forms/DashboardForm.js";
@@ -14,19 +15,27 @@ import Upgrade from "views/Upgrade.js";
 
 
 const dashboardRoutes = [
-  {
-    upgrade: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "nc-icon nc-alien-33",
-    component: Upgrade,
-    layout: "/admin"
-  },
+  // {
+  //   upgrade: true,
+  //   path: "/upgrade",
+  //   name: "Upgrade to PRO",
+  //   icon: "nc-icon nc-alien-33",
+  //   component: Upgrade,
+  //   layout: "/admin"
+  // },
   {
     path: "/dashboard",
     name: "Dashboard",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
+    layout: "/admin"
+  },
+  
+  {
+    path: "/CustomerRegister",
+    name: "customerRegister",
+    icon: "nc-icon nc-notes",
+    component: CustomerRegister,
     layout: "/admin"
   },
   {
@@ -99,14 +108,7 @@ const dashboardRoutes = [
   //   component: CardParameterbody,
   //   layout: "/admin"
   // }
-  // ,
-  // {
-  //   path: "/CardInsideBody",
-  //   name: "cardInsideBody",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: CardInsideBody,
-  //   layout: "/admin"
-  // }
+
 ];
 
 export default dashboardRoutes;

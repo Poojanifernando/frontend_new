@@ -1,0 +1,76 @@
+.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+.scrollmenu .aa {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    /* text-align: center; */
+    border: none;
+    padding:0;
+  }
+hr{
+    /* background-color: black; */
+    /* border: none; */
+    size : 1;
+}
+.h3{
+  font-family: Arial;
+  font-size: 25px;
+  color: black;
+  text-align: left;
+  padding: none;
+  border: none;
+}
+
+.inside_card_padding{
+  padding: 5px;
+}
+.padnone{
+  padding: none;
+}
+
+.rowss{
+  background-color: rgb(211, 239, 209);
+  text-align: left;
+}
+
+.test{
+  border-style: groove;
+}
+
+/* test */
+/* .column {
+  float: left;
+  width: 33.33%;
+} */
+
+/* Clear floats after the columns */
+/* .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.column9 {
+  float: left;
+  width: 33.33%;
+}
+.column7 {
+  float: left;
+  width: 33.33%;
+} */
+.column {
+  float: left;
+}
+
+.left  {
+  width: 50%;
+  /* height: 50px; */
+  /* align-content: center; */
+  
+}
+
+.middle,.right {
+  width: 25%;
+}
