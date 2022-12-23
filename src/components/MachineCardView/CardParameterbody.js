@@ -23,10 +23,10 @@ function CardParameterbody() {
     }, [])
 
     return (
-        <Container fluid>
-                <Card className="card-stats">
+        <Container style={{paddingBottom: "10px"}}>
+                < >
                    <CardInsideBody/>
-                </Card>
+                </>
 
         </Container>
     );

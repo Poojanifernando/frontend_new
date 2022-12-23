@@ -1,0 +1,92 @@
+.title {
+    padding-left: 10px;
+    padding-top: 0px;
+
+}
+
+.column {
+    float: left;
+    padding: 10px;
+
+
+}
+
+.left {
+    width: 25%;
+    font-weight: bold;
+
+}
+
+.right {
+    width: 75%;
+    background-color: rgb(41, 138, 63);
+    font-weight: bold;
+    text-align: center;
+    color: azure;
+    font-size: large;
+    border: none;
+    /* -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black; */
+
+}
+
+.row1 {
+    border-style: ridge;
+}
+
+
+.row1:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.column1 {
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    float: left;
+    width: 16.66%;
+    border: 10px;
+    /* background-color: rgb(240, 228, 228); */
+}
+/* .column2 {
+    padding-left: 5px;
+    float: left;
+    width: 16.66%;
+    border: 10px;
+  
+} */
+
+/* Clear floats after the columns */
+.row1:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .column1 {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .column2 {
+        width: 100%;
+    }
+}
+
+.linetitle {
+    /* color: rgb(122, 124, 124); */
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace black;
+    font-size: 15px;
+    color: rgb(122, 124, 124);
+}
+
+.fontsize {
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}

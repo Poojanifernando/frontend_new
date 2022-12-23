@@ -1,0 +1,105 @@
+.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+.scrollmenu .aa {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    /* text-align: center; */
+    border: none;
+  }
+hr{
+    /* background-color: black; */
+    /* border: none; */
+    size : 1;
+}
+.h3{
+  font-family: 'Courier New', Courier, monospace black;
+  font-size: 15px;
+  color: black;
+  text-align: left;
+  padding: none;
+  border: none;
+}
+
+.inside_card_padding{
+  padding: 5px;
+}
+.padnone{
+  padding: none;
+}
+
+/* .row{
+  background-color: rgb(157, 133, 133);
+  text-align: left;
+} */
+
+.rowstest{
+    background-color: rgb(182, 251, 213);
+    text-align: left;
+    padding: 10px;
+
+  }
+
+.test{
+  border-style: groove;
+}
+
+
+.column {
+  float: left;
+}
+
+.left  {
+  width: 50%;
+  /* height: 50px; */
+  /* align-content: center; */
+  
+}
+
+.middle,.right {
+  width: 25%;
+}
+
+
+.abc{
+    /* background-color: rgb(236, 153, 153); */
+   /* height: 100px; */
+   white-space: pre-line;
+
+}
+.ab{
+    /* background-color: rgb(118, 107, 107); */
+   /* height: 100px; */
+   white-space: pre-line;
+   font-size: 10px;
+ 
+
+}
+.a{
+    /* background-color: rgb(235, 11, 11); */
+   /* height: 100px; */
+   white-space: pre-line;
+   font-size: 35px;
+   
+}
+
+.col-4{
+    /* border-style: double; */
+    /* padding: 0; */
+    padding-top: 10px;
+    align-content: center;
+}
+.col-6{
+    /* border-style: double; */
+    padding: 0;
+    padding-left: 10px;
+}
+/* .col-2{
+    border-style: double;
+    padding: 0;
+} */
+/* .cardbody{
+  padding: 0;
+} */
