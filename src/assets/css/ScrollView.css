@@ -1,21 +1,25 @@
 .scrollmenu {
-    overflow: auto;
-    white-space: nowrap;
-  }
+  overflow: auto;
+  white-space: nowrap;
+  /* padding-left: 10px; */
   
-.scrollmenu .aa {
-    display: inline-block;
-    color: rgb(0, 0, 0);
-    /* text-align: center; */
-    border: none;
-    padding:0;
-  }
-hr{
-    /* background-color: black; */
-    /* border: none; */
-    size : 1;
 }
-.h3{
+
+.scrollmenu .aa {
+  /* display: inline-block;
+  color: rgb(0, 0, 0);
+  text-align: center; */
+  border: none;
+  /* padding: 3px; */
+}
+
+hr {
+  /* background-color: black; */
+  /* border: none; */
+  size: 1;
+}
+
+.h3 {
   font-family: Arial;
   font-size: 25px;
   color: black;
@@ -24,19 +28,20 @@ hr{
   border: none;
 }
 
-.inside_card_padding{
+.inside_card_padding {
   padding: 5px;
 }
-.padnone{
+
+.padnone {
   padding: none;
 }
 
-.rowss{
+.rowss {
   background-color: rgb(211, 239, 209);
   text-align: left;
 }
 
-.test{
+.test {
   border-style: groove;
 }
 
@@ -64,13 +69,14 @@ hr{
   float: left;
 }
 
-.left  {
+.left {
   width: 50%;
   /* height: 50px; */
   /* align-content: center; */
-  
+
 }
 
-.middle,.right {
+.middle,
+.right {
   width: 25%;
 }
