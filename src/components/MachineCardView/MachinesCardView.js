@@ -5,8 +5,11 @@ import "../../assets/css/ScrollView.css"
 
 
 
-import CardParameterbody from "components/MachineCardView/CardParameterbody.js";
+// import CardParameterbody from "components/MachineCardView/CardParameterbody.js";
 import LineHeader from "components/LineHeadder/LineHeader.js";
+
+
+
 
 // import ChartistGraph from "react-chartist";
 // react-bootstrap components
@@ -18,60 +21,50 @@ import {
 } from "react-bootstrap";
 
 function MachinesCardView() {
+  const [dateState, setDateState] = useState(new Date());
+  const [Lines, setLines] = useState([]);
   const [Machins, setMachines] = useState([]);
+  const [date, setdate] = useState('2022-12-23');
 
 
   useEffect(() => {
-    axios.get('http://localhost:8081/api/v1/MachineLineTest/getalltests').then((response) => {
-      setMachines(response.data);
+
+    //call date 
+    setInterval(() => setDateState(new Date()), 30000);
+    console.log("new")
+
+    axios.get('http://localhost:8081/api/v1/admin/getLineByDate/'+ date).then((response) => {
+      setLines(response.data);
       // console.log(response.data)
     });
 
     // http://localhost:8081/api/v1/PDM/getalltestsdevices
   }, [])
 
+
+  //get date
+  let a = dateState.toLocaleDateString('en-CA', {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  })
+
+  console.log(JSON. stringify(Lines))
+
+  console.log("date " + a)
   return (
+    <div>
+      {Lines?.map((Line, index) => {
+        return (
+          <Container fluid className="test">
+            {Lines.lineid_line_id}
+            <LineHeader date={date} line={Line.lineid_line_id} lineName={Line.line_name}/>
+           
+          </Container>
 
-    <Container fluid className="test">
-      <LineHeader />
-      <br />
-      <Row>
-
-
-        <div class="scrollmenu">
-          {/* <a href="#work">Work</a> */}
-          {Machins?.map((Machins, index) => {
-            return (
-
-              <Col lg="3" sm="6" className="aa">
-                <Card className="card-stats">
-                  <Card.Header>
-                    {/* <div className="stats"> */}
-                    {/* <i className="fas fa-redo mr-1"></i> */}
-                  Extruder 
-
-                    {/* {Machins?.machineID} */}
-
-                    {/* </div> */}
-                  </Card.Header>
-                  <CardParameterbody />
-                </Card>
-              </Col>
-
-            )
-          })}
-
-
-
-
-        </div>
-
-        {/**card row start */}
-
-        {/**card row End */}
-      </Row>
-
-    </Container>
+        )
+      })}
+    </div>
   );
 }
 
