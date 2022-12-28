@@ -4,20 +4,20 @@
 
 }
 
-.column {
+.columnrow {
     float: left;
     padding: 10px;
 
 
 }
 
-.left {
+.leftrow {
     width: 25%;
-    font-weight: bold;
+    font-weight: bold;  
 
 }
 
-.right {
+.rightrow {
     width: 75%;
     background-color: rgb(41, 138, 63);
     font-weight: bold;
@@ -90,3 +90,9 @@
     font-weight: bold;
     color: rgb(0, 0, 0);
 }
+.ptagRemove{
+    display: inline;
+     font-weight: normal;
+    color: rgb(0, 0, 0);
+}
+
