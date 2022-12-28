@@ -7,6 +7,14 @@ import Maps from "views/Maps.js";
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
 import CustomerRegister from "views/CustomerRegister";
+import CurrentProcessRegistration from "views/CurrentProcessRegistration";
+import JobRegistration from "views/JobRegistration";
+import BatchRegistration from "views/BatchRegistration";
+import ProductRegistration from "views/ProductRegistration";
+import ProductLineRegistration from "views/ProductLineRegistration";
+import MachineRegistration from "views/MachineRegistration";
+import ParameterCode from "views/ParameterCode";
+import DeviceRegistration from "views/DeviceRegistration";
 // import MachinesCardView from "views/MachineCardView/MachinesCardView.js";
 // import Charts from "views/Charts/Charts.js";
 // import DashboardForm from "views/Forms/DashboardForm.js";
@@ -30,7 +38,7 @@ const dashboardRoutes = [
     component: Dashboard,
     layout: "/admin"
   },
-  
+
   {
     path: "/CustomerRegister",
     name: "customerRegister",
@@ -80,6 +88,66 @@ const dashboardRoutes = [
     component: Notifications,
     layout: "/admin"
   },
+  {
+    path: "/CurrentProcessRegistration",
+    name: "currentProcessRegistration",
+    icon: "nc-icon nc-bell-55",
+    component: CurrentProcessRegistration,
+    layout: "/admin"
+  },
+  {
+    path: "/JobRegistration",
+    name: "jobRegistration",
+    icon: "nc-icon nc-bell-55",
+    component: JobRegistration,
+    layout: "/admin"
+  },
+  {
+    path: "/BatchRegistration",
+    name: "batchRegistration",
+    icon: "nc-icon nc-bell-55",
+    component: BatchRegistration,
+    layout: "/admin"
+  },
+  {
+    path: "/ProductRegistration",
+    name: "productRegistration",
+    icon: "nc-icon nc-bell-55",
+    component: ProductRegistration,
+    layout: "/admin"
+  },
+  {
+    path: "/ProductLineRegistration",
+    name: "productLineRegistration",
+    icon: "nc-icon nc-bell-55",
+    component: ProductLineRegistration,
+    layout: "/admin"
+  },
+  {
+    path: "/MachineRegistration",
+    name: "machineRegistration",
+    icon: "nc-icon nc-bell-55",
+    component: MachineRegistration,
+    layout: "/admin"
+  },
+  {
+    path: "/ParameterCode",
+    name: "parameterCode",
+    icon: "nc-icon nc-bell-55",
+    component: ParameterCode,
+    layout: "/admin"
+  },
+  {
+    path: "/DeviceRegistration",
+    name: "deviceRegistration",
+    icon: "nc-icon nc-bell-55",
+    component: DeviceRegistration,
+    layout: "/admin"
+  }
+
+
+
+
   // {
   //   path: "/MachinesCardView",
   //   name: "machinesCardView",
