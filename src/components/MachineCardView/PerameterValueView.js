@@ -25,6 +25,7 @@ function PerameterValueView(props) {
     " current_Machine "+current_Machine)
 
     const [Values, setValues] = useState([]);
+    const [color, setcolor] = useState(`rgb(182,251,213)`);
 
     useEffect(() => {
         axios.get('http://localhost:8081/api/v1/admin/GetValueByDevice/'+current_Job+'/'+current_batch+'/'+current_Line+'/'+current_pOrder+'/'+current_Machine+'/'+current_deviceId+'/'+current_pID+'/'+current_date).then((response) => {
@@ -43,7 +44,7 @@ function PerameterValueView(props) {
         <>
             {Values?.map((Value, index) => {
                 return (
-                    <Card.Title className="h3">{Value.value_tra} {Value.measuring_unit}</Card.Title>
+                    <Card.Title className="h3" style={{ backgroundColor:color}}>{Value.value_tra} {Value.measuring_unit}</Card.Title>
 
                 )
             })}

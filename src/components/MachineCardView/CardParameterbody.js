@@ -23,6 +23,7 @@ function CardParameterbody(props) {
 
     const [machinePerameters, setMachinePerameters] = useState([]);
 
+
     useEffect(() => {
         axios.get('http://localhost:8081/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine).then((response) => {
             setMachinePerameters(response.data);
@@ -34,7 +35,7 @@ function CardParameterbody(props) {
             < >
                 {machinePerameters?.map((machineperameter, index) => {
                     return (
-                        <Row className="rowstest">
+                        <Row className="rowstest" >
                             <Col xs="6 ab">
                                 {/* <div className="numbers"> */}
                                 <p className="card-category">
