@@ -57,8 +57,8 @@ function MachinesCardView() {
       {Lines?.map((Line, index) => {
         return (
           <Container fluid className="test">
-            {Lines.lineid_line_id}
-            <LineHeader date={date} line={Line.lineid_line_id} lineName={Line.line_name}/>
+            {Lines.product_lineid_ad}
+            <LineHeader date={date} line={Line.product_lineid_ad} lineName={Line.line_name}/>
            
           </Container>
 
