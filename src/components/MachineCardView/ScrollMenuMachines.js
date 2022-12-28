@@ -38,7 +38,7 @@ function ScrollMenuMachines(props) {
     return (
         <div>
             <br/>
-            <Row >
+            {/* <Row > */}
                 <div class="scrollmenu">
                     {/* <a href="#work">Work</a> */}
                     {AllMachines?.map((Machins, index) => {
@@ -61,7 +61,7 @@ function ScrollMenuMachines(props) {
                         )
                     })} 
                 </div>
-            </Row>
+            {/* </Row> */}
         </div>
     );
 }

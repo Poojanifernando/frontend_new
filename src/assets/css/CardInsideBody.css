@@ -1,14 +1,14 @@
-.scrollmenu {
-    overflow: auto;
-    white-space: nowrap;
-  }
-  
-.scrollmenu .aa {
-    display: inline-block;
-    color: rgb(0, 0, 0);
-    /* text-align: center; */
-    border: none;
-  }
+  /* .scrollmenu {
+      overflow: auto;
+      white-space: nowrap;
+    }
+    
+  .scrollmenu .aa {
+      display: inline-block;
+      color: rgb(0, 0, 0);
+      text-align: center;
+      border: none;
+    } */
 hr{
     /* background-color: black; */
     /* border: none; */

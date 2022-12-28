@@ -6,11 +6,11 @@
 }
 
 .scrollmenu .aa {
-  /* display: inline-block;
+  display: inline-block;
   color: rgb(0, 0, 0);
-  text-align: center; */
+  text-align: center; 
   border: none;
-  /* padding: 3px; */
+  padding: 3px;
 }
 
 hr {
@@ -37,7 +37,7 @@ hr {
 }
 
 .rowss {
-  background-color: rgb(211, 239, 209);
+  background-color: rgb(1, 1, 1);
   text-align: left;
 }
 
@@ -65,18 +65,18 @@ hr {
   float: left;
   width: 33.33%;
 } */
-.column {
+/* .column {
   float: left;
 }
 
 .left {
   width: 50%;
-  /* height: 50px; */
-  /* align-content: center; */
+  height: 50px;
+  align-content: center;
 
-}
+} */
 
-.middle,
+/* .middle,
 .right {
   width: 25%;
-}
+} */
