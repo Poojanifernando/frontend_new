@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
-import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
     Badge,
@@ -15,52 +15,65 @@ import {
     Dropdown
 } from "react-bootstrap";
 
-
-function CurrentProcessForm() {
-
+function CurrentProcessUpdate({ match }) {
+    
     const iserId = localStorage.getItem("userId");
+    const history = useHistory();
 
     //use states
-    const [jobids, setjobids] = useState([]);
     const [productTable, setProductDetails] = useState([]);
     const [lineDetails, setLineDetails] = useState([]);
     const [cusDetails, setcusDetails] = useState([]);
+    // const [details, setdetails] = useState([]);
 
-    //Hook
-    const processDetails = useFormik({
-        initialValues: {
-            job_id_ad: '',
-            userid_ad: iserId,
-            batchid_ad: '',
-            product_lineid_ad: '',
-            batch_start_time: '',
-            batch_end_time: '',
-            predicted_date: '',
-            production_order: '',
-            product: '',
-            job_description: '',
-            Customer_id: '',
-            Curd: '1',
-        },
-        onSubmit: values => {
-            //  console.log("test", 'http://localhost:8081/api/v1/admin/postcurrentdata/' + processDetails.values.job_id_ad + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + ':00/' + processDetails.values.batch_end_time + ':00/' + processDetails.values.product + '/' + processDetails.values.product + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad)
-            // console.log(processDetails.values)
-            axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + '/' + processDetails.values.batch_end_time + '/' + processDetails.values.product + '/' + processDetails.values.production_order + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad).then(() => {
-                alert("Current Process added successfully!!!");
-                window.location.reload();
-            }).catch((err) => {
-                alert(err);
-            })
-        }
+    const [job_id_ad, setjob_id_ad] = useState('');
+    // const [userid_ad, setuserid_ad] = useState("");
+    const [batchid_ad, setbatchid_ad] = useState("");
+    const [product_lineid_ad, setproduct_lineid_ad] = useState("");
+    const [batch_start_time, setbatch_start_time] = useState("");
+    const [count, setcount] = useState("");
+    const [batch_end_time, setbatch_end_time] = useState("");
+    const [predicted_date, setpredicted_date] = useState("");
+    const [production_order, setproduction_order] = useState("");
+    const [product, setproduct] = useState("");
+    const [job_description, setjob_description] = useState("");
+    const [Customer_id, setCustomer_id] = useState('');
+    // const [Curd, setCurd] = useState("3");
+
+    const [details] = useState({
+        userid_ad: iserId,
+        job_id_ad: '',
+        batchid_ad: '',
+        product_lineid_ad: '',
+        batch_start_time: '',
+        batch_end_time: '',
+        predicted_date: '',
+        production_order: '',
+        product: '',
+        job_description: '',
+        Customer_id: '',
+        Curd: '3',
     })
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/job/getAllJobs').then((response) => {
-            setjobids(response.data.content);
+        axios.get('http://localhost:8081/api/v1/admin/getcurrentprocess/' + match.params.id).then((response) => {
+            setjob_id_ad(response.data.job_id_ad)
+            setbatchid_ad(response.data.batchid_ad)
+            setproduct_lineid_ad(response.data.product_lineid_ad)
+            setbatch_start_time(response.data.batch_start_time)
+            setbatch_end_time(response.data.batch_end_time)
+            setpredicted_date(response.data.predicted_date)
+            setproduction_order(response.data.production_order)
+            setproduct(response.data.product_id);
+            setjob_description(response.data.job_description);
+            setCustomer_id(response.data.customer_id);
+            setcount(response.data.count_reg_bch)
         });
+
         axios.get('http://localhost:8081/api/v1/product/getAllProducts').then((response) => {
             setProductDetails(response.data.content);
         });
+
         axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
             setLineDetails(response.data.content);
         });
@@ -68,14 +81,51 @@ function CurrentProcessForm() {
         axios.get('http://localhost:8081/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
             setcusDetails(response.data.content);
         });
-
-
     }, []);
 
-    const [text, setText] = React.useState('');
+    const ChangeOnClick = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("userid_ad", "user_005");
+        formData.append("product_lineid_ad", product_lineid_ad);
+        formData.append("job_id_ad", job_id_ad);
+        formData.append("job_description", job_description);
+        formData.append("batchid_ad", batchid_ad);
+        formData.append("batch_start_time", batch_start_time);
+        formData.append("count", count);
+        formData.append("batch_end_time", batch_end_time);
+        formData.append("predicted_date", predicted_date);
+        formData.append("production_order", production_order);
+        formData.append("product", product);
+        formData.append("Customer_id", Customer_id);
+        formData.append("Curd", '3');
 
-    const onChange = (event) => {
-        setText(event.target.value);
+        details.userid_ad = formData.get('userid_ad');
+        details.product_lineid_ad = formData.get('product_lineid_ad');
+        details.job_id_ad = formData.get('job_id_ad');
+        details.job_description = formData.get('job_description');
+        details.batchid_ad = formData.get('batchid_ad');
+        details.batch_start_time = formData.get('batch_start_time');
+        details.count = formData.get('count');
+        details.batch_end_time = formData.get('batch_end_time');
+        details.predicted_date = formData.get('predicted_date');
+        details.production_order = formData.get('production_order');
+        details.product = formData.get('product');
+        details.Customer_id = formData.get('Customer_id');
+        details.Curd = formData.get('Curd');
+
+        // console.log(details);
+        //console.log('http://localhost:8081/api/v1/admin/postcurrentdata/'+details.job_id_ad+'/'+details.job_description+'/'+details.batchid_ad+'/'+details.batch_start_time+'/'+details.batch_end_time+'/'+details.product+'/'+details.count+'/'+details.product_lineid_ad+'/'+details.predicted_date+'/'+details.production_order+'/'+details.Customer_id+'/'+details.Curd+'/'+match.params.id)
+        await axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/' + details.job_id_ad + '/' + details.job_description + '/' + details.batchid_ad + '/' + details.batch_start_time + '/' + details.batch_end_time + '/' + details.product + '/' + details.count + '/' + details.product_lineid_ad + '/' + details.predicted_date + '/' + details.production_order + '/' + details.Customer_id + '/' + details.Curd + '/' + match.params.id)
+            .then(res => {
+                console.log("Return Data", res);
+                alert("Update Success!!");
+                history.push('/admin/CurrentProcessRegistration')
+            })
+            .catch(err => {
+                alert("Update Failed!!");
+                console.log(err);
+            });
     }
 
     return (
@@ -85,7 +135,7 @@ function CurrentProcessForm() {
                     <Col md="8">
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h4">Current Process Registration</Card.Title>
+                                <Card.Title as="h4">Current Process Update</Card.Title>
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -93,14 +143,14 @@ function CurrentProcessForm() {
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
                                                 <label>Job ID</label>
-                                                <div>
-                                                    <input type="search" list="list" autoComplete="on" value={text} onChange={onChange} className="form-control" />
-                                                    <datalist id="list">
-                                                        {jobids.map(item => {
-                                                            return (<option key={item.jobId} value={item.jobId}>{item.jobId}</option>);
-                                                        })}
-                                                    </datalist>
-                                                </div>
+                                                <Form.Control
+                                                    placeholder="Job ID"
+                                                    type="text"
+                                                    name="job_id_ad"
+                                                    value={job_id_ad}
+                                                    onChange={e => setjob_id_ad(e.target.value)}
+                                                    disabled={true}
+                                                ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -110,8 +160,9 @@ function CurrentProcessForm() {
                                                     placeholder="Job Discription"
                                                     type="text"
                                                     name="job_description"
-                                                    onChange={processDetails.handleChange}
-                                                    value={processDetails.values.job_description}
+                                                    value={job_description}
+                                                    onChange={e => setjob_description(e.target.value)}
+                                                    disabled={true}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -124,13 +175,12 @@ function CurrentProcessForm() {
                                                     placeholder="BATCH ID"
                                                     type="text"
                                                     name="batchid_ad"
-                                                    onChange={processDetails.handleChange}
-                                                    value={processDetails.values.batchid_ad}
+                                                    value={batchid_ad}
+                                                    onChange={e => setbatchid_ad(e.target.value)}
+                                                    disabled={true}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
-                                    </Row>
-                                    <Row>
                                     </Row>
                                     <Row>
                                         <Col className="pr-1" md="6">
@@ -140,8 +190,8 @@ function CurrentProcessForm() {
                                                     placeholder="Start Time"
                                                     type="time"
                                                     name="batch_start_time"
-                                                    onChange={processDetails.handleChange}
-                                                    value={processDetails.values.batch_start_time}
+                                                    value={batch_start_time}
+                                                    onChange={e => setbatch_start_time(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -152,8 +202,8 @@ function CurrentProcessForm() {
                                                     placeholder="End Time"
                                                     type="time"
                                                     name="batch_end_time"
-                                                    onChange={processDetails.handleChange}
-                                                    value={processDetails.values.batch_end_time}
+                                                    value={batch_end_time}
+                                                    onChange={e => setbatch_end_time(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -161,14 +211,11 @@ function CurrentProcessForm() {
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
-
                                                 <label>Product</label>
-                                                <Form.Select
-                                                    size="lg"
-                                                    className="form-control"
-                                                    name="product"
-                                                    value={processDetails.values.product}
-                                                    onChange={processDetails.handleChange}>
+                                                <Form.Select size="lg" className="form-control" name="product"
+                                                    value={product}
+                                                    onChange={e => setproduct(e.target.value)}
+                                                >
                                                     {productTable.map(item => {
                                                         return (<option key={item.productId} value={item.productId}>{item.productName}</option>);
                                                     })}
@@ -181,9 +228,9 @@ function CurrentProcessForm() {
                                                 <Form.Control
                                                     placeholder="Count"
                                                     type="number"
-                                                    name="count_reg_bch"
-                                                    onChange={processDetails.handleChange}
-                                                    value={processDetails.values.count_reg_bch}
+                                                    name="count"
+                                                    value={count}
+                                                    onChange={e => setcount(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -192,7 +239,10 @@ function CurrentProcessForm() {
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
                                                 <label>Production Line Name</label>
-                                                <Form.Select size="lg" className="form-control" name="product_lineid_ad" value={processDetails.values.product_lineid_ad} onChange={processDetails.handleChange}>
+                                                <Form.Select size="lg" className="form-control" name="product_lineid_ad"
+                                                    value={product_lineid_ad}
+                                                    onChange={e => setproduct_lineid_ad(e.target.value)}
+                                                >
                                                     {lineDetails.map(item => {
                                                         return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
                                                     })}
@@ -206,8 +256,8 @@ function CurrentProcessForm() {
                                                     placeholder="Date"
                                                     type="date"
                                                     name="predicted_date"
-                                                    onChange={processDetails.handleChange}
-                                                    value={processDetails.values.predicted_date}
+                                                    value={predicted_date}
+                                                    onChange={e => setpredicted_date(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -220,15 +270,20 @@ function CurrentProcessForm() {
                                                     placeholder="AUTO"
                                                     type="number"
                                                     name="production_order"
-                                                    onChange={processDetails.handleChange}
-                                                    value={processDetails.values.production_order}
+                                                    value={production_order}
+                                                    onChange={e => setproduction_order(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
                                             <Form.Group>
                                                 <label>Customer Id</label>
-                                                <Form.Select size="lg" className="form-control" name="Customer_id" value={processDetails.values.Customer_id} onChange={processDetails.handleChange}>
+                                                <Form.Select size="lg" className="form-control" name="Customer_id"
+                                                    // value={processDetails.values.Customer_id} onChange={processDetails.handleChange}
+                                                    value={Customer_id}
+                                                    onChange={e => setCustomer_id(e.target.value)}
+                                                    disabled={true}
+                                                >
                                                     {cusDetails.map(item => {
                                                         return (<option key={item.cus_id} value={item.cus_id}>{item.customer_name}</option>);
                                                     })}
@@ -237,13 +292,14 @@ function CurrentProcessForm() {
                                         </Col>
                                     </Row>
                                     <Row className="justify-content-center ">
+                                        &nbsp;&nbsp;
                                         <Button
                                             className="btn-fill center"
                                             type="submit"
-                                            variant="primary"
-                                            onClick={processDetails.handleSubmit}
+                                            variant="success"
+                                            onClick={(e) => ChangeOnClick(e)}
                                         >
-                                            Add Process
+                                            Update Process
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>
@@ -256,4 +312,5 @@ function CurrentProcessForm() {
         </>
     );
 }
-export default CurrentProcessForm;
+
+export default CurrentProcessUpdate;

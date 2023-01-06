@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react"
+import axios from "axios";
+import { useFormik } from 'formik';
 
 // react-bootstrap components
 import {
@@ -16,7 +18,30 @@ import {
 import { DropdownItem } from "reactstrap";
 
 function MachineRegistrationForm() {
+    const userId = "userLocaleStorage"
 
+    // const [MachineDetails, setMachines] = useState([]);
+
+    //Hook
+    const machDetails = useFormik({
+        initialValues: {
+            user_id_para:'userId From LocaleStorage',
+            machine_id: '',
+            machine_name: '',
+            machine_description: '',
+            machine_image: '',
+        },
+        onSubmit: values => {
+            console.log(JSON.stringify(machDetails.values))
+
+            axios.post('http://localhost:8081/api/v1/machine/saveMachine', machDetails.values).then(() => {
+                alert("Machine added successfully!!!");
+                
+            }).catch((err) => {
+                alert(err);
+            })
+        }
+    })
 
 
     return (
@@ -37,6 +62,9 @@ function MachineRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Machine ID"
                                                     type="text"
+                                                    name="machine_id"
+                                                    onChange={machDetails.handleChange}
+                                                    value={machDetails.values.machine_id}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -46,6 +74,9 @@ function MachineRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Machine Description"
                                                     type="text"
+                                                    name="machine_description"
+                                                    onChange={machDetails.handleChange}
+                                                    value={machDetails.values.machine_description}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -58,16 +89,21 @@ function MachineRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Machine Name"
                                                     type="text"
-                                                    
+                                                    name="machine_name"
+                                                    onChange={machDetails.handleChange}
+                                                    value={machDetails.values.machine_name}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
-                                        <Col className="pr-1" md="6">
+                                        <Col className="pl-1" md="6">
                                             <Form.Group>
                                                 <label>Machine Image</label>
                                                 <Form.Control
                                                     placeholder="Machine Image"
                                                     type="file"
+                                                    name="machine_image"
+                                                    onChange={machDetails.handleChange}
+                                                    value={machDetails.values.machine_image}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>   
@@ -89,17 +125,18 @@ function MachineRegistrationForm() {
                                             className="btn-fill center"
                                             type="submit"
                                             variant="primary"
+                                            onClick={machDetails.handleSubmit}
                                         >
                                             Add New     Machine
                                         </Button>
-                                        &nbsp;&nbsp;
+                                        {/* &nbsp;&nbsp;
                                         <Button
                                             className="btn-fill center"
                                             type="submit"
                                             variant="success"
                                         >
                                             Update Machine
-                                        </Button>
+                                        </Button> */}
                                     </Row>
                                     <div className="clearfix"></div>
                                 </Form>

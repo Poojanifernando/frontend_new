@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react"
+import axios from "axios";
+import { useFormik } from 'formik';
+// import "assets/css/Popup.css";
 
 // react-bootstrap components
 import {
@@ -16,8 +19,41 @@ import {
 import { DropdownItem } from "reactstrap";
 
 function BatchRegistrationForm() {
+    const userId = "userLocaleStorage"
 
 
+    // const navigate = navigate('/admin/BatchRegistration');
+
+    const [productDetails, setProductDetails] = useState([]);
+
+    //Hook
+    const batchDetails = useFormik({
+        initialValues: {
+            userid_reg_bch: 'userId From LocaleStorage',
+            batchID_regBch: '',
+            batchName_regBch: '',
+            count_regBch: '',
+            productCategory: '',
+            product_id: ''
+        },
+        onSubmit: values => {
+            console.log(JSON.stringify(batchDetails.values))
+
+            axios.post('http://localhost:8081/api/v1/batch/saveBatch', batchDetails.values).then(() => {
+                alert("Batch added successfully!!!");
+
+            }).catch((err) => {
+                alert(err);
+            })
+        }
+    })
+    useEffect(() => {
+
+        axios.get('http://localhost:8081/api/v1/product/getAllProducts').then((response) => {
+            setProductDetails(response.data.content);
+        });
+
+    }, [])
 
     return (
         <>
@@ -29,7 +65,7 @@ function BatchRegistrationForm() {
                                 <Card.Title as="h4">Batch Registration</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <Form>
+                                <Form >
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
@@ -37,6 +73,9 @@ function BatchRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Batch ID"
                                                     type="text"
+                                                    name="batchID_regBch"
+                                                    onChange={batchDetails.handleChange}
+                                                    value={batchDetails.values.batchID_regBch}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -46,11 +85,14 @@ function BatchRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Batch Name"
                                                     type="text"
+                                                    name="batchName_regBch"
+                                                    onChange={batchDetails.handleChange}
+                                                    value={batchDetails.values.batchName_regBch}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    
+
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
@@ -58,33 +100,52 @@ function BatchRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Batch Count"
                                                     type="number"
-                                                    
+                                                    name="count_regBch"
+                                                    onChange={batchDetails.handleChange}
+                                                    value={batchDetails.values.count_regBch}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
-                                              
-                                            <label>Product Category</label>
-                                                <Form.Select size="lg" className="form-control">
+
+                                                <label>Product Category</label>
+                                                <Form.Select size="lg" className="form-control pl-1" as="select"
+                                                    name="productCategory"
+                                                    onChange={batchDetails.handleChange}
+                                                    value={batchDetails.values.productCategory}
+                                                >
                                                     <option>Select type</option>
                                                     <option>Semi Auto</option>
                                                     <option>Fully Auto</option>
                                                     <option>Hands Strapping </option>
                                                     <option>High Thickness</option>
+
                                                 </Form.Select>
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                  
+
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
                                                 <label>Product ID</label>
-                                                <Form.Control
+                                                {/* <Form.Control
                                                     placeholder="Product ID"
                                                     type="text"
-                                                ></Form.Control>
+                                                    name="product_id"
+                                                    onChange={batchDetails.handleChange}
+                                                    value={batchDetails.values.product_id}
+                                                ></Form.Control> */}
+                                                <Form.Select size="lg"
+                                                    className="form-control"
+                                                    name="product_id"
+                                                    value={batchDetails.values.product_id}
+                                                    onChange={batchDetails.handleChange}>
+                                                    {productDetails.map(item => {
+                                                        return (<option>{item.productId}</option>);
+                                                    })}
+                                                </Form.Select>
                                             </Form.Group>
                                         </Col>
 
@@ -105,17 +166,18 @@ function BatchRegistrationForm() {
                                             className="btn-fill center"
                                             type="submit"
                                             variant="primary"
+                                            onClick={batchDetails.handleSubmit}
                                         >
-                                            Add Customer
+                                            Save details
                                         </Button>
-                                        &nbsp;&nbsp;
+                                        {/* &nbsp;&nbsp;
                                         <Button
                                             className="btn-fill center"
                                             type="submit"
                                             variant="success"
                                         >
                                             Update Customer
-                                        </Button>
+                                        </Button> */}
                                     </Row>
                                     <div className="clearfix"></div>
                                 </Form>

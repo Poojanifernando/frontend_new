@@ -21,11 +21,18 @@ function PerameterValueView(props) {
     const current_deviceId = props.deviceId;
     const current_pID = props.pID;
     const current_date = props.date;
-    console.log("current_date " + current_date + "and line id " + current_Line +"current_pOrder "+current_pOrder+
-    " current_Machine "+current_Machine)
+    // console.log("current_date " + current_date + "and line id " + current_Line +"current_pOrder "+current_pOrder+
+    // " current_Machine "+current_Machine)
 
     const [Values, setValues] = useState([]);
     const [color, setcolor] = useState(`rgb(182,251,213)`);
+    const [value, setValue] = useState(0);
+
+
+    function handleClick() {
+        setValue(prevValue => prevValue + 1);
+      }
+    
 
     useEffect(() => {
         axios.get('http://localhost:8081/api/v1/admin/GetValueByDevice/'+current_Job+'/'+current_batch+'/'+current_Line+'/'+current_pOrder+'/'+current_Machine+'/'+current_deviceId+'/'+current_pID+'/'+current_date).then((response) => {
@@ -34,7 +41,7 @@ function PerameterValueView(props) {
 
         setInterval(() => (new axios.get('http://localhost:8081/api/v1/admin/GetValueByDevice/'+current_Job+'/'+current_batch+'/'+current_Line+'/'+current_pOrder+'/'+current_Machine+'/'+current_deviceId+'/'+current_pID+'/'+current_date).then((response) => {
             setValues(response.data);
-            console.log('Interval triggered '+JSON. stringify(response.data));
+            // console.log('Interval triggered '+JSON. stringify(response.data));
         })), 7000);
  
        
@@ -43,10 +50,17 @@ function PerameterValueView(props) {
     return (
         <>
             {Values?.map((Value, index) => {
-                return (
-                    <Card.Title className="h3" style={{ backgroundColor:color}}>{Value.value_tra} {Value.measuring_unit}</Card.Title>
+                if(Value.parameter_id_in_iot_input_tra == "LNTH" ){
 
-                )
+                    return (
+                        <Card.Title className="h3"  key ={Value} style={{ backgroundColor:color}}>{Value.value_tra} {Value.measuring_unit} </Card.Title>
+                    )
+                }else{
+                    return (
+                    <Card.Title className="h3" key ={Value} style={{ backgroundColor:color}}>{Value.value_tra} {Value.measuring_unit}</Card.Title>
+
+                )}
+               
             })}
 
         </>

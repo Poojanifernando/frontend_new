@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
     Badge,
@@ -14,33 +15,81 @@ import {
     Col
 } from "react-bootstrap";
 
-function CustomerRegistraionForm() {
+function CustomerUpdate({ match }) {
+    const history = useHistory();
+    const userId = "UID_005";
 
-    const userId = localStorage.getItem("userId");
-    const [productDetails, setProductDetails] = useState([]);
+    const cusid = match.params.id;
 
-    //Hook
-    const cus_reg = useFormik({
-        initialValues: {
-            user_id: userId,
-            customer_name: '',
-            customer_NIC: '',
-            contact_person: '',
-            customer_contact_number: '',
-            customer_email: ''
-        },
-        onSubmit: values => {
-            console.log(JSON.stringify(cus_reg.values))
+    const [user_id, setuser_id] = useState('userId From LocaleStorage');
+    const [customer_name, setcustomer_name] = useState('userId From LocaleStorage');
+    const [customer_NIC, setcustomer_NIC] = useState('userId From LocaleStorage');
+    const [contact_person, setcontact_person] = useState('userId From LocaleStorage');
+    const [customer_contact_number, setcustomer_contact_number] = useState('userId From LocaleStorage');
+    const [customer_email, setcustomer_email] = useState('userId From LocaleStorage');
 
-            axios.post('http://localhost:8081/api/v1/customerRegistration/saveCustomerRegistration', cus_reg.values).then(() => {
-                alert("Customer added successfully!!!");
-                window.location.reload(false);
 
-            }).catch((err) => {
-                alert(err);
-            })
-        }
+
+    const [CustomerDetails] = useState({
+        cus_id: '',
+        user_id: '',
+        customer_name: '',
+        customer_NIC: '',
+        contact_person: '',
+        customer_contact_number: '',
+        customer_email: ''
+
     })
+
+    useEffect(() => {
+
+        axios.get('http://localhost:8081/api/v1/customerRegistration/searchCustomerRegistration/' + match.params.id).then((response) => {
+
+            setuser_id(response.data.content.cus_id);
+            setcustomer_name(response.data.content.customer_name);
+            setcustomer_NIC(response.data.content.customer_NIC);
+            setcontact_person(response.data.content.contact_person);
+            setcustomer_contact_number(response.data.content.customer_contact_number);
+            setcustomer_email(response.data.content.customer_email);
+
+
+        });
+    }, [])
+
+
+    const ChangeOnClick = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("cus_id", cusid);
+        formData.append("user_id", userId);
+        formData.append("customer_name", customer_name);
+        formData.append("customer_NIC", customer_NIC);
+        formData.append("contact_person", contact_person);
+        formData.append("customer_contact_number", customer_contact_number);
+        formData.append("customer_email", customer_email);
+
+        CustomerDetails.cus_id = formData.get('cus_id');
+        CustomerDetails.user_id = formData.get('user_id');
+        CustomerDetails.customer_name = formData.get('customer_name');
+        CustomerDetails.customer_NIC = formData.get('customer_NIC');
+        CustomerDetails.contact_person = formData.get('contact_person');
+        CustomerDetails.customer_contact_number = formData.get('customer_contact_number');
+        CustomerDetails.customer_email = formData.get('customer_email');
+        console.log(CustomerDetails);
+
+        await axios.put(`http://localhost:8081/api/v1/customerRegistration/updateCustomerRegistration/${match.params.id}`, CustomerDetails)
+            .then(res => {
+                console.log("Return Data", res);
+                alert("Update Success!!");
+                history.push('/admin/CustomerRegister')
+
+            })
+            .catch(err => {
+                alert("Update Failed!!");
+                console.log(err);
+            });
+
+    }
 
     return (
         <>
@@ -61,8 +110,8 @@ function CustomerRegistraionForm() {
                                                     placeholder="Customer Name"
                                                     type="text"
                                                     name="customer_name"
-                                                    onChange={cus_reg.handleChange}
-                                                    value={cus_reg.values.customer_name}
+                                                    value={customer_name}
+                                                    onChange={e => setcustomer_name(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -73,8 +122,8 @@ function CustomerRegistraionForm() {
                                                     placeholder="NIC or Registration Number"
                                                     type="text"
                                                     name="customer_NIC"
-                                                    onChange={cus_reg.handleChange}
-                                                    value={cus_reg.values.customer_NIC}
+                                                    value={customer_NIC}
+                                                    onChange={e => setcustomer_NIC(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -87,8 +136,8 @@ function CustomerRegistraionForm() {
                                                     placeholder="Contact Person"
                                                     type="text"
                                                     name="contact_person"
-                                                    onChange={cus_reg.handleChange}
-                                                    value={cus_reg.values.contact_person}
+                                                    value={contact_person}
+                                                    onChange={e => setcontact_person(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -99,8 +148,8 @@ function CustomerRegistraionForm() {
                                                     placeholder="Contact Number"
                                                     type="number"
                                                     name="customer_contact_number"
-                                                    onChange={cus_reg.handleChange}
-                                                    value={cus_reg.values.customer_contact_number}
+                                                    value={customer_contact_number}
+                                                    onChange={e => setcustomer_contact_number(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -113,8 +162,8 @@ function CustomerRegistraionForm() {
                                                     placeholder="Email"
                                                     type="text"
                                                     name="customer_email"
-                                                    onChange={cus_reg.handleChange}
-                                                    value={cus_reg.values.customer_email}
+                                                    value={customer_email}
+                                                    onChange={e => setcustomer_email(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -123,10 +172,10 @@ function CustomerRegistraionForm() {
                                         <Button
                                             className="btn-fill center"
                                             type="submit"
-                                            variant="primary"
-                                            onClick={cus_reg.handleSubmit}
+                                            variant="success"
+                                            onClick={(e) => ChangeOnClick(e)}
                                         >
-                                            Add Customer
+                                            Update Customer
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>
@@ -140,4 +189,4 @@ function CustomerRegistraionForm() {
     );
 }
 
-export default CustomerRegistraionForm;
+export default CustomerUpdate;

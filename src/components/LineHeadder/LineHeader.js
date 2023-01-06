@@ -21,26 +21,35 @@ function LineHeader(props) {
 
     const [lineCustomerDetails, setlineCustomerDetails] = useState([]);
 
+    const [test, settest] = useState('green');
+
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/admin/GetDetailsByDateAndLineId/'+current_date+'/'+current_Line).then((response) => {
+
+        axios.get('http://localhost:8081/api/v1/admin/GetDetailsByDateAndLineId/' + current_date + '/' + current_Line).then((response) => {
             setlineCustomerDetails(response.data);
         });
 
-    }, []);
+        //initial value setter
 
+        //loop
+        setInterval(() => (new axios.get('http://localhost:8081/api/v1/admin/getLineColors').then((response) => {
+            settest(response.data);
+        })), 7000);
+    }, []);
 
     return (
 
         <div >
-
             {/* <h3 className="title">Line - line 1</h3> */}
-            <div class="row1"   >
-                <div class="columnrow leftrow fontsize">LINE - {current_Line_name}</div>
-                <div class="columnrow rightrow"> Online </div>
-            </div>
             {lineCustomerDetails?.map((cusDetails, index) => {
                 return (
                     <>
+                        <div class="row1"   >
+                            <div class="columnrow leftrow fontsize">LINE - {current_Line_name}</div>
+                            <div class="columnrow rightrow"
+                                style={{ backgroundColor: test.color_code_st_out , textShadow:"2px -1px 0 #000" }}
+                            > {test.high_or_low} </div>
+                        </div>
                         <div class="row1">
                             <div class="column1"><p className="linetitle">Job no :<p className="ptagRemove"> {cusDetails.job_id_ad}</p></p></div>
                             <div class="column1"><p className="linetitle" >Product :<p className="ptagRemove">  {cusDetails.product_name}</p></p> </div>
@@ -49,7 +58,7 @@ function LineHeader(props) {
                             <div class="column1"><p className="linetitle">Customer : <p className="ptagRemove"> {cusDetails.customer_name}</p></p> </div>
                             <div class="column1"><p className="linetitle">Done :</p></div>
                         </div>
-                        <ScrollMenuMachines date={current_date} line={current_Line} pOrder={cusDetails.production_order}/>
+                        <ScrollMenuMachines date={current_date} line={current_Line} pOrder={cusDetails.production_order} />
                     </>)
             })}
 

@@ -24,7 +24,7 @@ function MachinesCardView() {
   const [dateState, setDateState] = useState(new Date());
   const [Lines, setLines] = useState([]);
   const [Machins, setMachines] = useState([]);
-  const [date, setdate] = useState('2022-12-23');
+  const [date, setdate] = useState('2023-01-06');
 
 
   useEffect(() => {
