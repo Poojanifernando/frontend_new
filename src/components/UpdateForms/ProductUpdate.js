@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { useFormik } from 'formik';
-
+import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
     Badge,
@@ -17,30 +17,68 @@ import {
 } from "react-bootstrap";
 import { DropdownItem } from "reactstrap";
 
-function ProductRegistrationForm() {
+function ProductUpdate({ match }) {
+    const history = useHistory();
     const userid_pro = "UID_005"
 
- //Hook
- const ProDetails = useFormik({
-    initialValues: {
+
+    const [product_id, setproduct_id] = useState('');
+    const [product_name, setproduct_name] = useState("");
+    const [description, setdescription] = useState("");
+    const [image, setimage] = useState("");
+
+    const [ProductDetails] = useState({
+
         userID_pro: userid_pro,
         productId: '',
         productName: '',
         description: '',
         image: '',
-    },
-    onSubmit: values => {
-        console.log(JSON.stringify(ProDetails.values))
 
-        axios.post('http://localhost:8081/api/v1/product/saveProduct', ProDetails.values).then(() => {
-            alert("Product added successfully!!!");
-            window.location.reload(false);
+    })
 
-        }).catch((err) => {
-            alert(err);
+
+    useEffect(() => {
+
+        axios.get('http://localhost:8081/api/v1/product/searchRegisteredProduct/' + match.params.id).then((response) => {
+
+            // setBatchdetails(response.data.content);
+            setproduct_id(response.data.content.productId);
+            setproduct_name(response.data.content.productName);
+            setdescription(response.data.content.description);
+
+        });
+    }, [])
+
+    const ChangeOnClick = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("product_id", product_id);
+        formData.append("product_name", product_name);
+        formData.append("description", description);
+        formData.append("image", image);
+
+
+        ProductDetails.userID_pro=userid_pro;
+        ProductDetails.productId=formData.get('product_id');
+        ProductDetails.productName=formData.get('product_name');
+        ProductDetails.description=formData.get('description');
+        ProductDetails.image=formData.get('image');
+        console.log(ProductDetails);
+
+        await axios.put(`http://localhost:8081/api/v1/product/updateRegisteredProduct/${match.params.id}`,ProductDetails)
+        .then(res=>{
+          console.log("Return Data",res);
+          alert("Update Success!!");
+          history.push('/admin/ProductRegistration')
+        
         })
+        .catch(err=>{
+          alert("Update Failed!!");
+          console.log(err);
+        });
+
     }
-})
 
     return (
         <>
@@ -49,7 +87,7 @@ function ProductRegistrationForm() {
                     <Col md="8">
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h4">Product Registration</Card.Title>
+                                <Card.Title as="h4">Product Update</Card.Title>
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -60,9 +98,10 @@ function ProductRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Batch ID"
                                                     type="text"
-                                                    name="productId"
-                                                    onChange={ProDetails.handleChange}
-                                                    value={ProDetails.values.productId}
+                                                    name="product_id"
+                                                    value={product_id}
+                                                    onChange={e => setproduct_id(e.target.value)}
+                                                    disabled={true}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -72,13 +111,14 @@ function ProductRegistrationForm() {
                                                 <Form.Control
                                                     placeholder="Batch Name"
                                                     type="text"
-                                                    name="productName"
-                                                    onChange={ProDetails.handleChange}
-                                                    value={ProDetails.values.productName}
+                                                    name="product_name"
+                                                    value={product_name}
+                                                    onChange={e => setproduct_name(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                     </Row>
+
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
@@ -87,8 +127,8 @@ function ProductRegistrationForm() {
                                                     placeholder="Product Description"
                                                     type="text"
                                                     name="description"
-                                                    onChange={ProDetails.handleChange}
-                                                    value={ProDetails.values.description}
+                                                    value={description}
+                                                    onChange={e => setdescription(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -99,8 +139,8 @@ function ProductRegistrationForm() {
                                                     placeholder="Product Image"
                                                     type="file"
                                                     name="image"
-                                                    onChange={ProDetails.handleChange}
-                                                    value={ProDetails.values.image}
+                                                    value={image}
+                                                    onChange={e => setimage(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -110,10 +150,10 @@ function ProductRegistrationForm() {
                                         <Button
                                             className="btn-fill center"
                                             type="submit"
-                                            variant="primary"
-                                            onClick={ProDetails.handleSubmit}
+                                            variant="success"
+                                            onClick={(e) => ChangeOnClick(e)}
                                         >
-                                            Add New Product
+                                            Update Product
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>
@@ -127,4 +167,4 @@ function ProductRegistrationForm() {
     );
 }
 
-export default ProductRegistrationForm;
+export default ProductUpdate;

@@ -3,6 +3,10 @@ import { useLocation, NavLink } from "react-router-dom";
 
 import { Nav } from "react-bootstrap";
 
+
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import logo from "assets/img/logo.jpg";
 
 function Sidebar({ color, image, routes }) {
@@ -29,33 +33,58 @@ function Sidebar({ color, image, routes }) {
             </div>
           </a>
           <a className="simple-text" >
-          Lalan Group
+            Lalan Group
           </a>
         </div>
         <Nav>
+
+          {/* <li>
+            <NavDropdown
+              id="nav-dropdown-dark-example"
+              title="Dropdown"
+              // menuVariant="dark"
+              // className="nav-link"
+            >
+              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Another action
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
+          </li> */}
+
           {routes.map((prop, key) => {
+            if(prop.invisible) return null;
             if (!prop.redirect)
               return (
-                <li
-                  className={
-                    prop.upgrade
-                      ? "active active-pro"
-                      : activeRoute(prop.layout + prop.path)
-                  }
-                  key={key}
-                >
-                  <NavLink
-                    to={prop.layout + prop.path}
-                    className="nav-link"
-                    activeClassName="active"
+                <>
+                  <li
+                    className={
+                      prop.upgrade
+                        ? "active active-pro"
+                        : activeRoute(prop.layout + prop.path)
+                    }
+                    key={key}
                   >
-                    <i className={prop.icon} />
-                    <p>{prop.name}</p>
-                  </NavLink>
-                </li>
+                    <NavLink
+                      to={prop.layout + prop.path}
+                      className="nav-link"
+                      activeClassName="active"
+                    >
+                      <i className={prop.icon} />
+                      <p>{prop.name}</p>
+                    </NavLink>
+                  </li>
+                </>
+
               );
             return null;
-          })} 
+          })}
+
         </Nav>
       </div>
     </div>
