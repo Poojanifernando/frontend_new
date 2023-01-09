@@ -34,6 +34,7 @@ function ProductLineRegistrationForm() {
 
             axios.post('http://localhost:8081/api/v1/line/saveLine', LineDetails.values).then(() => {
                 alert("Line added successfully!!!");
+                window.location.reload();
             }).catch((err) => {
                 alert(err);
             })

@@ -58,11 +58,12 @@ function CustomerRegistraionForm() {
                                             <Form.Group>
                                                 <label>Customer Name</label>
                                                 <Form.Control
-                                                    placeholder="Customer Name"
+                                                    placeholder="Company Name"
                                                     type="text"
                                                     name="customer_name"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_name}
+                                                    required
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -73,6 +74,7 @@ function CustomerRegistraionForm() {
                                                     placeholder="NIC or Registration Number"
                                                     type="text"
                                                     name="customer_NIC"
+                                                    maxlength="20"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_NIC}
                                                 ></Form.Control>
@@ -84,7 +86,7 @@ function CustomerRegistraionForm() {
                                             <Form.Group>
                                                 <label>Contact Person</label>
                                                 <Form.Control
-                                                    placeholder="Contact Person"
+                                                    placeholder="Contact Person Name"
                                                     type="text"
                                                     name="contact_person"
                                                     onChange={cus_reg.handleChange}
@@ -96,8 +98,10 @@ function CustomerRegistraionForm() {
                                             <Form.Group>
                                                 <label>Contact Number</label>
                                                 <Form.Control
-                                                    placeholder="Contact Number"
-                                                    type="number"
+                                                    placeholder="0xx-xxxxxxxx"
+                                                    type="tel"
+                                                    maxlength="10"
+                                                  
                                                     name="customer_contact_number"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_contact_number}
@@ -110,7 +114,7 @@ function CustomerRegistraionForm() {
                                             <Form.Group>
                                                 <label>Email</label>
                                                 <Form.Control
-                                                    placeholder="Email"
+                                                    placeholder="example@email"
                                                     type="text"
                                                     name="customer_email"
                                                     onChange={cus_reg.handleChange}

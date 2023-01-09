@@ -75,7 +75,7 @@ function Header() {
               </Nav.Link>
             </Nav.Item>
             <Dropdown as={Nav.Item}>
-              <Dropdown.Toggle
+              {/* <Dropdown.Toggle
                 as={Nav.Link}
                 data-toggle="dropdown"
                 id="dropdown-67443507"
@@ -83,9 +83,9 @@ function Header() {
                 className="m-0"
               >
                 <i className="nc-icon nc-planet"></i>
-                {/* <span className="notification">5</span> */}
+                <span className="notification">5</span>
                 <span className="d-lg-none ml-1">Notification</span>
-              </Dropdown.Toggle>
+              </Dropdown.Toggle> */}
               {/* <Dropdown.Menu>
                 <Dropdown.Item
                   href="#pablo"
@@ -131,7 +131,7 @@ function Header() {
             </Nav.Item>
           </Nav>
           <Nav className="ml-auto" navbar>
-            <Nav.Item>
+            {/* <Nav.Item>
               <Nav.Link
                 className="m-0"
                 href="/admin/user"
@@ -139,8 +139,8 @@ function Header() {
               >
                 <span className="no-icon">Account</span>
               </Nav.Link>
-            </Nav.Item>
-            <Dropdown as={Nav.Item}>
+            </Nav.Item> */}
+            {/* <Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 aria-expanded={false}
                 aria-haspopup={true}
@@ -185,7 +185,7 @@ function Header() {
                   Separated link
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown> */}
             <Nav.Item>
               <Nav.Link
                 className="m-0"

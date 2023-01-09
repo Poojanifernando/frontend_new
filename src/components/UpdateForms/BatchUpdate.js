@@ -16,10 +16,11 @@ import {
 
 function BatchUpdate({ match }) {
     const history = useHistory();
+    const userid = localStorage.getItem('userId')
     const [Batchdetails111, setBatchdetails] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
 
-    const [userid_reg_bch, setuserid_reg_bch] = useState('userId From LocaleStorage');
+    const [userid_reg_bch, setuserid_reg_bch] = useState(userid);
     const [batchid, setbatchid] = useState("");
     const [batchName_regBch, setbatchName_regBch] = useState("");
     const [count_regBch, setcount_regBch] = useState("");
@@ -29,7 +30,7 @@ function BatchUpdate({ match }) {
 
     const [batchDetails] = useState({
 
-        userid_reg_bch: 'userId From LocaleStorage',
+        userid_reg_bch: userid,
         batchID_regBch: '',
         batchName_regBch: '',
         count_regBch: '',
@@ -92,7 +93,10 @@ function BatchUpdate({ match }) {
     }
 
   
-  
+    const CancelOnClick = async (e) => {
+        e.preventDefault();
+        history.push('/admin/BatchRegistration')
+    }
     
     return (
         <>
@@ -206,6 +210,16 @@ function BatchUpdate({ match }) {
                                             >
                                                 Update Customer
                                             </Button>
+                                            &nbsp;&nbsp;
+                                        <Button
+                                            className="btn-fill center"
+                                            type="submit"
+                                            variant="danger"
+                                            onClick={(e) => CancelOnClick(e)}
+
+                                        >
+                                           Cancel 
+                                        </Button>
                                         </Row>
                                         <div className="clearfix"></div>
                                     </Form>

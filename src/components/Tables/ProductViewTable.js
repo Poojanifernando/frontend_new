@@ -67,11 +67,11 @@ function ProductViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th className="border-0">Id</th>
-                                            <th className="border-0">Name</th>
-                                            <th className="border-0">description</th>
-                                            <th className="border-0">date_and_time</th>
-                                            <th className="border-0">Action</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Name</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">description</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">date_and_time</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

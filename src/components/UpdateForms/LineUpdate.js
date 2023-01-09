@@ -82,7 +82,10 @@ function LineUpdate({ match }) {
                 console.log(err);
             });
     }
-
+    const CancelOnClick = async (e) => {
+        e.preventDefault();
+        history.push('/admin/ProductLineRegistration')
+    }
 
     return (
         <>
@@ -182,6 +185,16 @@ function LineUpdate({ match }) {
                                             onClick={(e) => ChangeOnClick(e)}
                                         >
                                             Update Line
+                                        </Button>
+                                        &nbsp;&nbsp;
+                                        <Button
+                                            className="btn-fill center"
+                                            type="submit"
+                                            variant="danger"
+                                            onClick={(e) => CancelOnClick(e)}
+
+                                        >
+                                           Cancel 
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>
