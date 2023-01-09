@@ -22,6 +22,7 @@ import LineUpdate from "components/UpdateForms/LineUpdate";
 import ProductUpdate from "components/UpdateForms/ProductUpdate";
 import CurrentProcessUpdate from "components/UpdateForms/CurrentProcessUpdate";
 import LineMachineDevice from "views/LineMachineDevice";
+import DeviceUpdate from "components/UpdateForms/DeviceUpdate";
 
 
 const dashboardRoutes = [
@@ -69,13 +70,13 @@ const dashboardRoutes = [
   //   component: Typography,
   //   layout: "/admin"
   // },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-atom",
-    component: Icons,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-atom",
+  //   component: Icons,
+  //   layout: "/admin"
+  // },
   // {
   //   path: "/maps",
   //   name: "Maps",
@@ -83,13 +84,13 @@ const dashboardRoutes = [
   //   component: Maps,
   //   layout: "/admin"
   // },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    icon: "nc-icon nc-bell-55",
-    component: Notifications,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/notifications",
+  //   name: "Notifications",
+  //   icon: "nc-icon nc-bell-55",
+  //   component: Notifications,
+  //   layout: "/admin"
+  // },
   // {
   //   path: "/BatchRegistration",
   //   name: "batchRegistration",
@@ -152,13 +153,19 @@ const dashboardRoutes = [
   //   invisible: true
   // }\
   {
-    path: "/DeviceRegistration",
-    name: "Device",
+    path: "/CustomerRegister",
+    name: "Customer",
     icon: "nc-icon nc-notes",
-    component: DeviceRegistration,
+    component: CustomerRegister,
     layout: "/admin"
-  }
-  ,
+  },
+  {
+    path: "/ProductRegistration",
+    name: "product",
+    icon: "nc-icon nc-notes",
+    component: ProductRegistration,
+    layout: "/admin"
+  } ,
   {
     path: "/ProductLineRegistration",
     name: "Product Line",
@@ -167,37 +174,34 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
+    path: "/DeviceRegistration",
+    name: "Device",
+    icon: "nc-icon nc-notes",
+    component: DeviceRegistration,
+    layout: "/admin"
+  }
+  ,
+  
+  {
     path: "/CurrentProcessRegistration",
-    name: "C Process Registration",
+    name: "Production",
     icon: "nc-icon nc-notes",
     component: CurrentProcessRegistration,
     layout: "/admin"
   },
-  {
-    path: "/CustomerRegister",
-    name: "Customer Register",
-    icon: "nc-icon nc-notes",
-    component: CustomerRegister,
-    layout: "/admin"
-  },
-  {
-    path: "/ProductRegistration",
-    name: "productRegistration",
-    icon: "nc-icon nc-notes",
-    component: ProductRegistration,
-    layout: "/admin"
-  }
-  ,
-  {
-    path: "/LineMachineDevice",
-    name: "LineMachineDevice",
-    icon: "nc-icon nc-notes",
-    component: LineMachineDevice,
-    layout: "/admin"
-  }
+ 
+
+  // ,
+  // {
+  //   path: "/LineMachineDevice",
+  //   name: "LineMachineDevice",
+  //   icon: "nc-icon nc-notes",
+  //   component: LineMachineDevice,
+  //   layout: "/admin"
+  // },
 
   //updates
-  ,
+ 
   {
     path: `/updateBatch/:id`,
     name: "updateBatch",
@@ -238,6 +242,15 @@ const dashboardRoutes = [
     name: "Current Process Update",
     icon: "nc-icon nc-notes",
     component: CurrentProcessUpdate,
+    layout: "/admin",
+    invisible: true
+  }
+  ,
+  {
+    path: `/DeviceUpdate/:id`,
+    name: "Device Update",
+    icon: "nc-icon nc-notes",
+    component: DeviceUpdate,
     layout: "/admin",
     invisible: true
   }

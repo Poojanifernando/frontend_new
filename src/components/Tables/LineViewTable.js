@@ -68,12 +68,12 @@ function LineViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th className="border-0">line_id</th>
-                                            <th className="border-0">line_name</th>
-                                            <th className="border-0">description</th>
-                                            <th className="border-0">start_time</th>
-                                            <th className="border-0">end_time</th>
-                                            <th className="border-0">Action</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold" >line_id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">line_name</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">description</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">start_time</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">end_time</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -85,11 +85,23 @@ function LineViewTable() {
                                                     <td>{line.description}</td>
                                                     <td>{line.startTime}</td>
                                                     <td>{line.endTime}</td>
-                                                    <td>
+                                                    {/* <td>
                                                         <a className="btn btn-danger" id="icon"><em
                                                             className="fa fa-trash"
                                                             onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(line.lineId) }; }} /></a>
                                                         &nbsp;&nbsp;
+                                                        <Link  id="icon" className="btn btn-success" to={`/admin/updateLine/${line.lineId}` }>
+                                                            <em className="far fa-edit"/>
+                                                        </Link>
+                                                    </td> */}
+                                                     <td>
+                                                        <a className="btn btn-danger" id="icon"><em
+                                                            className="fa fa-trash"
+                                                            onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(line.lineId) }; }} /></a>
+                                                        &nbsp;&nbsp;
+                                                        {/* <a className="btn btn-success" id="icon"><em
+                                                            className="far fa-edit"
+                                                            onClick={() => { if (window.confirm("Are you sure you want to Edit this ?")) { editConference(Batch.batchID_regBch) }; }} /></a> */}
                                                         <Link  id="icon" className="btn btn-success" to={`/admin/updateLine/${line.lineId}` }
                                                            >
                                                             <em

@@ -128,6 +128,10 @@ function CurrentProcessUpdate({ match }) {
             });
     }
 
+    const CancelOnClick = async (e) => {
+        e.preventDefault();
+        history.push('/admin/CurrentProcessRegistration')
+    }
     return (
         <>
             <Container >
@@ -135,7 +139,7 @@ function CurrentProcessUpdate({ match }) {
                     <Col md="8">
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h4">Current Process Update</Card.Title>
+                                <Card.Title as="h4">Production Registration Update</Card.Title>
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -269,6 +273,7 @@ function CurrentProcessUpdate({ match }) {
                                                 <Form.Control
                                                     placeholder="AUTO"
                                                     type="number"
+                                                    min="0"
                                                     name="production_order"
                                                     value={production_order}
                                                     onChange={e => setproduction_order(e.target.value)}
@@ -300,6 +305,16 @@ function CurrentProcessUpdate({ match }) {
                                             onClick={(e) => ChangeOnClick(e)}
                                         >
                                             Update Process
+                                        </Button>
+                                        &nbsp;&nbsp;
+                                        <Button
+                                            className="btn-fill center"
+                                            type="submit"
+                                            variant="danger"
+                                            onClick={(e) => CancelOnClick(e)}
+
+                                        >
+                                           Cancel 
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>

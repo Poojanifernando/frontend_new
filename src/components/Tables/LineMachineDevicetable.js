@@ -66,10 +66,10 @@ function LineMachineDevicetable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th className="border-0">Line Id</th>
-                                            <th className="border-0">Machine Id</th>
-                                            <th className="border-0">Device Id</th>
-                                            <th className="border-0">Action</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Line Id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Machine Id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Device Id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -35,12 +35,12 @@ function ProcessRegistrationTable() {
     //delete the specific column
     const deleteConference = (id) => {
         console.log(id)
-        axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/JOB_101/MYJOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/4/' + id).then(() => {
-            alert("deleted successfully!!");
+        //axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/JOB_101/MYJOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/4/' + id).then(() => {
+            alert("You cant delete Process");
             window.location.reload(false);
-        }).catch((err) => {
-            alert(err);
-        })
+        //}).catch((err) => {
+         //   alert(err);
+        //x})
     };
 
     //Edit the specific column
@@ -62,7 +62,7 @@ function ProcessRegistrationTable() {
                     <Col md="12">
                         <Card className="card-plain table-plain-bg">
                             <Card.Header>
-                                <Card.Title as="h4">Current Process Registration</Card.Title>
+                                <Card.Title as="h4">Production Registration</Card.Title>
                                 <p className="card-category">
                                     View all Process details
                                 </p>
@@ -71,16 +71,16 @@ function ProcessRegistrationTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th className="border-0">JOB ID</th>
-                                            <th className="border-0">Batch Id</th>
-                                            <th className="border-0">Batch Start Time</th>
-                                            <th className="border-0">Batch End Time</th>
-                                            <th className="border-0">Count</th>
-                                            <th className="border-0">Line Id</th>
-                                            <th className="border-0">Date</th>
-                                            <th className="border-0">ORDER</th>
-                                            <th className="border-0">Customer ID</th>
-                                            <th className="border-0">Action</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">JOB ID</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Batch Id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Batch Start Time</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Batch End Time</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Count</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Line Id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Date</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">ORDER</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Customer ID</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

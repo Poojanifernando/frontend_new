@@ -25,15 +25,11 @@ function ScrollMenuMachines(props) {
     const [AllMachines, setAllMachines] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/'+current_date+'/'+current_Line+'/'+1).then((response) => {
+        axios.get('http://localhost:8081/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/'+current_date+'/'+current_Line+'/'+current_pOrder).then((response) => {
             setAllMachines(response.data);
         });
 
-
     }, [])
-
-
-
 
     return (
         <div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
-import { Field, useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
     Badge,
@@ -15,56 +15,148 @@ import {
     Dropdown
 } from "react-bootstrap";
 
-function DeviceRegistrationForm() {
+function DeviceUpdate({ match }) {
 
+    const history = useHistory();
     const userId = localStorage.getItem("userId");
     const [lineDetails, setLineDetails] = useState([]);
+    const [detail, setdetail] = useState([]);
 
-    //Hook
-    const Devicereg = useFormik({
-        initialValues: {
-            user_id_para: userId,
-            LineId: '',
-            MachineID: '',
-            MachineName: '',
-            MachineDiscription: '',
-            line_dvc_reg: '',
-            deviceid_dvc_reg: '',
-            device_name_dvc_reg: '',
-            description: '',
-            devicegpslocation: '',
-            device_ip_address: '',
-            parameter_id: '',
-            max_value: '',
-            min_value: '',
-            measuring_unit: '',
-            is_it_starter_value: '',
-            alarm_alert_type: '',
-            message: '',
 
-        },
-        onSubmit: values => {
-            console.log(JSON.stringify(Devicereg.values))
+    const [userid_reg_bch, setuserid_reg_bch] = useState(userId);
+    const [LineId, setlineId] = useState("");
+    const [MachineID, setMachineID] = useState("");
+    const [MachineName, setMachineName] = useState("");
+    const [MachineDiscription, setMachineDiscription] = useState("");
+    const [deviceid_dvc_reg, setdeviceid_dvc_reg] = useState("");
+    const [device_name_dvc_reg, setdevice_name_dvc_reg] = useState("");
+    const [description, setdescription] = useState("");
+    const [devicegpslocation, setdevicegpslocation] = useState("");
+    const [device_ip_address, setdevice_ip_address] = useState("");
+    const [parameter_id, setparameter_id] = useState("");
+    const [min_value, setmin_value] = useState("");
+    const [max_value, setmax_value] = useState("");
+    const [measuring_unit, setmeasuring_unit] = useState("");
+    const [is_it_starter_value, setis_it_starter_value] = useState("");
+    const [alarm_alert_type, setalarm_alert_type] = useState("");
+    const [message, setmessage] = useState("");
 
-            axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/' + Devicereg.values.LineId + '/' + Devicereg.values.MachineID + '/' + Devicereg.values.MachineName + '/' + Devicereg.values.MachineDiscription + '/' + Devicereg.values.deviceid_dvc_reg + '/' + Devicereg.values.parameter_id + '/' + Devicereg.values.description + '/' + Devicereg.values.alarm_alert_type + '/' + Devicereg.values.is_it_starter_value + '/' + Devicereg.values.min_value + '/' + Devicereg.values.max_value + '/' + Devicereg.values.measuring_unit + '/' + Devicereg.values.message + '/' + Devicereg.values.devicegpslocation + '/' + Devicereg.values.device_ip_address + '/' + Devicereg.values.device_name_dvc_reg + '/1').then(() => {
-                alert("Device Added successfully!!!");
-                window.location.reload(false);
-            }).catch((err) => {
-                alert(err);
-            })
-        }
+    const [deviceDetails] = useState({
+
+        userid_reg_bch: userId,
+        LineId: '',
+        MachineID: '',
+        MachineName: '',
+        MachineDiscription: '',
+        deviceid_dvc_reg: '',
+        device_name_dvc_reg: '',
+        description: '',
+        devicegpslocation: '',
+        device_ip_address: '',
+        parameter_id: '',
+        min_value: '',
+        max_value: '',
+        measuring_unit: '',
+        is_it_starter_value: '',
+        alarm_alert_type: '',
+        message: ''
+
     })
 
 
     useEffect(() => {
 
+
         axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
             setLineDetails(response.data.content);
+        });
+        axios.get('http://localhost:8081/api/v1/admin/getalldeviceregistration/' + match.params.id).then((response) => {
+            setdetail(response.data);
+
+
+            setlineId(response.data.line_id);
+            setMachineID(response.data.machine_id);
+            setMachineName(response.data.machine_name);
+            setdeviceid_dvc_reg(response.data.deviceid_dvc_reg);
+            setparameter_id(response.data.parameter_id);
+            setmin_value(response.data.min_value);
+            setmax_value(response.data.max_value);
+            setmeasuring_unit(response.data.measuring_unit);
+            setis_it_starter_value(response.data.is_it_starter_value);
+            setalarm_alert_type(response.data.is_it_alarm_parameter);
+            setdevice_name_dvc_reg(response.data.device_name_dvc_reg);
+            setdescription(response.data.description);
+            setdevicegpslocation(response.data.devicegpslocation);
+            setdevice_ip_address(response.data.device_ip_address);
+            setmessage(response.data.message);
+            setMachineDiscription(response.data.machine_description);
         });
 
     }, []);
 
 
+
+    const ChangeOnClick = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("userid_reg_bch", userid_reg_bch);
+        formData.append("LineId", LineId);
+        formData.append("MachineID", MachineID);
+        formData.append("MachineName", MachineName);
+        formData.append("MachineDiscription", MachineDiscription);
+        formData.append("deviceid_dvc_reg", deviceid_dvc_reg);
+        formData.append("device_name_dvc_reg", device_name_dvc_reg);
+        formData.append("description", description);
+        formData.append("devicegpslocation", devicegpslocation);
+        formData.append("device_ip_address", device_ip_address);
+        formData.append("parameter_id", parameter_id);
+        formData.append("min_value", min_value);
+        formData.append("max_value", max_value);
+        formData.append("measuring_unit", measuring_unit);
+        formData.append("is_it_starter_value", is_it_starter_value);
+        formData.append("alarm_alert_type", alarm_alert_type);
+        formData.append("message", message);
+
+
+        deviceDetails.userid_reg_bch = formData.get('userid_reg_bch');
+        deviceDetails.LineId = formData.get('LineId');
+        deviceDetails.MachineID = formData.get('MachineID');
+        deviceDetails.MachineName = formData.get('MachineName');
+        deviceDetails.MachineDiscription = formData.get('MachineDiscription');
+        deviceDetails.deviceid_dvc_reg = formData.get('deviceid_dvc_reg');
+        deviceDetails.device_name_dvc_reg = formData.get('device_name_dvc_reg');
+        deviceDetails.description = formData.get('description');
+        deviceDetails.devicegpslocation = formData.get('devicegpslocation');
+        deviceDetails.device_ip_address = formData.get('device_ip_address');
+        deviceDetails.parameter_id = formData.get('parameter_id');
+        deviceDetails.max_value = formData.get('max_value');
+        deviceDetails.min_value = formData.get('min_value');
+        deviceDetails.measuring_unit = formData.get('measuring_unit');
+        deviceDetails.is_it_starter_value = formData.get('is_it_starter_value');
+        deviceDetails.alarm_alert_type = formData.get('alarm_alert_type');
+        deviceDetails.message = formData.get('message');
+    //    console.log(deviceDetails);
+
+        await axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/'+deviceDetails.LineId+'/'+deviceDetails.MachineID+'/'+deviceDetails.MachineName+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.parameter_id+'/'+deviceDetails.description+'/'+deviceDetails.alarm_alert_type+'/'+deviceDetails.is_it_starter_value+'/'+deviceDetails.min_value+'/'+deviceDetails.max_value+'/'+deviceDetails.measuring_unit+'/'+deviceDetails.message+'/'+deviceDetails.devicegpslocation+'/'+deviceDetails.device_ip_address+'/'+deviceDetails.device_name_dvc_reg+'/3')
+        .then(res=>{
+          console.log("Return Data",res);
+        alert("Update Success!!");
+        history.push('/admin/DeviceRegistration')
+
+        })
+        .catch(err=>{
+          alert("Update Failed!!");
+          console.log(err);
+        });
+
+    }
+
+    const CancelOnClick = async (e) => {
+        e.preventDefault();
+        history.push('/admin/DeviceRegistration')
+    }
+
+    console.log(JSON.stringify(detail))
     return (
         <>
             <Container >
@@ -80,8 +172,11 @@ function DeviceRegistrationForm() {
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
                                                 <label>Production Line Name</label>
-                                                <Form.Select size="lg" className="form-control" name="LineId" value={Devicereg.values.LineId} onChange={Devicereg.handleChange}>
-                                                    <option value="">Choose</option>
+                                                <Form.Select size="lg" className="form-control" name="LineId"
+                                                    value={LineId}
+                                                    onChange={e => setlineId(e.target.value)}
+                                                    disabled={true}
+                                                >
                                                     {lineDetails.map(item => {
                                                         return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
                                                     })}
@@ -95,8 +190,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Machine ID"
                                                     type="text"
                                                     name="MachineID"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.MachineID}
+                                                    value={MachineID}
+                                                    disabled={true}
+                                                    onChange={e => setMachineID(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -109,8 +205,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Machine Name"
                                                     type="text"
                                                     name="MachineName"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.MachineName}
+                                                    value={MachineName}
+                                                    disabled={true}
+                                                    onChange={e => setMachineName(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -121,8 +218,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Machine Discription"
                                                     type="text"
                                                     name="MachineDiscription"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.MachineDiscription}
+                                                    value={MachineDiscription}
+                                                    disabled={true}
+                                                    onChange={e => setMachineDiscription(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -135,8 +233,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Device ID"
                                                     type="text"
                                                     name="deviceid_dvc_reg"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.deviceid_dvc_reg}
+                                                    value={deviceid_dvc_reg}
+                                                    disabled={true}
+                                                    onChange={e => setdeviceid_dvc_reg(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -147,8 +246,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Device Name"
                                                     type="text"
                                                     name="device_name_dvc_reg"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.device_name_dvc_reg}
+                                                    disabled={true}
+                                                    value={device_name_dvc_reg}
+                                                    onChange={e => setdevice_name_dvc_reg(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -161,8 +261,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Device Description"
                                                     type="text"
                                                     name="description"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.description}
+                                                    value={description}
+                                                    disabled={true}
+                                                    onChange={e => setdescription(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -173,9 +274,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Device Location"
                                                     type="text"
                                                     name="devicegpslocation"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.devicegpslocation}
-
+                                                    value={devicegpslocation}
+                                                    disabled={true}
+                                                    onChange={e => setdevicegpslocation(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -188,8 +289,9 @@ function DeviceRegistrationForm() {
                                                     placeholder="Device IP Address"
                                                     type="text"
                                                     name="device_ip_address"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.device_ip_address}
+                                                    disabled={true}
+                                                    value={device_ip_address}
+                                                    onChange={e => setdevice_ip_address(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -200,13 +302,15 @@ function DeviceRegistrationForm() {
                                                     placeholder="Parameter ID"
                                                     type="text"
                                                     name="parameter_id"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.parameter_id}
+                                                    disabled={true}
+                                                    value={parameter_id}
+                                                    onChange={e => setparameter_id(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                     </Row>
                                     <Row>
+                                        
                                         <Col className="pl-1" md="6">
                                             <Form.Group>
                                                 <label>Min Value</label>
@@ -215,8 +319,8 @@ function DeviceRegistrationForm() {
                                                     type="number"
                                                     min="0"
                                                     name="min_value"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.min_value}
+                                                    value={min_value}
+                                                    onChange={e => setmin_value(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -228,12 +332,11 @@ function DeviceRegistrationForm() {
                                                     type="number"
                                                     min="0"
                                                     name="max_value"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.max_value}
+                                                    value={max_value}
+                                                    onChange={e => setmax_value(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
-
                                     </Row>
                                     <Row>
                                         <Col className="pr-1" md="6">
@@ -243,8 +346,8 @@ function DeviceRegistrationForm() {
                                                     placeholder="Mesuring Unit"
                                                     type="text"
                                                     name="measuring_unit"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.measuring_unit}
+                                                    value={measuring_unit}
+                                                    onChange={e => setmeasuring_unit(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -252,15 +355,14 @@ function DeviceRegistrationForm() {
 
                                             <label>Start-up Parameter/Not</label>
                                             <Form.Group>
-
                                                 <Form.Check
                                                     label="Yes"
                                                     type="radio"
                                                     id="option1"
                                                     name="is_it_starter_value"
                                                     value={1}
-                                                    onChange={Devicereg.handleChange}
-                                                    onBlur={Devicereg.handleBlur}
+                                                    onChange={e => setis_it_starter_value(e.target.value)}
+                                                // onBlur={Devicereg.handleBlur}
                                                 />
                                                 <Form.Check
                                                     label="No"
@@ -268,15 +370,15 @@ function DeviceRegistrationForm() {
                                                     id="option2"
                                                     name="is_it_starter_value"
                                                     value={0}
-                                                    onChange={Devicereg.handleChange}
-                                                    onBlur={Devicereg.handleBlur}
+                                                    onChange={e => setis_it_starter_value(e.target.value)}
+                                                // onBlur={Devicereg.handleBlur}
                                                 />
                                             </Form.Group>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col className="pr-1" md="6">
-                                            <label>Alarm Alert Type</label>
+                                            <label>Alarm Alert Type {}</label>
                                             <Form.Group>
 
                                                 <Form.Check
@@ -285,16 +387,16 @@ function DeviceRegistrationForm() {
                                                     id="option1"
                                                     name="alarm_alert_type"
                                                     value={1}
-                                                    onChange={Devicereg.handleChange}
-                                                    onBlur={Devicereg.handleBlur}
+                                                    onChange={e => setalarm_alert_type(e.target.value)}
+                                                // onBlur={Devicereg.handleBlur}
                                                 />
                                                 <Form.Check type="radio"
                                                     label="no"
                                                     id="option2"
                                                     name="alarm_alert_type"
                                                     value={0}
-                                                    onChange={Devicereg.handleChange}
-                                                    onBlur={Devicereg.handleBlur}
+                                                    onChange={e => setalarm_alert_type(e.target.value)}
+                                                // onBlur={Devicereg.handleBlur}
                                                 />
                                             </Form.Group>
                                         </Col>
@@ -305,8 +407,8 @@ function DeviceRegistrationForm() {
                                                     placeholder="message"
                                                     type="text"
                                                     name="message"
-                                                    onChange={Devicereg.handleChange}
-                                                    value={Devicereg.values.message}
+                                                    value={message}
+                                                    onChange={e => setmessage(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -315,10 +417,20 @@ function DeviceRegistrationForm() {
                                         <Button
                                             className="btn-fill center"
                                             type="submit"
-                                            variant="primary"
-                                            onClick={Devicereg.handleSubmit}
+                                            variant="success"
+                                            onClick={(e) => ChangeOnClick(e)}
                                         >
-                                            Add New Device
+                                            Update Device
+                                        </Button>
+                                        &nbsp;&nbsp;
+                                        <Button
+                                            className="btn-fill center"
+                                            type="submit"
+                                            variant="danger"
+                                            onClick={(e) => CancelOnClick(e)}
+
+                                        >
+                                           Cancel 
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>
@@ -332,4 +444,4 @@ function DeviceRegistrationForm() {
     );
 }
 
-export default DeviceRegistrationForm;
+export default DeviceUpdate;

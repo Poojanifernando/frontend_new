@@ -43,8 +43,11 @@ function CurrentProcessForm() {
             Curd: '1',
         },
         onSubmit: values => {
-            //  console.log("test", 'http://localhost:8081/api/v1/admin/postcurrentdata/' + processDetails.values.job_id_ad + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + ':00/' + processDetails.values.batch_end_time + ':00/' + processDetails.values.product + '/' + processDetails.values.product + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad)
-            // console.log(processDetails.values)
+            // console.log("test", 'http://localhost:8081/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + ':00/' + processDetails.values.batch_end_time + ':00/' + processDetails.values.product + '/' + processDetails.values.product + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad)
+             console.log(processDetails.values.product)
+            // console.log(JSON.stringify(processDetails.values.product))
+            // console.log(JSON.stringify(processDetails.values.product_lineid_ad))  
+            
             axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + '/' + processDetails.values.batch_end_time + '/' + processDetails.values.product + '/' + processDetails.values.production_order + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad).then(() => {
                 alert("Current Process added successfully!!!");
                 window.location.reload();
@@ -53,6 +56,8 @@ function CurrentProcessForm() {
             })
         }
     })
+
+console.log(JSON.stringify(productTable));
 
     useEffect(() => {
         axios.get('http://localhost:8081/api/v1/job/getAllJobs').then((response) => {
@@ -76,6 +81,7 @@ function CurrentProcessForm() {
 
     const onChange = (event) => {
         setText(event.target.value);
+       
     }
 
     return (
@@ -85,7 +91,7 @@ function CurrentProcessForm() {
                     <Col md="8">
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h4">Current Process Registration</Card.Title>
+                                <Card.Title as="h4">Production Registration</Card.Title>
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -94,8 +100,9 @@ function CurrentProcessForm() {
                                             <Form.Group>
                                                 <label>Job ID</label>
                                                 <div>
-                                                    <input type="search" list="list" autoComplete="on" value={text} onChange={onChange} className="form-control" />
+                                                    <input type="search" list="list" autoComplete="on" value={text} onChange={onChange} className="form-control" placeholder="Job ID" />
                                                     <datalist id="list">
+                                                    <option value="">Choose</option>
                                                         {jobids.map(item => {
                                                             return (<option key={item.jobId} value={item.jobId}>{item.jobId}</option>);
                                                         })}
@@ -169,8 +176,9 @@ function CurrentProcessForm() {
                                                     name="product"
                                                     value={processDetails.values.product}
                                                     onChange={processDetails.handleChange}>
+                                                        <option value="">Choose</option>
                                                     {productTable.map(item => {
-                                                        return (<option key={item.productId} value={item.productId}>{item.productName}</option>);
+                                                        return (<option key={item.productId} value={item.productId}>{item.productId}</option>);
                                                     })}
                                                 </Form.Select>
                                             </Form.Group>
@@ -181,6 +189,7 @@ function CurrentProcessForm() {
                                                 <Form.Control
                                                     placeholder="Count"
                                                     type="number"
+                                                    min="0"
                                                     name="count_reg_bch"
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.count_reg_bch}
@@ -193,6 +202,7 @@ function CurrentProcessForm() {
                                             <Form.Group>
                                                 <label>Production Line Name</label>
                                                 <Form.Select size="lg" className="form-control" name="product_lineid_ad" value={processDetails.values.product_lineid_ad} onChange={processDetails.handleChange}>
+                                                <option value="">Choose</option>
                                                     {lineDetails.map(item => {
                                                         return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
                                                     })}
@@ -217,7 +227,7 @@ function CurrentProcessForm() {
                                             <Form.Group>
                                                 <label>Production Order</label>
                                                 <Form.Control
-                                                    placeholder="AUTO"
+                                                    placeholder="Production Order"
                                                     type="number"
                                                     name="production_order"
                                                     onChange={processDetails.handleChange}
@@ -229,8 +239,9 @@ function CurrentProcessForm() {
                                             <Form.Group>
                                                 <label>Customer Id</label>
                                                 <Form.Select size="lg" className="form-control" name="Customer_id" value={processDetails.values.Customer_id} onChange={processDetails.handleChange}>
+                                                <option value="">Choose</option>
                                                     {cusDetails.map(item => {
-                                                        return (<option key={item.cus_id} value={item.cus_id}>{item.customer_name}</option>);
+                                                        return (<option key={item.cus_id} value={item.cus_id}>{item.customer_name} - {item.cus_id}</option>);
                                                     })}
                                                 </Form.Select>
                                             </Form.Group>

@@ -91,6 +91,12 @@ function CustomerUpdate({ match }) {
 
     }
 
+    
+    const CancelOnClick = async (e) => {
+        e.preventDefault();
+        history.push('/admin/CustomerRegister')
+    }
+
     return (
         <>
             <Container >
@@ -146,7 +152,8 @@ function CustomerUpdate({ match }) {
                                                 <label>Contact Number</label>
                                                 <Form.Control
                                                     placeholder="Contact Number"
-                                                    type="number"
+                                                    type="tel"
+                                                    maxlength="10"  
                                                     name="customer_contact_number"
                                                     value={customer_contact_number}
                                                     onChange={e => setcustomer_contact_number(e.target.value)}
@@ -177,6 +184,17 @@ function CustomerUpdate({ match }) {
                                         >
                                             Update Customer
                                         </Button>
+                                        &nbsp;&nbsp;
+                                        <Button
+                                            className="btn-fill center"
+                                            type="submit"
+                                            variant="danger"
+                                            onClick={(e) => CancelOnClick(e)}
+
+                                        >
+                                           Cancel 
+                                        </Button>
+                                        
                                     </Row>
                                     <div className="clearfix"></div>
                                 </Form>

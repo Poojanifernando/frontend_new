@@ -66,13 +66,13 @@ function CustomerViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th className="border-0">ID</th>
-                                            <th className="border-0">Name</th>
-                                            <th className="border-0">NIC</th>
-                                            <th className="border-0">Contact Person</th>
-                                            <th className="border-0">Number</th>
-                                            <th className="border-0">Email</th>
-                                            <th className="border-0">Action</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">ID</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Name</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">NIC</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Contact Person</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Number</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Email</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -19,7 +19,7 @@ import { DropdownItem } from "reactstrap";
 
 function ProductUpdate({ match }) {
     const history = useHistory();
-    const userid_pro = "UID_005"
+    const userid_pro = localStorage.getItem('userId');
 
 
     const [product_id, setproduct_id] = useState('');
@@ -79,6 +79,11 @@ function ProductUpdate({ match }) {
         });
 
     }
+    const CancelOnClick = async (e) => {
+        e.preventDefault();
+        history.push('/admin/ProductRegistration')
+    }
+
 
     return (
         <>
@@ -96,7 +101,7 @@ function ProductUpdate({ match }) {
                                             <Form.Group>
                                                 <label>Product ID</label>
                                                 <Form.Control
-                                                    placeholder="Batch ID"
+                                                    placeholder="Product ID"
                                                     type="text"
                                                     name="product_id"
                                                     value={product_id}
@@ -109,7 +114,7 @@ function ProductUpdate({ match }) {
                                             <Form.Group>
                                                 <label>Product Name</label>
                                                 <Form.Control
-                                                    placeholder="Batch Name"
+                                                    placeholder="Product Name"
                                                     type="text"
                                                     name="product_name"
                                                     value={product_name}
@@ -154,6 +159,16 @@ function ProductUpdate({ match }) {
                                             onClick={(e) => ChangeOnClick(e)}
                                         >
                                             Update Product
+                                        </Button>
+                                        &nbsp;&nbsp;
+                                        <Button
+                                            className="btn-fill center"
+                                            type="submit"
+                                            variant="danger"
+                                            onClick={(e) => CancelOnClick(e)}
+
+                                        >
+                                           Cancel 
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>

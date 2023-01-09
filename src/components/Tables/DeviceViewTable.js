@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import { Link } from "react-router-dom";
 // react-bootstrap components
 import {
     Badge,
@@ -22,32 +23,23 @@ function DeviceViewTable() {
 
 
     useEffect(() => {
-        // axios.get('http://localhost:8081/api/v1/devices/getAllDevice').then((response) => {
-        //     setBatches(response.data.content);
-        // });
+        axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/{lineId}/{machineId_2}/{machineName}/{machineDescription}/{deviceId}/{parameterId}/{des}/1/1/20/25/{mesuringUnit}/{massage}/{deviceLocation}/{deviceIpAddress}/{deviceName}/'+2).then((response) => {
+            setBatches(response.data);
+        });
     }, [])
 
     // //delete the specific column
-    // const deleteConference = (id) => {
-    //     axios.delete('http://localhost:8081/api/v1/batch/deleteBatch/' + id).then(() => {
-    //         alert("deleted successfully!!");
-    //         setBatches([...Batches, { }]);
-    //         history.push('/admin/BatchRegistration')
-    //     }).catch((err) => {
-    //         alert(err);
-    //     })
-    // };
+    const deleteConference = (id) => {
+        // axios.delete('http://localhost:8081/api/v1/batch/deleteBatch/' + id).then(() => {
+            alert("you cant delete Devices");
+        //     setBatches([...Batches, { }]);
+        //     history.push('/admin/BatchRegistration')
+        // }).catch((err) => {
+        //     alert(err);
+        // })
+    };
 
-    // //Edit the specific column
-    // const editConference = (id) => {
-    //     console.log(id)
-    //     // axios.delete('' + id).then(() => {
-    //     //     alert("Edit successfully!!");
-    //     // }).catch((err) => {
-    //     //     alert(err);
-    //     // })
 
-    // };
 
     console.log(JSON.stringify(Batches))
     return (
@@ -66,47 +58,47 @@ function DeviceViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th className="border-0">line_dvc_reg</th>
-                                            <th className="border-0">ID</th>
-                                            <th className="border-0">NAME</th>
-                                            <th className="border-0">DESCRIPTION</th>
-                                            <th className="border-0">LOCATION</th>
-                                            <th className="border-0">IP</th>
-                                            <th className="border-0">PARAMETER ID</th>
-                                            <th className="border-0">MAX</th>
-                                            <th className="border-0">MIN</th>
-                                            <th className="border-0">UNIT</th>
-                                            <th className="border-0">START-UP</th>
-                                            <th className="border-0">ALARM</th>
-                                            <th className="border-0">MESSAGE</th>
-                                            <th className="border-0">Action</th>
+
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Line ID</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Machine ID</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Device ID</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Parameter ID</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Alarm</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Starter</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">MIN</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">MAX</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Unit</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {Batches?.map((Batch, index) => {
                                             return (
                                                 <tr>
-                                                    <td>{Batch.lineDvcReg}</td>
-                                                    <td>{Batch.deviceID_dvcReg}</td>
-                                                    <td>{Batch.device_name_dvc_reg}</td>
-                                                    <td>{Batch.description}</td>
-                                                    <td>{Batch.deviceGPSLocation}</td>
-                                                    <td>{Batch.deviceIpAddress}</td>
-                                                    <td>{Batch.parameterId}</td>
-                                                    <td>{Batch.max_value}</td>
-                                                    <td>{Batch.min_value}</td>
+                                                    <td>{Batch.line_id}</td>
+                                                    <td>{Batch.machine_name}</td>
+                                                    <td>{Batch.deviceid_dvc_reg}</td>
+                                                    <td>{Batch.parameter_id}</td>
+                                                    <td>{Batch.is_it_alarm_parameter}</td>
                                                     <td>{Batch.is_it_starter_value}</td>
-
-                                                    <td>{Batch.alarm_alert_type}</td>
-                                                    <td>{Batch.message}</td>
+                                                    <td>{Batch.min_value}</td>
+                                                    <td>{Batch.max_value}</td>
+                                                    <td>{Batch.measuring_unit}</td>
                                                     <td>
-                                                        <a className="btn btn-danger" id="icon"><em
+                                                        <a className="btn btn-danger" id="icon" ><em
                                                             className="fa fa-trash"
                                                             onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(Batch.batchID_regBch) }; }} /></a>
                                                         &nbsp;&nbsp;
-                                                        <a className="btn btn-success" id="icon"><em
+                                                        {/* <a className="btn btn-success" id="icon">
+                                                            <em
                                                             className="far fa-edit"
-                                                            onClick={() => { if (window.confirm("Are you sure you want to Edit this ?")) { editConference(Batch.batchID_regBch) }; }} /></a>
+                                                            onClick={() => { if (window.confirm("Are you sure you want to Edit this ?")) { editConference(Batch.batchID_regBch) }; }} /></a> */}
+
+                                                            <Link id="icon" className="btn btn-success" to={`/admin/DeviceUpdate/${Batch.deviceid_dvc_reg}`}
+                                                            >
+                                                                <em
+                                                                    className="far fa-edit" />
+                                                            </Link>
                                                     </td>
                                                 </tr>
                                             )

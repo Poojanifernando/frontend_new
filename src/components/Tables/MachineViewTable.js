@@ -66,10 +66,10 @@ function MachineViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th className="border-0">Id</th>
-                                            <th className="border-0">Name</th>
-                                            <th className="border-0">Discription</th>
-                                            <th className="border-0">Action</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Id</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Name</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Discription</th>
+                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

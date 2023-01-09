@@ -58,7 +58,7 @@ function ProductRegistrationForm() {
                                             <Form.Group>
                                                 <label>Product ID</label>
                                                 <Form.Control
-                                                    placeholder="Batch ID"
+                                                    placeholder="Product ID"
                                                     type="text"
                                                     name="productId"
                                                     onChange={ProDetails.handleChange}
@@ -70,7 +70,7 @@ function ProductRegistrationForm() {
                                             <Form.Group>
                                                 <label>Product Name</label>
                                                 <Form.Control
-                                                    placeholder="Batch Name"
+                                                    placeholder="Product Name"
                                                     type="text"
                                                     name="productName"
                                                     onChange={ProDetails.handleChange}

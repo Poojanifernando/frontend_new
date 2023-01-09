@@ -24,7 +24,7 @@ function MachinesCardView() {
   const [dateState, setDateState] = useState(new Date());
   const [Lines, setLines] = useState([]);
   const [Machins, setMachines] = useState([]);
-  const [date, setdate] = useState('2023-01-06');
+  const [date, setdate] = useState('2023-01-08');
 
 
   useEffect(() => {
@@ -33,9 +33,9 @@ function MachinesCardView() {
     setInterval(() => setDateState(new Date()), 30000);
     console.log("new")
 
-    axios.get('http://localhost:8081/api/v1/admin/getLineByDate/'+ date).then((response) => {
+    axios.get('http://localhost:8081/api/v1/admin/getLineByDate/'+ a).then((response) => {
       setLines(response.data);
-      // console.log(response.data)
+      console.log(response.data)
     });
 
     // http://localhost:8081/api/v1/PDM/getalltestsdevices
@@ -58,8 +58,7 @@ function MachinesCardView() {
         return (
           <Container fluid className="test">
             {Lines.product_lineid_ad}
-            <LineHeader date={date} line={Line.product_lineid_ad} lineName={Line.line_name}/>
-           
+            <LineHeader date={a} line={Line.product_lineid_ad} lineName={Line.line_name}/>
           </Container>
 
         )

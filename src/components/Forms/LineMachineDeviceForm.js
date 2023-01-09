@@ -33,6 +33,7 @@ function LineMachineDeviceForm() {
         },
         onSubmit: values => {
             console.log(JSON.stringify(batchDetails.values))
+            
 
             // axios.post('http://localhost:8081/api/v1/batch/saveBatch', batchDetails.values).then(() => {
             //     alert("Batch added successfully!!!");

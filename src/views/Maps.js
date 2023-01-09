@@ -24,7 +24,7 @@ function Maps() {
       position: myLatlng,
       map: map,
       animation: google.maps.Animation.DROP,
-      title: "Light Bootstrap Dashboard PRO React!",
+      title: "Lalan",
     });
 
     const contentString =

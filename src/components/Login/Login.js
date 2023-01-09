@@ -5,6 +5,7 @@ import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import useAuth from "isAuth/useAuth";
+import image from 'assets/img/login.png';
 
 
 function Login() {
@@ -31,7 +32,7 @@ function Login() {
         window.location.reload(false);
       }
       else{
-        alert("enter valid email");
+        alert("enter valid email or password !");
         window.location.reload(false);
       }
 
@@ -50,7 +51,7 @@ function Login() {
 
   return (
 
-    <div>
+    <div style={{backgroundImage: `url(${image})`}}>
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={8} lg={6} xs={12}>
@@ -58,7 +59,7 @@ function Login() {
             <Card className="shadow">
               <Card.Body>
                 <div className="mb-3 mt-md-4">
-                  <h2 className="fw-bold mb-2 text-uppercase ">Sign-In</h2>
+                  <h2 className="fw-bold mb-2 text-uppercase col-md-12 text-center">Sign-In</h2>
                   {/* <p className=" mb-5">Please enter your login and password!</p> */}
                   <div className="mb-3">
                     <Form>
@@ -96,23 +97,26 @@ function Login() {
                           </a>
                         </p>
                       </Form.Group>
-                      <div className="d-grid">
+                      <div className="col-md-12 text-center">
                         <Button
                           variant="primary"
                           type="submit"
-                          onClick={login.handleSubmit}>
+                          onClick={login.handleSubmit}
+                          style={{width:"200px"}}
+                          >
                           Login
                         </Button>
                       </div>
                     </Form>
                     <div className="mt-3">
-                      <p className="mb-0  text-center">
+                      {/* <p className="mb-0  text-center">
                         Don't have an account?{" "}
-                        <Link className="text-primary fw-bold" to={`/signup`}
+                        <Link className="text-primary fw-bold "
+                        //  to={`/signup`}
                         >
                           Sign Up
                         </Link>
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </div>
