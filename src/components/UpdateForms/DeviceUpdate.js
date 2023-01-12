@@ -294,7 +294,7 @@ function DeviceUpdate({ match }) {
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
-                                        <Col className="pl-1" md="6">
+                                        {/* <Col className="pl-1" md="6">
                                             <Form.Group>
                                                 <label>Parameter ID</label>
                                                 <Form.Control
@@ -306,7 +306,7 @@ function DeviceUpdate({ match }) {
                                                     onChange={e => setparameter_id(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
-                                        </Col>
+                                        </Col> */}
                                     </Row>
                                     <Row>
                                         

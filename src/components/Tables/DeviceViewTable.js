@@ -62,7 +62,7 @@ function DeviceViewTable() {
                                             <th style={{color:'black'}} className="border-0 font-weight-bold">Line ID</th>
                                             <th style={{color:'black'}} className="border-0 font-weight-bold">Machine ID</th>
                                             <th style={{color:'black'}} className="border-0 font-weight-bold">Device ID</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Parameter ID</th>
+                                            {/* <th style={{color:'black'}} className="border-0 font-weight-bold">Parameter ID</th> */}
                                             <th style={{color:'black'}} className="border-0 font-weight-bold">Alarm</th>
                                             <th style={{color:'black'}} className="border-0 font-weight-bold">Starter</th>
                                             <th style={{color:'black'}} className="border-0 font-weight-bold">MIN</th>
@@ -78,7 +78,7 @@ function DeviceViewTable() {
                                                     <td>{Batch.line_id}</td>
                                                     <td>{Batch.machine_name}</td>
                                                     <td>{Batch.deviceid_dvc_reg}</td>
-                                                    <td>{Batch.parameter_id}</td>
+                                                    {/* <td>{Batch.parameter_id}</td> */}
                                                     <td>{Batch.is_it_alarm_parameter}</td>
                                                     <td>{Batch.is_it_starter_value}</td>
                                                     <td>{Batch.min_value}</td>
