@@ -21,7 +21,7 @@ function LineHeader(props) {
 
     const [lineCustomerDetails, setlineCustomerDetails] = useState([]);
 
-    const [test, settest] = useState('green');
+    const [test, settest] = useState([]);
 
     useEffect(() => {
 
@@ -31,15 +31,21 @@ function LineHeader(props) {
 
         //initial value setter
         axios.get('http://localhost:8081/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
-            settest(response.data[0]);
+            settest(response.data);
         });
         //loop
         setInterval(() => (new axios.get('http://localhost:8081/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
-            settest(response.data[0]);
+            settest(response.data);
+
+
         })), 5000);
     }, []);
 
-    console.log(lineCustomerDetails)
+
+    let firstWarm = true;
+    let firstOnline = true;
+    console.log("ssssssssssssssssssssssssssssssss", JSON.stringify(test))
+
     return (
 
         <div >
@@ -47,11 +53,34 @@ function LineHeader(props) {
             {lineCustomerDetails?.map((cusDetails, index) => {
                 return (
                     <>
-                        <div class="row1"   >
-                            <div class="columnrow leftrow fontsize">LINE - {current_Line_name}</div>
-                            <div class="columnrow rightrow"
-                                style={{ backgroundColor: test.t_color , textShadow:"2px -1px 0 #000" }}
-                            > {test.t_warmup} </div>
+        <div class="row1">
+            <div class="columnrow leftrow fontsize">LINE - {current_Line_name}</div>
+            {test.map((Value, index) => {
+                if (Value.t_warmup === 'Warming Up' && firstWarm) {
+                    firstWarm = false;
+                    return (
+                        <div class="columnrow rightrow"
+                            style={{ backgroundColor: Value.t_color, textShadow: "2px -1px 0 #000" }}
+                        >{Value.t_warmup}
+                        </div>
+                    );
+                } 
+                if (Value.t_warmup === 'Online' && firstOnline) {
+                    firstOnline = false;
+                    return (
+                        <div class="columnrow rightrow"
+                            style={{ backgroundColor: "#027739", textShadow: "2px -1px 0 #000" }}
+                        >{Value.t_warmup}
+                        </div>
+                    );
+                } 
+                // return <>sss</>
+            })}
+
+                            {/* <div class="columnrow rightrow"
+                                style={{ backgroundColor: test.color_code_st_out , textShadow:"2px -1px 0 #000" }}
+                            > {test.t_warmup}</div> */}
+
                         </div>
                         <div class="row1">
                             <div class="column1"><p className="linetitle">Job no :<p className="ptagRemove"> {cusDetails.job_id_ad}</p></p></div>

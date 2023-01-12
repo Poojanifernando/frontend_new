@@ -20,27 +20,46 @@ import { DropdownItem } from "reactstrap";
 function ProductRegistrationForm() {
     const userid_pro = "UID_005"
 
- //Hook
- const ProDetails = useFormik({
-    initialValues: {
-        userID_pro: userid_pro,
-        productId: '',
-        productName: '',
-        description: '',
-        image: '',
-    },
-    onSubmit: values => {
-        console.log(JSON.stringify(ProDetails.values))
+    //Hook
+    const ProDetails = useFormik({
+        initialValues: {
+            userID_pro: userid_pro,
+            productId: '',
+            productName: '',
+            description: '',
+            image: '',
+        },
 
-        axios.post('http://localhost:8081/api/v1/product/saveProduct', ProDetails.values).then(() => {
-            alert("Product added successfully!!!");
-            window.location.reload(false);
 
-        }).catch((err) => {
-            alert(err);
-        })
-    }
-})
+        validate: values => {
+            const errors = {};
+            if (!values.productId) {
+                errors.productId = 'Product id is required';
+            }
+            if (!values.productName) {
+                errors.productName = 'Product name is required';
+            }
+            if (!values.description) {
+                errors.description = 'Description is required';
+            }
+            return errors;
+        },
+        onSubmit: values => {
+            if (ProDetails.isValid) {
+              
+                axios.post('http://localhost:8081/api/v1/product/saveProduct', ProDetails.values).then(() => {
+                    alert("Product added successfully!!!");
+                    window.location.reload(false);
+
+                }).catch((err) => {
+                    alert(err);
+                })
+
+            } else {
+                console.log('Not all fields are filled in');
+            }
+        }
+    })
 
     return (
         <>
@@ -64,6 +83,9 @@ function ProductRegistrationForm() {
                                                     onChange={ProDetails.handleChange}
                                                     value={ProDetails.values.productId}
                                                 ></Form.Control>
+                                                {ProDetails.errors.productId && (
+                                                    <div className="text-danger">{ProDetails.errors.productId}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -76,6 +98,9 @@ function ProductRegistrationForm() {
                                                     onChange={ProDetails.handleChange}
                                                     value={ProDetails.values.productName}
                                                 ></Form.Control>
+                                                {ProDetails.errors.productName && (
+                                                    <div className="text-danger">{ProDetails.errors.productName}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -90,6 +115,9 @@ function ProductRegistrationForm() {
                                                     onChange={ProDetails.handleChange}
                                                     value={ProDetails.values.description}
                                                 ></Form.Control>
+                                                {ProDetails.errors.description && (
+                                                    <div className="text-danger">{ProDetails.errors.description}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">

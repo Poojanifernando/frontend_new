@@ -41,7 +41,7 @@ function DeviceViewTable() {
 
 
 
-    console.log(JSON.stringify(Batches))
+    // console.log(JSON.stringify(Batches))
     return (
         <>
             <Container fluid>

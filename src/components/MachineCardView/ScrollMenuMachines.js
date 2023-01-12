@@ -44,13 +44,14 @@ function ScrollMenuMachines(props) {
                             // sm="12"
                              className="aa">
                                 <Card className="card-stats">
-                                    <Card.Header>
+                                    <Card.Header >
                                         {/* <div className="stats"> */}
                                         {/* <i className="fas fa-redo mr-1"></i> */}
                                         {Machins.machine_name}
                                         {/* {Machins?.machineID} */}
                                         {/* </div> */}
                                     </Card.Header>
+                                    <br/>
                                     <CardParameterbody date={current_date} line={current_Line} POrder={current_pOrder} MachineId={Machins.machine_id}/>
                                 </Card>
                             </Col>

@@ -42,22 +42,57 @@ function CurrentProcessForm() {
             Customer_id: '',
             Curd: '1',
         },
+        validate: values => {
+            const errors = {};
+            if (!values.batchid_ad) {
+                errors.batchid_ad = 'Batch id is required';
+            }
+            if (!values.product_lineid_ad) {
+                errors.product_lineid_ad = 'Product line id is required';
+            }
+            if (!values.batch_start_time) {
+                errors.batch_start_time = 'Start time is required';
+            }
+            if (!values.batch_end_time) {
+                errors.batch_end_time = 'End time is required';
+            }
+            if (!values.predicted_date) {
+                errors.predicted_date = 'Date is required';
+            }
+            if (!values.production_order) {
+                errors.production_order = 'Order is required';
+            }
+            if (!values.product) {
+                errors.product = 'product is required';
+            }
+            if (!values.job_description) {
+                errors.job_description = 'Description is required';
+            }
+            if (!values.Customer_id) {
+                errors.Customer_id = 'Customer id is required';
+            }
+            return errors;
+        },
         onSubmit: values => {
+            if (processDetails.isValid) {
             // console.log("test", 'http://localhost:8081/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + ':00/' + processDetails.values.batch_end_time + ':00/' + processDetails.values.product + '/' + processDetails.values.product + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad)
-             console.log(processDetails.values.product)
+            // console.log(processDetails.values.product)
             // console.log(JSON.stringify(processDetails.values.product))
             // console.log(JSON.stringify(processDetails.values.product_lineid_ad))  
-            
+    
             axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + '/' + processDetails.values.batch_end_time + '/' + processDetails.values.product + '/' + processDetails.values.production_order + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad).then(() => {
                 alert("Current Process added successfully!!!");
                 window.location.reload();
             }).catch((err) => {
                 alert(err);
             })
+        } else {
+            console.log('Not all fields are filled in');
+          }
         }
     })
 
-console.log(JSON.stringify(productTable));
+    // console.log(JSON.stringify(productTable));
 
     useEffect(() => {
         axios.get('http://localhost:8081/api/v1/job/getAllJobs').then((response) => {
@@ -81,7 +116,7 @@ console.log(JSON.stringify(productTable));
 
     const onChange = (event) => {
         setText(event.target.value);
-       
+
     }
 
     return (
@@ -102,12 +137,13 @@ console.log(JSON.stringify(productTable));
                                                 <div>
                                                     <input type="search" list="list" autoComplete="on" value={text} onChange={onChange} className="form-control" placeholder="Job ID" />
                                                     <datalist id="list">
-                                                    <option value="">Choose</option>
+                                                        <option value="">Choose</option>
                                                         {jobids.map(item => {
                                                             return (<option key={item.jobId} value={item.jobId}>{item.jobId}</option>);
                                                         })}
                                                     </datalist>
                                                 </div>
+                                               
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -120,6 +156,9 @@ console.log(JSON.stringify(productTable));
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.job_description}
                                                 ></Form.Control>
+                                                 {processDetails.errors.job_description && (
+                                                    <div className="text-danger">{processDetails.errors.job_description}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -134,6 +173,9 @@ console.log(JSON.stringify(productTable));
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.batchid_ad}
                                                 ></Form.Control>
+                                                {processDetails.errors.batchid_ad && (
+                                                    <div className="text-danger">{processDetails.errors.batchid_ad}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -150,6 +192,9 @@ console.log(JSON.stringify(productTable));
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.batch_start_time}
                                                 ></Form.Control>
+                                                 {processDetails.errors.batch_start_time && (
+                                                    <div className="text-danger">{processDetails.errors.batch_start_time}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -162,6 +207,9 @@ console.log(JSON.stringify(productTable));
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.batch_end_time}
                                                 ></Form.Control>
+                                                {processDetails.errors.batch_end_time && (
+                                                    <div className="text-danger">{processDetails.errors.batch_end_time}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -176,11 +224,14 @@ console.log(JSON.stringify(productTable));
                                                     name="product"
                                                     value={processDetails.values.product}
                                                     onChange={processDetails.handleChange}>
-                                                        <option value="">Choose</option>
+                                                    <option value="">Choose</option>
                                                     {productTable.map(item => {
                                                         return (<option key={item.productId} value={item.productId}>{item.productId}</option>);
                                                     })}
                                                 </Form.Select>
+                                                {processDetails.errors.product && (
+                                                    <div className="text-danger">{processDetails.errors.product}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -194,6 +245,9 @@ console.log(JSON.stringify(productTable));
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.count_reg_bch}
                                                 ></Form.Control>
+                                                 {processDetails.errors.count_reg_bch && (
+                                                    <div className="text-danger">{processDetails.errors.count_reg_bch}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -202,11 +256,14 @@ console.log(JSON.stringify(productTable));
                                             <Form.Group>
                                                 <label>Production Line Name</label>
                                                 <Form.Select size="lg" className="form-control" name="product_lineid_ad" value={processDetails.values.product_lineid_ad} onChange={processDetails.handleChange}>
-                                                <option value="">Choose</option>
+                                                    <option value="">Choose</option>
                                                     {lineDetails.map(item => {
                                                         return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
                                                     })}
                                                 </Form.Select>
+                                                {processDetails.errors.product_lineid_ad && (
+                                                    <div className="text-danger">{processDetails.errors.product_lineid_ad}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -219,6 +276,9 @@ console.log(JSON.stringify(productTable));
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.predicted_date}
                                                 ></Form.Control>
+                                                {processDetails.errors.predicted_date && (
+                                                    <div className="text-danger">{processDetails.errors.predicted_date}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -233,17 +293,23 @@ console.log(JSON.stringify(productTable));
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.production_order}
                                                 ></Form.Control>
+                                                {processDetails.errors.production_order && (
+                                                    <div className="text-danger">{processDetails.errors.production_order}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
                                             <Form.Group>
                                                 <label>Customer Id</label>
                                                 <Form.Select size="lg" className="form-control" name="Customer_id" value={processDetails.values.Customer_id} onChange={processDetails.handleChange}>
-                                                <option value="">Choose</option>
+                                                    <option value="">Choose</option>
                                                     {cusDetails.map(item => {
                                                         return (<option key={item.cus_id} value={item.cus_id}>{item.customer_name} - {item.cus_id}</option>);
                                                     })}
                                                 </Form.Select>
+                                                {processDetails.errors.Customer_id && (
+                                                    <div className="text-danger">{processDetails.errors.Customer_id}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>

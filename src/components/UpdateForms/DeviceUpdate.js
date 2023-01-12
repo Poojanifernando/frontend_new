@@ -135,10 +135,10 @@ function DeviceUpdate({ match }) {
         deviceDetails.is_it_starter_value = formData.get('is_it_starter_value');
         deviceDetails.alarm_alert_type = formData.get('alarm_alert_type');
         deviceDetails.message = formData.get('message');
-    //    console.log(deviceDetails);
+       console.log(deviceDetails);
 
-        await axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/'+deviceDetails.LineId+'/'+deviceDetails.MachineID+'/'+deviceDetails.MachineName+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.parameter_id+'/'+deviceDetails.description+'/'+deviceDetails.alarm_alert_type+'/'+deviceDetails.is_it_starter_value+'/'+deviceDetails.min_value+'/'+deviceDetails.max_value+'/'+deviceDetails.measuring_unit+'/'+deviceDetails.message+'/'+deviceDetails.devicegpslocation+'/'+deviceDetails.device_ip_address+'/'+deviceDetails.device_name_dvc_reg+'/3')
-        .then(res=>{
+        await axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/'+deviceDetails.LineId+'/'+deviceDetails.MachineID+'/'+deviceDetails.MachineName+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.deviceid_dvc_reg+'/'+deviceDetails.parameter_id+'/'+deviceDetails.description+'/'+deviceDetails.alarm_alert_type+'/'+deviceDetails.is_it_starter_value+'/'+deviceDetails.min_value+'/'+deviceDetails.max_value+'/'+deviceDetails.measuring_unit+'/'+deviceDetails.message+'/'+deviceDetails.devicegpslocation+'/'+deviceDetails.device_ip_address+'/'+deviceDetails.device_name_dvc_reg+'/3')
+        .then(res=>{deviceid_dvc_reg
           console.log("Return Data",res);
         alert("Update Success!!");
         history.push('/admin/DeviceRegistration')
@@ -289,7 +289,6 @@ function DeviceUpdate({ match }) {
                                                     placeholder="Device IP Address"
                                                     type="text"
                                                     name="device_ip_address"
-                                                    disabled={true}
                                                     value={device_ip_address}
                                                     onChange={e => setdevice_ip_address(e.target.value)}
                                                 ></Form.Control>

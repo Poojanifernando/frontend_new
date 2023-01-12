@@ -43,16 +43,70 @@ function DeviceRegistrationForm() {
             message: '',
 
         },
+        validate: values => {
+            const errors = {};
+            if (!values.LineId) {
+                errors.LineId = 'Line id is required';
+            }
+            if (!values.MachineID) {
+                errors.MachineID = 'Machine id is required';
+            }
+            if (!values.MachineName) {
+                errors.MachineName = 'Machine name is required';
+            }
+            if (!values.MachineDiscription) {
+                errors.MachineDiscription = 'Discription is required';
+            }
+            if (!values.deviceid_dvc_reg) {
+                errors.deviceid_dvc_reg = 'Device id is required';
+            }
+            if (!values.device_name_dvc_reg) {
+                errors.device_name_dvc_reg = 'Device name is required';
+            }
+            if (!values.description) {
+                errors.description = 'description is required';
+            }
+            if (!values.devicegpslocation) {
+                errors.devicegpslocation = 'GPS location is required';
+            }
+            // if (!values.device_ip_address) {
+            //     errors.device_ip_address = 'Ip address is required';
+            // }
+            if (!values.parameter_id) {
+                errors.parameter_id = 'Parameter id is required';
+            }
+            if (!values.max_value) {
+                errors.max_value = 'Max value is required';
+            }
+            if (!values.min_value) {
+                errors.min_value = 'Min value is required';
+            }
+            if (!values.measuring_unit) {
+                errors.measuring_unit = 'Measuring unit is required';
+            }
+            if (!values.message) {
+                errors.message = 'Message is required';
+            }
+            if (!values.device_ip_address) {
+                values.device_ip_address = 'not assign';
+            }
+            return errors;
+        },
         onSubmit: values => {
-            console.log(JSON.stringify(Devicereg.values))
+            if (Devicereg.isValid) {
+                console.log(JSON.stringify(Devicereg.values))
 
-            axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/' + Devicereg.values.LineId + '/' + Devicereg.values.MachineID + '/' + Devicereg.values.MachineName + '/' + Devicereg.values.MachineDiscription + '/' + Devicereg.values.deviceid_dvc_reg + '/' + Devicereg.values.parameter_id + '/' + Devicereg.values.description + '/' + Devicereg.values.alarm_alert_type + '/' + Devicereg.values.is_it_starter_value + '/' + Devicereg.values.min_value + '/' + Devicereg.values.max_value + '/' + Devicereg.values.measuring_unit + '/' + Devicereg.values.message + '/' + Devicereg.values.devicegpslocation + '/' + Devicereg.values.device_ip_address + '/' + Devicereg.values.device_name_dvc_reg + '/1').then(() => {
-                alert("Device Added successfully!!!");
-                window.location.reload(false);
-            }).catch((err) => {
-                alert(err);
-            })
+                axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/' + Devicereg.values.LineId + '/' + Devicereg.values.MachineID + '/' + Devicereg.values.MachineName + '/' + Devicereg.values.MachineDiscription + '/' + Devicereg.values.deviceid_dvc_reg + '/' + Devicereg.values.parameter_id + '/' + Devicereg.values.description + '/' + Devicereg.values.alarm_alert_type + '/' + Devicereg.values.is_it_starter_value + '/' + Devicereg.values.min_value + '/' + Devicereg.values.max_value + '/' + Devicereg.values.measuring_unit + '/' + Devicereg.values.message + '/' + Devicereg.values.devicegpslocation + '/' + Devicereg.values.device_ip_address + '/' + Devicereg.values.device_name_dvc_reg + '/1').then(() => {
+                    alert("Device Added successfully!!!");
+                    window.location.reload(false);
+                }).catch((err) => {
+                    alert(err);
+                })
+            } else {
+                console.log('Not all fields are filled in');
+            }
         }
+
     })
 
 
@@ -86,6 +140,9 @@ function DeviceRegistrationForm() {
                                                         return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
                                                     })}
                                                 </Form.Select>
+                                                {Devicereg.errors.LineId && (
+                                                    <div className="text-danger">{Devicereg.errors.LineId}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -98,6 +155,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.MachineID}
                                                 ></Form.Control>
+                                                {Devicereg.errors.MachineID && (
+                                                    <div className="text-danger">{Devicereg.errors.MachineID}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -112,6 +172,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.MachineName}
                                                 ></Form.Control>
+                                                {Devicereg.errors.MachineName && (
+                                                    <div className="text-danger">{Devicereg.errors.MachineName}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -124,6 +187,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.MachineDiscription}
                                                 ></Form.Control>
+                                                {Devicereg.errors.MachineDiscription && (
+                                                    <div className="text-danger">{Devicereg.errors.MachineDiscription}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -138,6 +204,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.deviceid_dvc_reg}
                                                 ></Form.Control>
+                                                {Devicereg.errors.deviceid_dvc_reg && (
+                                                    <div className="text-danger">{Devicereg.errors.deviceid_dvc_reg}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -150,6 +219,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.device_name_dvc_reg}
                                                 ></Form.Control>
+                                                {Devicereg.errors.device_name_dvc_reg && (
+                                                    <div className="text-danger">{Devicereg.errors.device_name_dvc_reg}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -164,6 +236,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.description}
                                                 ></Form.Control>
+                                                {Devicereg.errors.description && (
+                                                    <div className="text-danger">{Devicereg.errors.description}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -175,8 +250,10 @@ function DeviceRegistrationForm() {
                                                     name="devicegpslocation"
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.devicegpslocation}
-
                                                 ></Form.Control>
+                                                {Devicereg.errors.devicegpslocation && (
+                                                    <div className="text-danger">{Devicereg.errors.devicegpslocation}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -191,23 +268,37 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.device_ip_address}
                                                 ></Form.Control>
+                                               
+                                                {/* {Devicereg.errors.device_ip_address && (
+                                                    <div className="text-danger">{Devicereg.errors.device_ip_address}</div>
+                                                )} */}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
                                             <Form.Group>
                                                 <label>Parameter ID</label>
-                                                <Form.Control
+                                                {/* <Form.Control
                                                     placeholder="Parameter ID"
                                                     type="text"
                                                     name="parameter_id"
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.parameter_id}
-                                                ></Form.Control>
+                                                ></Form.Control> */}
+                                                 <Form.Select className="form-control" name="parameter_id" onChange={Devicereg.handleChange}
+                                                    value={Devicereg.values.parameter_id}>
+                                                    <option>Select</option>
+                                                    <option value="POWR">Power</option>
+                                                    <option value="LNTH">Length</option>
+                                                    <option value="TEMP">Temperature</option>
+                                                </Form.Select>
+                                                {Devicereg.errors.parameter_id && (
+                                                    <div className="text-danger">{Devicereg.errors.parameter_id}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col className="pl-1" md="6">
+                                        <Col className="pr -1" md="6">
                                             <Form.Group>
                                                 <label>Min Value</label>
                                                 <Form.Control
@@ -218,9 +309,12 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.min_value}
                                                 ></Form.Control>
+                                                {Devicereg.errors.min_value && (
+                                                    <div className="text-danger">{Devicereg.errors.min_value}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
-                                        <Col className="pr-1" md="6">
+                                        <Col className="pl-1" md="6">
                                             <Form.Group>
                                                 <label>Max Value</label>
                                                 <Form.Control
@@ -231,6 +325,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.max_value}
                                                 ></Form.Control>
+                                                {Devicereg.errors.max_value && (
+                                                    <div className="text-danger">{Devicereg.errors.max_value}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
 
@@ -246,6 +343,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.measuring_unit}
                                                 ></Form.Control>
+                                                {Devicereg.errors.measuring_unit && (
+                                                    <div className="text-danger">{Devicereg.errors.measuring_unit}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pr-1" md="6">
@@ -272,6 +372,7 @@ function DeviceRegistrationForm() {
                                                     onBlur={Devicereg.handleBlur}
                                                 />
                                             </Form.Group>
+
                                         </Col>
                                     </Row>
                                     <Row>
@@ -308,6 +409,9 @@ function DeviceRegistrationForm() {
                                                     onChange={Devicereg.handleChange}
                                                     value={Devicereg.values.message}
                                                 ></Form.Control>
+                                                {Devicereg.errors.message && (
+                                                    <div className="text-danger">{Devicereg.errors.message}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
