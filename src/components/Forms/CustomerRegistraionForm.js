@@ -29,7 +29,27 @@ function CustomerRegistraionForm() {
             customer_contact_number: '',
             customer_email: ''
         },
+        validate: values => {
+            const errors = {};
+            if (!values.customer_name) {
+                errors.customer_name = 'Customer name is required';
+            }
+            if (!values.customer_NIC) {
+                errors.customer_NIC = 'Customer NIC is required';
+            }
+            if (!values.contact_person) {
+                errors.contact_person = 'Contact person is required';
+            }
+            if (!values.customer_email) {
+                errors.customer_email = 'Customer email is required';
+            }
+            if (!values.customer_contact_number) {
+                errors.customer_contact_number = 'Contact number is required';
+            }
+            return errors;
+        },
         onSubmit: values => {
+            if (cus_reg.isValid) {
             console.log(JSON.stringify(cus_reg.values))
 
             axios.post('http://localhost:8081/api/v1/customerRegistration/saveCustomerRegistration', cus_reg.values).then(() => {
@@ -39,6 +59,9 @@ function CustomerRegistraionForm() {
             }).catch((err) => {
                 alert(err);
             })
+        } else {
+            console.log('Not all fields are filled in');
+        }
         }
     })
 
@@ -65,6 +88,9 @@ function CustomerRegistraionForm() {
                                                     value={cus_reg.values.customer_name}
                                                     required
                                                 ></Form.Control>
+                                                {cus_reg.errors.customer_name && (
+                                                    <div className="text-danger">{cus_reg.errors.customer_name}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -78,6 +104,9 @@ function CustomerRegistraionForm() {
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_NIC}
                                                 ></Form.Control>
+                                                {cus_reg.errors.customer_NIC && (
+                                                    <div className="text-danger">{cus_reg.errors.customer_NIC}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -92,6 +121,9 @@ function CustomerRegistraionForm() {
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.contact_person}
                                                 ></Form.Control>
+                                                {cus_reg.errors.contact_person && (
+                                                    <div className="text-danger">{cus_reg.errors.contact_person}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -101,11 +133,13 @@ function CustomerRegistraionForm() {
                                                     placeholder="0xx-xxxxxxxx"
                                                     type="tel"
                                                     maxlength="10"
-                                                  
                                                     name="customer_contact_number"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_contact_number}
                                                 ></Form.Control>
+                                                {cus_reg.errors.customer_contact_number && (
+                                                    <div className="text-danger">{cus_reg.errors.customer_contact_number}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -120,6 +154,9 @@ function CustomerRegistraionForm() {
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_email}
                                                 ></Form.Control>
+                                                {cus_reg.errors.customer_email && (
+                                                    <div className="text-danger">{cus_reg.errors.customer_email}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>

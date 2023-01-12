@@ -19,27 +19,70 @@ function ProductLineRegistrationForm() {
     const userId = localStorage.getItem("userId");
 
     //Hook
+    // const LineDetails = useFormik({
+    //     initialValues: {
+    //         userID_line: userId,
+    //         lineId: '',
+    //         lineName: '',
+    //         description: '',
+    //         startTime: '',
+    //         endTime: '',
+    //         image: ''
+    //     },
+        // onSubmit: values => {
+        //     axios.post('http://localhost:8081/api/v1/line/saveLine', LineDetails.values).then(() => {
+        //         alert("Line added successfully!!!");
+        //         window.location.reload();
+        //     }).catch((err) => {
+        //         alert(err);
+        //     })
+        // }
+    // })
     const LineDetails = useFormik({
         initialValues: {
-            userID_line: userId,
-            lineId: '',
-            lineName: '',
-            description: '',
-            startTime: '',
-            endTime: '',
-            image: ''
+          userID_line: userId,
+          lineId: '',
+          lineName: '',
+          description: '',
+          startTime: '',
+          endTime: '',
+          image: ''
+        },
+        validate: values => {
+          const errors = {};
+          if (!values.lineId) {
+            errors.lineId = 'Line ID is required';
+          }
+          if (!values.description) {
+            errors.description = 'Line description is required';
+          }
+          if (!values.lineName) {
+            errors.lineName = 'Line Name is required';
+          }
+          if (!values.startTime) {
+            errors.startTime = 'start time is required';
+          }
+          if (!values.endTime) {
+            errors.endTime = 'end time is required';
+          }
+          return errors;
         },
         onSubmit: values => {
-            console.log(JSON.stringify(LineDetails.values))
-
-            axios.post('http://localhost:8081/api/v1/line/saveLine', LineDetails.values).then(() => {
-                alert("Line added successfully!!!");
-                window.location.reload();
-            }).catch((err) => {
-                alert(err);
-            })
+          if (LineDetails.isValid) {
+            console.log('All fields are filled in');
+           
+                axios.post('http://localhost:8081/api/v1/line/saveLine', LineDetails.values).then(() => {
+                    alert("Line added successfully!!!");
+                    window.location.reload();
+                }).catch((err) => {
+                    alert(err);
+                })
+            
+          } else {
+            console.log('Not all fields are filled in');
+          }
         }
-    })
+      });
 
 
     return (
@@ -50,6 +93,7 @@ function ProductLineRegistrationForm() {
                         <Card>
                             <Card.Header>
                                 <Card.Title as="h4">Product Line Registration</Card.Title>
+                                
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -63,7 +107,12 @@ function ProductLineRegistrationForm() {
                                                     name="lineId"
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.lineId}
+                                                    required={true}
+
                                                 ></Form.Control>
+                                                {LineDetails.errors.lineId && (
+                                                    <div className="text-danger">{LineDetails.errors.lineId}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
@@ -76,6 +125,9 @@ function ProductLineRegistrationForm() {
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.description}
                                                 ></Form.Control>
+                                                {LineDetails.errors.description && (
+                                                    <div className="text-danger">{LineDetails.errors.description}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -90,6 +142,9 @@ function ProductLineRegistrationForm() {
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.lineName}
                                                 ></Form.Control>
+                                                 {LineDetails.errors.lineName && (
+                                                    <div className="text-danger">{LineDetails.errors.lineName}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pr-1" md="6">
@@ -102,6 +157,7 @@ function ProductLineRegistrationForm() {
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.image}
                                                 ></Form.Control>
+                                                
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -116,6 +172,9 @@ function ProductLineRegistrationForm() {
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.startTime}
                                                 ></Form.Control>
+                                                {LineDetails.errors.startTime && (
+                                                    <div className="text-danger">{LineDetails.errors.startTime}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                         <Col className="pr-1" md="6">
@@ -128,6 +187,9 @@ function ProductLineRegistrationForm() {
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.endTime}
                                                 ></Form.Control>
+                                                {LineDetails.errors.endTime && (
+                                                    <div className="text-danger">{LineDetails.errors.endTime}</div>
+                                                )}
                                             </Form.Group>
                                         </Col>
                                     </Row>

@@ -17,7 +17,7 @@ hr{
 .h3{
   font-family: 'Courier New', Courier, monospace black;
   font-size: 15px;
-  color: black;
+  color: rgb(6, 6, 6);
   text-align: left;
   padding: none;
   border: none;
@@ -36,7 +36,7 @@ hr{
 } */
 
 .rowstest{
-    background-color: rgb(182, 251, 213);
+    background-color:#95D60A;
     text-align: left;
     padding: 10px;
 
@@ -103,3 +103,12 @@ hr{
 /* .cardbody{
   padding: 0;
 } */
+
+.textcolor{
+  color: #ffffff;
+}
+.asd{
+  font-weight:bold;
+  color: #0c0c0c;
+  
+}

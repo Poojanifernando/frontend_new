@@ -54,7 +54,7 @@ function ProcessRegistrationTable() {
 
     };
 
-    console.log(JSON.stringify(progerss))
+    // console.log(JSON.stringify(progerss))
     return (
         <>
             <Container fluid>
