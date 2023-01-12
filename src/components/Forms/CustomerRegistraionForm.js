@@ -133,6 +133,7 @@ function CustomerRegistraionForm() {
                                                     placeholder="0xx-xxxxxxxx"
                                                     type="tel"
                                                     maxlength="10"
+                                                    pattern="[0-9]{10}"
                                                     name="customer_contact_number"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_contact_number}

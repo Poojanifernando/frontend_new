@@ -46,6 +46,40 @@ function LineHeader(props) {
     let firstOnline = true;
     console.log("ssssssssssssssssssssssssssssssss", JSON.stringify(test))
 
+
+    //button change
+    const [isRunning, setIsRunning] = useState(false);
+
+    const handleClick = async () => {
+        if(!isRunning){
+          if (confirm("Are you want to start this?")) {
+            setIsRunning(true);
+            try {
+              const response = await fetch('http://your-api.com/start');
+              const data = await response.json();
+              // do something with the data
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        } else {
+          if (confirm("Are you want to stop this?")) {
+            setIsRunning(false);
+            try {
+              const response = await fetch('http://your-api.com/stop');
+              const data = await response.json();
+              // do something with the data
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+      };
+    const style = {
+        backgroundColor: isRunning ? 'red': 'green',
+        color: 'white'
+      };
+
     return (
 
         <div >
@@ -53,29 +87,34 @@ function LineHeader(props) {
             {lineCustomerDetails?.map((cusDetails, index) => {
                 return (
                     <>
-        <div class="row1">
-            <div class="columnrow leftrow fontsize">LINE - {current_Line_name}</div>
-            {test.map((Value, index) => {
-                if (Value.t_warmup === 'Warming Up' && firstWarm) {
-                    firstWarm = false;
-                    return (
-                        <div class="columnrow rightrow"
-                            style={{ backgroundColor: Value.t_color, textShadow: "2px -1px 0 #000" }}
-                        >{Value.t_warmup}
-                        </div>
-                    );
-                } 
-                if (Value.t_warmup === 'Online' && firstOnline) {
-                    firstOnline = false;
-                    return (
-                        <div class="columnrow rightrow"
-                            style={{ backgroundColor: "#027739", textShadow: "2px -1px 0 #000" }}
-                        >{Value.t_warmup}
-                        </div>
-                    );
-                } 
-                // return <>sss</>
-            })}
+                        <div class="row1">
+                            <div class="columnrow leftrow fontsize">
+                                <button onClick={handleClick} className='btn' style={style}>
+                                    {isRunning ? 'Stop' : 'Start'}
+                                </button>
+                                &nbsp;&nbsp;&nbsp;
+                                LINE - {current_Line_name}</div>
+                            {test.map((Value, index) => {
+                                if (Value.t_warmup === 'Warming Up' && firstWarm) {
+                                    firstWarm = false;
+                                    return (
+                                        <div class="columnrow rightrow"
+                                            style={{ backgroundColor: Value.t_color, textShadow: "2px -1px 0 #000" }}
+                                        >{Value.t_warmup}
+                                        </div>
+                                    );
+                                }
+                                if (Value.t_warmup === 'Online' && firstOnline) {
+                                    firstOnline = false;
+                                    return (
+                                        <div class="columnrow rightrow"
+                                            style={{ backgroundColor: "#027739", textShadow: "2px -1px 0 #000" }}
+                                        >{Value.t_warmup}
+                                        </div>
+                                    );
+                                }
+                                // return <>sss</>
+                            })}
 
                             {/* <div class="columnrow rightrow"
                                 style={{ backgroundColor: test.color_code_st_out , textShadow:"2px -1px 0 #000" }}
