@@ -47,7 +47,7 @@ function ProductRegistrationForm() {
         onSubmit: values => {
             if (ProDetails.isValid) {
               
-                axios.post('http://localhost:8081/api/v1/product/saveProduct', ProDetails.values).then(() => {
+                axios.post('http://localhost:8082/api/v1/product/saveProduct', ProDetails.values).then(() => {
                     alert("Product added successfully!!!");
                     window.location.reload(false);
 

@@ -34,7 +34,7 @@ function MachineRegistrationForm() {
         onSubmit: values => {
             console.log(JSON.stringify(machDetails.values))
 
-            axios.post('http://localhost:8081/api/v1/machine/saveMachine', machDetails.values).then(() => {
+            axios.post('http://localhost:8082/api/v1/machine/saveMachine', machDetails.values).then(() => {
                 alert("Machine added successfully!!!");
                 
             }).catch((err) => {

@@ -22,11 +22,11 @@ function ProcessRegistrationTable() {
 
     console.log(progerss)
     useEffect(() => {
-        // axios.get('http://localhost:8081/api/v1/admin/getAllAdmins').then((response) => {
+        // axios.get('http://localhost:8082/api/v1/admin/getAllAdmins').then((response) => {
         //     setProgerss(response.data.content);
         // });
 
-        axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/JOB_101/MY JOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/2/' + userid).then((response) => {
+        axios.get('http://localhost:8082/api/v1/admin/postcurrentdata/JOB_101/MY JOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/2/' + userid).then((response) => {
             setProgerss(response.data);
         });
 
@@ -35,7 +35,7 @@ function ProcessRegistrationTable() {
     //delete the specific column
     const deleteConference = (id) => {
         console.log(id)
-        //axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/JOB_101/MYJOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/4/' + id).then(() => {
+        //axios.get('http://localhost:8082/api/v1/admin/postcurrentdata/JOB_101/MYJOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/4/' + id).then(() => {
             alert("You cant delete Process");
             window.location.reload(false);
         //}).catch((err) => {

@@ -40,6 +40,7 @@ function DeviceRegistrationForm() {
             measuring_unit: '',
             is_it_starter_value: '',
             alarm_alert_type: '',
+            completed_prod_count: '',
             message: '',
 
         },
@@ -96,7 +97,7 @@ function DeviceRegistrationForm() {
             if (Devicereg.isValid) {
                 console.log(JSON.stringify(Devicereg.values))
 
-                axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/' + Devicereg.values.LineId + '/' + Devicereg.values.MachineID + '/' + Devicereg.values.MachineName + '/' + Devicereg.values.MachineDiscription + '/' + Devicereg.values.deviceid_dvc_reg + '/' + Devicereg.values.parameter_id + '/' + Devicereg.values.description + '/' + Devicereg.values.alarm_alert_type + '/' + Devicereg.values.is_it_starter_value + '/' + Devicereg.values.min_value + '/' + Devicereg.values.max_value + '/' + Devicereg.values.measuring_unit + '/' + Devicereg.values.message + '/' + Devicereg.values.devicegpslocation + '/' + Devicereg.values.device_ip_address + '/' + Devicereg.values.device_name_dvc_reg + '/1').then(() => {
+                axios.get('http://localhost:8082/api/v1/admin/DeviceRegistration/' + Devicereg.values.LineId + '/' + Devicereg.values.MachineID + '/' + Devicereg.values.MachineName + '/' + Devicereg.values.MachineDiscription + '/' + Devicereg.values.deviceid_dvc_reg + '/' + Devicereg.values.parameter_id + '/' + Devicereg.values.description + '/' + Devicereg.values.alarm_alert_type + '/' + Devicereg.values.completed_prod_count+ '/' + Devicereg.values.is_it_starter_value + '/' + Devicereg.values.min_value + '/' + Devicereg.values.max_value + '/' + Devicereg.values.measuring_unit + '/' + Devicereg.values.message + '/' + Devicereg.values.devicegpslocation + '/' + Devicereg.values.device_ip_address + '/' + Devicereg.values.device_name_dvc_reg + '/1').then(() => {
                     alert("Device Added successfully!!!");
                     window.location.reload(false);
                 }).catch((err) => {
@@ -112,8 +113,8 @@ function DeviceRegistrationForm() {
 
     useEffect(() => {
 
-        axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
-            setLineDetails(response.data.content);
+        axios.get('http://localhost:8082/api/v1/line/getAllLineAndId').then((response) => {
+            setLineDetails(response.data);
         });
 
     }, []);
@@ -373,6 +374,31 @@ function DeviceRegistrationForm() {
                                                 />
                                             </Form.Group>
 
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className="pr-1" md="6">
+                                            <label>Is length</label>
+                                            <Form.Group>
+
+                                                <Form.Check
+                                                    label="yes"
+                                                    type="radio"
+                                                    id="option1"
+                                                    name="completed_prod_count"
+                                                    value={1}
+                                                    onChange={Devicereg.handleChange}
+                                                    onBlur={Devicereg.handleBlur}
+                                                />
+                                                <Form.Check type="radio"
+                                                    label="no"
+                                                    id="option2"
+                                                    name="completed_prod_count"
+                                                    value={0}
+                                                    onChange={Devicereg.handleChange}
+                                                    onBlur={Devicereg.handleBlur}
+                                                />
+                                            </Form.Group>
                                         </Col>
                                     </Row>
                                     <Row>

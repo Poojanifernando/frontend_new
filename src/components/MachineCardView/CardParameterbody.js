@@ -26,15 +26,15 @@ function CardParameterbody(props) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine).then((response) => {
+        axios.get('http://localhost:8082/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine).then((response) => {
             setMachinePerameters(response.data);
         });
 
-        axios.get('http://localhost:8081/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        axios.get('http://localhost:8082/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             setlinecolor(response.data);
         });
 
-        setInterval(() => (new axios.get('http://localhost:8081/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        setInterval(() => (new axios.get('http://localhost:8082/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             setlinecolor(response.data);
         })), 7000);
 
@@ -48,15 +48,17 @@ function CardParameterbody(props) {
                 {machinePerameters?.map((machineperameter, index) => {
                      let color="#C0C0C0";
                      let name;
+                     let msg123='';
                      let variable = false;
                     return (
                         <>
                             {linecolors?.map((linecolor, index) => {
                                
-                               if(variable = false){
+                               if(variable == false){
                                 if(machineperameter.device_id ==linecolor.device_id){
-                                    name =  machineperameter.device_id;
+                                    name =  machineperameter.device_id
                                     color = linecolor.t_color
+                                    msg123 = linecolor.high_or_low
                                     variable = true;
                                  }
                                }
@@ -87,7 +89,7 @@ function CardParameterbody(props) {
                                                         {/* <div className="numbers"> */}
                                                         {/* <p className="card-category">Device Name  - {Parameters?.paraId_PDM}</p> */}
                                                         {/* <Card.Title className="h3">150 C</Card.Title> */}
-                                                        <PerameterValueView job={machineperameter.job_id_ad} batch={machineperameter.batchid_ad} lid={current_Line} proOder={current_pOrder} machine={current_Machine} deviceId={machineperameter.device_id} pID={machineperameter.parameter_id} date={current_date} color={color} />
+                                                        <PerameterValueView job={machineperameter.job_id_ad} batch={machineperameter.batchid_ad} lid={current_Line} proOder={current_pOrder} machine={current_Machine} deviceId={machineperameter.device_id} pID={machineperameter.parameter_id} date={current_date} color={color} msg={msg123}  />
                                                         {/* </div> */}
                                                     </Col>
                                                     {/* <Col xs="2 a"> */}

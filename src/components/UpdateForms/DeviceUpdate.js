@@ -39,6 +39,7 @@ function DeviceUpdate({ match }) {
     const [measuring_unit, setmeasuring_unit] = useState("");
     const [is_it_starter_value, setis_it_starter_value] = useState("");
     const [alarm_alert_type, setalarm_alert_type] = useState("");
+    const [completed_prod_count, setcompleted_prod_count] = useState("");
     const [message, setmessage] = useState("");
 
     const [deviceDetails] = useState({
@@ -59,6 +60,7 @@ function DeviceUpdate({ match }) {
         measuring_unit: '',
         is_it_starter_value: '',
         alarm_alert_type: '',
+        completed_prod_count: '',
         message: ''
 
     })
@@ -67,10 +69,10 @@ function DeviceUpdate({ match }) {
     useEffect(() => {
 
 
-        axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
-            setLineDetails(response.data.content);
+        axios.get('http://localhost:8082/api/v1/line/getAllLineAndId').then((response) => {
+            setLineDetails(response.data);
         });
-        axios.get('http://localhost:8081/api/v1/admin/getalldeviceregistration/' + match.params.id).then((response) => {
+        axios.get('http://localhost:8082/api/v1/admin/getalldeviceregistration/' + match.params.id).then((response) => {
             setdetail(response.data);
 
 
@@ -90,6 +92,7 @@ function DeviceUpdate({ match }) {
             setdevice_ip_address(response.data.device_ip_address);
             setmessage(response.data.message);
             setMachineDiscription(response.data.machine_description);
+            setcompleted_prod_count(response.data.completed_prod_count)
         });
 
     }, []);
@@ -115,6 +118,7 @@ function DeviceUpdate({ match }) {
         formData.append("measuring_unit", measuring_unit);
         formData.append("is_it_starter_value", is_it_starter_value);
         formData.append("alarm_alert_type", alarm_alert_type);
+        formData.append("completed_prod_count", completed_prod_count);
         formData.append("message", message);
 
 
@@ -134,10 +138,11 @@ function DeviceUpdate({ match }) {
         deviceDetails.measuring_unit = formData.get('measuring_unit');
         deviceDetails.is_it_starter_value = formData.get('is_it_starter_value');
         deviceDetails.alarm_alert_type = formData.get('alarm_alert_type');
+        deviceDetails.completed_prod_count = formData.get('completed_prod_count');
         deviceDetails.message = formData.get('message');
        console.log(deviceDetails);
 
-        await axios.get('http://localhost:8081/api/v1/admin/DeviceRegistration/'+deviceDetails.LineId+'/'+deviceDetails.MachineID+'/'+deviceDetails.MachineName+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.deviceid_dvc_reg+'/'+deviceDetails.parameter_id+'/'+deviceDetails.description+'/'+deviceDetails.alarm_alert_type+'/'+deviceDetails.is_it_starter_value+'/'+deviceDetails.min_value+'/'+deviceDetails.max_value+'/'+deviceDetails.measuring_unit+'/'+deviceDetails.message+'/'+deviceDetails.devicegpslocation+'/'+deviceDetails.device_ip_address+'/'+deviceDetails.device_name_dvc_reg+'/3')
+        await axios.get('http://localhost:8082/api/v1/admin/DeviceRegistration/'+deviceDetails.LineId+'/'+deviceDetails.MachineID+'/'+deviceDetails.MachineName+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.deviceid_dvc_reg+'/'+deviceDetails.parameter_id+'/'+deviceDetails.description+'/'+deviceDetails.alarm_alert_type+'/'+deviceDetails.completed_prod_count+'/'+deviceDetails.is_it_starter_value+'/'+deviceDetails.min_value+'/'+deviceDetails.max_value+'/'+deviceDetails.measuring_unit+'/'+deviceDetails.message+'/'+deviceDetails.devicegpslocation+'/'+deviceDetails.device_ip_address+'/'+deviceDetails.device_name_dvc_reg+'/3')
         .then(res=>{deviceid_dvc_reg
           console.log("Return Data",res);
         alert("Update Success!!");
@@ -371,6 +376,29 @@ function DeviceUpdate({ match }) {
                                                     value={0}
                                                     onChange={e => setis_it_starter_value(e.target.value)}
                                                 // onBlur={Devicereg.handleBlur}
+                                                />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className="pr-1" md="6">
+                                            <label>Is length</label>
+                                            <Form.Group>
+
+                                                <Form.Check
+                                                    label="yes"
+                                                    type="radio"
+                                                    id="option1"
+                                                    name="completed_prod_count"
+                                                    value={1}
+                                                    onChange={e => setcompleted_prod_count(e.target.value)}
+                                                />
+                                                <Form.Check type="radio"
+                                                    label="no"
+                                                    id="option2"
+                                                    name="completed_prod_count"
+                                                    value={0}
+                                                    onChange={e => setcompleted_prod_count(e.target.value)}
                                                 />
                                             </Form.Group>
                                         </Col>

@@ -43,11 +43,11 @@ function BatchUpdate({ match }) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:8081/api/v1/product/getAllProducts').then((response) => {
+        axios.get('http://localhost:8082/api/v1/product/getAllProducts').then((response) => {
             setProductDetails(response.data.content);
         });
 
-        axios.get('http://localhost:8081/api/v1/batch/searchBatch/' + match.params.id).then((response) => {
+        axios.get('http://localhost:8082/api/v1/batch/searchBatch/' + match.params.id).then((response) => {
             setBatchdetails(response.data.content);
 
             setbatchid(response.data.content.batchID_regBch);
@@ -78,7 +78,7 @@ function BatchUpdate({ match }) {
         batchDetails.product_id=formData.get('product_id');
         console.log(batchDetails);
 
-        await axios.put(`http://localhost:8081/api/v1/batch/updateBatch/${match.params.id}`,batchDetails)
+        await axios.put(`http://localhost:8082/api/v1/batch/updateBatch/${match.params.id}`,batchDetails)
         .then(res=>{
           console.log("Return Data",res);
           alert("Update Success!!");

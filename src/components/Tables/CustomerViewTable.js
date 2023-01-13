@@ -21,14 +21,14 @@ function CustomerViewTable() {
     const [Customers, setCustomers] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
+        axios.get('http://localhost:8082/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
             setCustomers(response.data.content);
         });
     }, [])
 
     //delete the specific column
     const deleteConference = (id) => {
-        axios.delete('http://localhost:8081/api/v1/customerRegistration/deleteCustomerRegistration/' + id).then(() => {
+        axios.delete('http://localhost:8082/api/v1/customerRegistration/deleteCustomerRegistration/' + id).then(() => {
             alert("deleted successfully!!");
             setCustomers([...Customers, id]);
             history.push('/admin/CustomerRegister')

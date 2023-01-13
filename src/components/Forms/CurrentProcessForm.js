@@ -80,7 +80,7 @@ function CurrentProcessForm() {
             // console.log(JSON.stringify(processDetails.values.product))
             // console.log(JSON.stringify(processDetails.values.product_lineid_ad))  
     
-            axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + '/' + processDetails.values.batch_end_time + '/' + processDetails.values.product + '/' + processDetails.values.production_order + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad).then(() => {
+            axios.get('http://localhost:8082/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + '/' + processDetails.values.batch_end_time + '/' + processDetails.values.product + '/' + processDetails.values.production_order + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad).then(() => {
                 alert("Current Process added successfully!!!");
                 window.location.reload();
             }).catch((err) => {
@@ -95,17 +95,17 @@ function CurrentProcessForm() {
     // console.log(JSON.stringify(productTable));
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/job/getAllJobs').then((response) => {
+        axios.get('http://localhost:8082/api/v1/job/getAllJobs').then((response) => {
             setjobids(response.data.content);
         });
-        axios.get('http://localhost:8081/api/v1/product/getAllProducts').then((response) => {
-            setProductDetails(response.data.content);
+        axios.get('http://localhost:8082/api/v1/product/getAllProductsNameAndIds').then((response) => {
+            setProductDetails(response.data);
         });
-        axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
-            setLineDetails(response.data.content);
+        axios.get('http://localhost:8082/api/v1/line/getAllLineAndId').then((response) => {
+            setLineDetails(response.data);
         });
 
-        axios.get('http://localhost:8081/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
+        axios.get('http://localhost:8082/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
             setcusDetails(response.data.content);
         });
 
@@ -226,7 +226,7 @@ function CurrentProcessForm() {
                                                     onChange={processDetails.handleChange}>
                                                     <option value="">Choose</option>
                                                     {productTable.map(item => {
-                                                        return (<option key={item.productId} value={item.productId}>{item.productId}</option>);
+                                                        return (<option key={item.productId} value={item.productId}>{item.productId} - {item.productname}</option>);
                                                     })}
                                                 </Form.Select>
                                                 {processDetails.errors.product && (

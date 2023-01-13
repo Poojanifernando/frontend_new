@@ -43,7 +43,7 @@ function CustomerUpdate({ match }) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:8081/api/v1/customerRegistration/searchCustomerRegistration/' + match.params.id).then((response) => {
+        axios.get('http://localhost:8082/api/v1/customerRegistration/searchCustomerRegistration/' + match.params.id).then((response) => {
 
             setuser_id(response.data.content.cus_id);
             setcustomer_name(response.data.content.customer_name);
@@ -77,7 +77,7 @@ function CustomerUpdate({ match }) {
         CustomerDetails.customer_email = formData.get('customer_email');
         console.log(CustomerDetails);
 
-        await axios.put(`http://localhost:8081/api/v1/customerRegistration/updateCustomerRegistration/${match.params.id}`, CustomerDetails)
+        await axios.put(`http://localhost:8082/api/v1/customerRegistration/updateCustomerRegistration/${match.params.id}`, CustomerDetails)
             .then(res => {
                 console.log("Return Data", res);
                 alert("Update Success!!");
