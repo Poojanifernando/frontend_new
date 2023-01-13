@@ -22,6 +22,7 @@ function PerameterValueView(props) {
     const current_pID = props.pID;
     const current_date = props.date;
     const colorfromprop = props.color;
+    const msg = props.msg;
     // console.log("current_date " + current_date + "and line id " + current_Line +"current_pOrder "+current_pOrder+
     // " current_Machine "+current_Machine)
 
@@ -30,24 +31,21 @@ function PerameterValueView(props) {
     const [value123, setValue] = useState(0);
     const [previousValue, setpreviousValue] = useState(0);
 
-
-
-
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
+        axios.get('http://localhost:8082/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
             setValues(response.data);
             console.log('sad',response.data)
         });
         
-        axios.get('http://localhost:8081/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
+        axios.get('http://localhost:8082/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
             
             setValue(response.data.IOT);
         });
 
-        setInterval(() => (new axios.get('http://localhost:8081/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
+        setInterval(() => (new axios.get('http://localhost:8082/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
             setValues(response.data);
             // console.log('Interval triggered '+JSON. stringify(response.data));
-            axios.get('http://localhost:8081/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
+            axios.get('http://localhost:8082/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
             setValue(response.data.IOT);
            
         });
@@ -61,19 +59,20 @@ function PerameterValueView(props) {
     const changelength = (e) => {
         console.log(e)
     }
-    // console.log("e.target.value")
+
     return (
         <>
             {Values?.map((Value, index) => {
                 if (Value.parameter_id_in_iot_input_tra == "LNTH") {
                     return (
-                        <Card.Title className="" key={Value} style={{ backgroundColor: colorfromprop}}><p className="asd">{value123} {Value.measuring_unit} </p></Card.Title>
+                        <Card.Title className=""  style={{ backgroundColor: colorfromprop}}><p className="asd">{value123} {Value.measuring_unit} </p></Card.Title>
                     )
                 } else {
 
                     return (
 
-                        <Card.Title onChange={e => changelength(Value.value_tra)} className="" key={Value} style={{ backgroundColor: colorfromprop }}><p className="asd">{Value.value_tra} {Value.measuring_unit}</p></Card.Title>
+                        <Card.Title onChange={e => changelength(Value.value_tra)} className=""  style={{ backgroundColor: colorfromprop }}><p className="asd">{Value.value_tra} {Value.measuring_unit}
+                         </p></Card.Title>
 
                     )
                 }

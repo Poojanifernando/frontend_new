@@ -23,14 +23,14 @@ function ProductViewTable() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/product/getAllProducts').then((response) => {
+        axios.get('http://localhost:8082/api/v1/product/getAllProducts').then((response) => {
             setpoducts(response.data.content);
         });
     }, [])
 
     //delete the specific column
     const deleteConference = (id) => {
-        axios.delete('http://localhost:8081/api/v1/product/deleteRegisteredProduct/' + id).then(() => {
+        axios.delete('http://localhost:8082/api/v1/product/deleteRegisteredProduct/' + id).then(() => {
             alert("deleted successfully!!");
             history.push('/admin/ProductRegistration')
             window.location.reload(false);

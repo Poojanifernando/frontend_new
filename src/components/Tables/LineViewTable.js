@@ -23,14 +23,14 @@ function LineViewTable() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
+        axios.get('http://localhost:8082/api/v1/line/getAllLines').then((response) => {
             setLines(response.data.content);
         });
     }, [])
 
     //delete the specific column
     const deleteConference = (id) => {
-        axios.delete('http://localhost:8081/api/v1/line/deleteRegisteredLine/' + id).then(() => {
+        axios.delete('http://localhost:8082/api/v1/line/deleteRegisteredLine/' + id).then(() => {
             alert("deleted successfully!!");
             setLines([...lines, { }]);
             history.push('/admin/ProductLineRegistration')

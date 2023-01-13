@@ -40,7 +40,7 @@ function ProductUpdate({ match }) {
 
     useEffect(() => {
 
-        axios.get('http://localhost:8081/api/v1/product/searchRegisteredProduct/' + match.params.id).then((response) => {
+        axios.get('http://localhost:8082/api/v1/product/searchRegisteredProduct/' + match.params.id).then((response) => {
 
             // setBatchdetails(response.data.content);
             setproduct_id(response.data.content.productId);
@@ -66,7 +66,7 @@ function ProductUpdate({ match }) {
         ProductDetails.image=formData.get('image');
         console.log(ProductDetails);
 
-        await axios.put(`http://localhost:8081/api/v1/product/updateRegisteredProduct/${match.params.id}`,ProductDetails)
+        await axios.put(`http://localhost:8082/api/v1/product/updateRegisteredProduct/${match.params.id}`,ProductDetails)
         .then(res=>{
           console.log("Return Data",res);
           alert("Update Success!!");

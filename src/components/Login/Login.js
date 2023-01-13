@@ -45,7 +45,7 @@ function Login() {
   useEffect(() => {
     // localStorage.setItem("isAuth", false)
 
-    console.log("sss")
+    
   }, [])
 
 
@@ -126,6 +126,7 @@ function Login() {
         </Row>
       </Container>
     </div>
+
   );
 }
 

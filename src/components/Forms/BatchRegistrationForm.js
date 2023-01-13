@@ -39,7 +39,7 @@ function BatchRegistrationForm() {
         onSubmit: values => {
             console.log(JSON.stringify(batchDetails.values))
 
-            axios.post('http://localhost:8081/api/v1/batch/saveBatch', batchDetails.values).then(() => {
+            axios.post('http://localhost:8082/api/v1/batch/saveBatch', batchDetails.values).then(() => {
                 alert("Batch added successfully!!!");
 
             }).catch((err) => {
@@ -49,7 +49,7 @@ function BatchRegistrationForm() {
     })
     useEffect(() => {
 
-        axios.get('http://localhost:8081/api/v1/product/getAllProducts').then((response) => {
+        axios.get('http://localhost:8082/api/v1/product/getAllProducts').then((response) => {
             setProductDetails(response.data.content);
         });
 

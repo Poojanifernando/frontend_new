@@ -52,7 +52,7 @@ function CustomerRegistraionForm() {
             if (cus_reg.isValid) {
             console.log(JSON.stringify(cus_reg.values))
 
-            axios.post('http://localhost:8081/api/v1/customerRegistration/saveCustomerRegistration', cus_reg.values).then(() => {
+            axios.post('http://localhost:8082/api/v1/customerRegistration/saveCustomerRegistration', cus_reg.values).then(() => {
                 alert("Customer added successfully!!!");
                 window.location.reload(false);
 

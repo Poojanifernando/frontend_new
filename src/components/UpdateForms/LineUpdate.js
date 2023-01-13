@@ -38,7 +38,7 @@ function LineUpdate({ match }) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/line/searchRegisteredLine/' + match.params.id).then((response) => {
+        axios.get('http://localhost:8082/api/v1/line/searchRegisteredLine/' + match.params.id).then((response) => {
             // setBatchdetails(response.data.content);
 
             setline_id(response.data.content.lineId);
@@ -71,7 +71,7 @@ function LineUpdate({ match }) {
         LineDetails.image = formData.get('image');
         console.log(LineDetails);
 
-        await axios.put(`http://localhost:8081/api/v1/line/updateRegisteredLine/${match.params.id}`, LineDetails)
+        await axios.put(`http://localhost:8082/api/v1/line/updateRegisteredLine/${match.params.id}`, LineDetails)
             .then(res => {
                 console.log("Return Data", res);
                 alert("Update Success!!");

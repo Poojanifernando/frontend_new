@@ -43,12 +43,12 @@ function DashboardForm() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
+        axios.get('http://localhost:8082/api/v1/line/getAllLines').then((response) => {
             setLines(response.data.content);
 
         });
 
-        axios.get('http://localhost:8081/api/v1/job/getAllJobs').then((response) => {
+        axios.get('http://localhost:8082/api/v1/job/getAllJobs').then((response) => {
             SetAllJobs(response.data.content);
 
         });

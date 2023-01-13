@@ -30,7 +30,7 @@ function ProductLineRegistrationForm() {
     //         image: ''
     //     },
         // onSubmit: values => {
-        //     axios.post('http://localhost:8081/api/v1/line/saveLine', LineDetails.values).then(() => {
+        //     axios.post('http://localhost:8082/api/v1/line/saveLine', LineDetails.values).then(() => {
         //         alert("Line added successfully!!!");
         //         window.location.reload();
         //     }).catch((err) => {
@@ -71,7 +71,7 @@ function ProductLineRegistrationForm() {
           if (LineDetails.isValid) {
             console.log('All fields are filled in');
            
-                axios.post('http://localhost:8081/api/v1/line/saveLine', LineDetails.values).then(() => {
+                axios.post('http://localhost:8082/api/v1/line/saveLine', LineDetails.values).then(() => {
                     alert("Line added successfully!!!");
                     window.location.reload();
                 }).catch((err) => {

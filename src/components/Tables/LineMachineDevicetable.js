@@ -22,14 +22,14 @@ function LineMachineDevicetable() {
 
 
     useEffect(() => {
-        // axios.get('http://localhost:8081/api/v1/devices/getAllDevice').then((response) => {
+        // axios.get('http://localhost:8082/api/v1/devices/getAllDevice').then((response) => {
         //     setBatches(response.data.content);
         // });
     }, [])
 
     // //delete the specific column
     // const deleteConference = (id) => {
-    //     axios.delete('http://localhost:8081/api/v1/batch/deleteBatch/' + id).then(() => {
+    //     axios.delete('http://localhost:8082/api/v1/batch/deleteBatch/' + id).then(() => {
     //         alert("deleted successfully!!");
     //         setBatches([...Batches, { }]);
     //         history.push('/admin/BatchRegistration')

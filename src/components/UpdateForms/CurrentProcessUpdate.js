@@ -56,7 +56,7 @@ function CurrentProcessUpdate({ match }) {
     })
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/admin/getcurrentprocess/' + match.params.id).then((response) => {
+        axios.get('http://localhost:8082/api/v1/admin/getcurrentprocess/' + match.params.id).then((response) => {
             setjob_id_ad(response.data.job_id_ad)
             setbatchid_ad(response.data.batchid_ad)
             setproduct_lineid_ad(response.data.product_lineid_ad)
@@ -70,16 +70,16 @@ function CurrentProcessUpdate({ match }) {
             setcount(response.data.count_reg_bch)
         });
 
-        axios.get('http://localhost:8081/api/v1/product/getAllProducts').then((response) => {
-            setProductDetails(response.data.content);
+        axios.get('http://localhost:8082/api/v1/product/getAllProductsNameAndIds').then((response) => {
+            setProductDetails(response.data);
         });
 
-        axios.get('http://localhost:8081/api/v1/line/getAllLines').then((response) => {
-            setLineDetails(response.data.content);
+        axios.get('http://localhost:8082/api/v1/line/getAllLineAndId').then((response) => {
+            setLineDetails(response.data);
         });
 
-        axios.get('http://localhost:8081/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
-            setcusDetails(response.data.content);
+        axios.get('http://localhost:8082/api/v1/customerRegistration/getAllCusDetails').then((response) => {
+            setcusDetails(response.data);
         });
     }, []);
 
@@ -115,8 +115,8 @@ function CurrentProcessUpdate({ match }) {
         details.Curd = formData.get('Curd');
 
         // console.log(details);
-        //console.log('http://localhost:8081/api/v1/admin/postcurrentdata/'+details.job_id_ad+'/'+details.job_description+'/'+details.batchid_ad+'/'+details.batch_start_time+'/'+details.batch_end_time+'/'+details.product+'/'+details.count+'/'+details.product_lineid_ad+'/'+details.predicted_date+'/'+details.production_order+'/'+details.Customer_id+'/'+details.Curd+'/'+match.params.id)
-        await axios.get('http://localhost:8081/api/v1/admin/postcurrentdata/' + details.job_id_ad + '/' + details.job_description + '/' + details.batchid_ad + '/' + details.batch_start_time + '/' + details.batch_end_time + '/' + details.product + '/' + details.count + '/' + details.product_lineid_ad + '/' + details.predicted_date + '/' + details.production_order + '/' + details.Customer_id + '/' + details.Curd + '/' + match.params.id)
+        //console.log('http://localhost:8082/api/v1/admin/postcurrentdata/'+details.job_id_ad+'/'+details.job_description+'/'+details.batchid_ad+'/'+details.batch_start_time+'/'+details.batch_end_time+'/'+details.product+'/'+details.count+'/'+details.product_lineid_ad+'/'+details.predicted_date+'/'+details.production_order+'/'+details.Customer_id+'/'+details.Curd+'/'+match.params.id)
+        await axios.get('http://localhost:8082/api/v1/admin/postcurrentdata/' + details.job_id_ad + '/' + details.job_description + '/' + details.batchid_ad + '/' + details.batch_start_time + '/' + details.batch_end_time + '/' + details.product + '/' + details.count + '/' + details.product_lineid_ad + '/' + details.predicted_date + '/' + details.production_order + '/' + details.Customer_id + '/' + details.Curd + '/' + match.params.id)
             .then(res => {
                 console.log("Return Data", res);
                 alert("Update Success!!");

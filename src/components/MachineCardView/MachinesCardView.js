@@ -33,7 +33,7 @@ function MachinesCardView() {
     setInterval(() => setDateState(new Date()), 30000);
     console.log("new")
 
-    axios.get('http://localhost:8081/api/v1/admin/getLineByDate/'+ a).then((response) => {
+    axios.get('http://localhost:8082/api/v1/admin/getLineByDate/'+ a).then((response) => {
       setLines(response.data);
       console.log(response.data)
     });
