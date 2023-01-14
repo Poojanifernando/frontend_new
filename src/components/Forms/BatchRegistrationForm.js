@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
 // import "assets/css/Popup.css";
 
@@ -20,6 +21,7 @@ import { DropdownItem } from "reactstrap";
 
 function BatchRegistrationForm() {
     const userId = "userLocaleStorage"
+    const [url, seturl] = useState('');
 
 
     // const navigate = navigate('/admin/BatchRegistration');
@@ -39,7 +41,7 @@ function BatchRegistrationForm() {
         onSubmit: values => {
             console.log(JSON.stringify(batchDetails.values))
 
-            axios.post('http://localhost:8082/api/v1/batch/saveBatch', batchDetails.values).then(() => {
+            axios.post(url+'/api/v1/batch/saveBatch', batchDetails.values).then(() => {
                 alert("Batch added successfully!!!");
 
             }).catch((err) => {
@@ -48,8 +50,9 @@ function BatchRegistrationForm() {
         }
     })
     useEffect(() => {
-
-        axios.get('http://localhost:8082/api/v1/product/getAllProducts').then((response) => {
+        const myurl = getLocalhostUrl();
+         seturl(myurl)
+        axios.get(myurl+'/api/v1/product/getAllProducts').then((response) => {
             setProductDetails(response.data.content);
         });
 

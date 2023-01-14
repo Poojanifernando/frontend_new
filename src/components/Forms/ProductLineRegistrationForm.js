@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
 // react-bootstrap components
 import {
@@ -17,73 +18,58 @@ import {
 
 function ProductLineRegistrationForm() {
     const userId = localStorage.getItem("userId");
+    const [url, seturl] = useState('');
 
     //Hook
-    // const LineDetails = useFormik({
-    //     initialValues: {
-    //         userID_line: userId,
-    //         lineId: '',
-    //         lineName: '',
-    //         description: '',
-    //         startTime: '',
-    //         endTime: '',
-    //         image: ''
-    //     },
-        // onSubmit: values => {
-        //     axios.post('http://localhost:8082/api/v1/line/saveLine', LineDetails.values).then(() => {
-        //         alert("Line added successfully!!!");
-        //         window.location.reload();
-        //     }).catch((err) => {
-        //         alert(err);
-        //     })
-        // }
-    // })
     const LineDetails = useFormik({
         initialValues: {
-          userID_line: userId,
-          lineId: '',
-          lineName: '',
-          description: '',
-          startTime: '',
-          endTime: '',
-          image: ''
+            userID_line: userId,
+            lineId: '',
+            lineName: '',
+            description: '',
+            startTime: '',
+            endTime: '',
+            image: ''
         },
         validate: values => {
-          const errors = {};
-          if (!values.lineId) {
-            errors.lineId = 'Line ID is required';
-          }
-          if (!values.description) {
-            errors.description = 'Line description is required';
-          }
-          if (!values.lineName) {
-            errors.lineName = 'Line Name is required';
-          }
-          if (!values.startTime) {
-            errors.startTime = 'start time is required';
-          }
-          if (!values.endTime) {
-            errors.endTime = 'end time is required';
-          }
-          return errors;
+            const errors = {};
+            if (!values.lineId) {
+                errors.lineId = 'Line ID is required';
+            }
+            if (!values.description) {
+                errors.description = 'Line description is required';
+            }
+            if (!values.lineName) {
+                errors.lineName = 'Line Name is required';
+            }
+            if (!values.startTime) {
+                errors.startTime = 'start time is required';
+            }
+            if (!values.endTime) {
+                errors.endTime = 'end time is required';
+            }
+            return errors;
         },
         onSubmit: values => {
-          if (LineDetails.isValid) {
-            console.log('All fields are filled in');
-           
-                axios.post('http://localhost:8082/api/v1/line/saveLine', LineDetails.values).then(() => {
+            if (LineDetails.isValid) {
+                console.log('All fields are filled in');
+
+                axios.post(url + '/api/v1/line/saveLine', LineDetails.values).then(() => {
                     alert("Line added successfully!!!");
                     window.location.reload();
                 }).catch((err) => {
                     alert(err);
                 })
-            
-          } else {
-            console.log('Not all fields are filled in');
-          }
-        }
-      });
 
+            } else {
+                console.log('Not all fields are filled in');
+            }
+        }
+    });
+    useEffect(() => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+    }, []);
 
     return (
         <>
@@ -93,7 +79,7 @@ function ProductLineRegistrationForm() {
                         <Card>
                             <Card.Header>
                                 <Card.Title as="h4">Product Line Registration</Card.Title>
-                                
+
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -142,7 +128,7 @@ function ProductLineRegistrationForm() {
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.lineName}
                                                 ></Form.Control>
-                                                 {LineDetails.errors.lineName && (
+                                                {LineDetails.errors.lineName && (
                                                     <div className="text-danger">{LineDetails.errors.lineName}</div>
                                                 )}
                                             </Form.Group>
@@ -157,7 +143,7 @@ function ProductLineRegistrationForm() {
                                                     onChange={LineDetails.handleChange}
                                                     value={LineDetails.values.image}
                                                 ></Form.Control>
-                                                
+
                                             </Form.Group>
                                         </Col>
                                     </Row>

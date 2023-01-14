@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
@@ -18,13 +19,13 @@ import {
 function LineUpdate({ match }) {
     const userId = localStorage.getItem("userId");
     const history = useHistory();
-
     const [line_id, setline_id] = useState("");
     const [line_name, setline_name] = useState("");
     const [description, setdescription] = useState("");
     const [start_time, setstart_time] = useState("");
     const [endtime, setendtime] = useState("");
     const [image, setimage] = useState("");
+    const [url, seturl] = useState('');
 
     const [LineDetails] = useState({
         userID_line: userId,
@@ -38,15 +39,15 @@ function LineUpdate({ match }) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/line/searchRegisteredLine/' + match.params.id).then((response) => {
-            // setBatchdetails(response.data.content);
-
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl+'/api/v1/line/searchRegisteredLine/' + match.params.id).then((response) => {
             setline_id(response.data.content.lineId);
             setline_name(response.data.content.lineName);
             setdescription(response.data.content.description);
             setstart_time(response.data.content.startTime);
             setendtime(response.data.content.endTime);
-            // setimage(response.data.content.image);
+            
         });
     }, [])
 
@@ -71,7 +72,7 @@ function LineUpdate({ match }) {
         LineDetails.image = formData.get('image');
         console.log(LineDetails);
 
-        await axios.put(`http://localhost:8082/api/v1/line/updateRegisteredLine/${match.params.id}`, LineDetails)
+        await axios.put(url+`/api/v1/line/updateRegisteredLine/${match.params.id}`, LineDetails)
             .then(res => {
                 console.log("Return Data", res);
                 alert("Update Success!!");

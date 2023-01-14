@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
 // react-bootstrap components
 import {
-    Badge,
-    Button,
     Card,
-    Navbar,
-    Nav,
     Table,
     Container,
     Row,
@@ -16,19 +13,22 @@ import {
 } from "react-bootstrap";
 
 function CustomerViewTable() {
-    
+
     const history = useHistory();
     const [Customers, setCustomers] = useState([]);
+    const [url, seturl] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl + '/api/v1/customerRegistration/getAllCustomerRegistration').then((response) => {
             setCustomers(response.data.content);
         });
     }, [])
 
     //delete the specific column
     const deleteConference = (id) => {
-        axios.delete('http://localhost:8082/api/v1/customerRegistration/deleteCustomerRegistration/' + id).then(() => {
+        axios.delete(url + '/api/v1/customerRegistration/deleteCustomerRegistration/' + id).then(() => {
             alert("deleted successfully!!");
             setCustomers([...Customers, id]);
             history.push('/admin/CustomerRegister')
@@ -37,17 +37,6 @@ function CustomerViewTable() {
             alert(err);
         })
     };
-
-    // //Edit the specific column
-    // const editConference = (id) => {
-    //     console.log(id)
-    //     // axios.delete('' + id).then(() => {
-    //     //     alert("Edit successfully!!");
-    //     // }).catch((err) => {
-    //     //     alert(err);
-    //     // })
-
-    // };
 
     console.log(JSON.stringify(Customers))
     return (
@@ -66,17 +55,17 @@ function CustomerViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">ID</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Name</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">NIC</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Contact Person</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Number</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Email</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">ID</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Name</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">NIC</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Contact Person</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Number</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Email</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {Customers?.map((customer, index)  => {
+                                        {Customers?.map((customer, index) => {
                                             return (
                                                 <tr key={customer.cus_id}>
                                                     <td>{customer.cus_id}</td>
@@ -90,10 +79,10 @@ function CustomerViewTable() {
                                                             className="fa fa-trash"
                                                             onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(customer.cus_id) }; }} /></a>
                                                         &nbsp;&nbsp;
-                                                        <Link  id="icon" className="btn btn-success" to={`/admin/updateCustomer/${customer.cus_id}` }
-                                                           >
+                                                        <Link id="icon" className="btn btn-success" to={`/admin/updateCustomer/${customer.cus_id}`}
+                                                        >
                                                             <em
-                                                            className="far fa-edit"/>
+                                                                className="far fa-edit" />
                                                         </Link>
                                                     </td>
                                                 </tr>

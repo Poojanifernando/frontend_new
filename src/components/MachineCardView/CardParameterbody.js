@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import CardInsideBody from "components/MachineCardView/CardInsideBody.js";
 import PerameterValueView from "components/MachineCardView/PerameterValueView.js";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import "../../assets/css/CardInsideBody.css";
 
 // import ChartistGraph from "react-chartist";
@@ -23,18 +24,21 @@ function CardParameterbody(props) {
 
     const [machinePerameters, setMachinePerameters] = useState([]);
     const [linecolors, setlinecolor] = useState([]);
+    const [url, seturl] = useState('');
 
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine).then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl+'/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine).then((response) => {
             setMachinePerameters(response.data);
         });
 
-        axios.get('http://localhost:8082/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        axios.get(myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             setlinecolor(response.data);
         });
 
-        setInterval(() => (new axios.get('http://localhost:8082/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        setInterval(() => (new axios.get(myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             setlinecolor(response.data);
         })), 7000);
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import axios from "axios";
 // react-bootstrap components
 import {
@@ -16,21 +17,22 @@ import {
 } from "react-bootstrap";
 
 function BatchViewTable() {
+
     const history = useHistory();
-
-
     const [Batches, setBatches] = useState([]);
-
+    const [url, seturl] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/batch/getAllBatches').then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl+'/api/v1/batch/getAllBatches').then((response) => {
             setBatches(response.data.content);
         });
     }, [])
 
     //delete the specific column
     const deleteConference = (id) => {
-        axios.delete('http://localhost:8082/api/v1/batch/deleteBatch/' + id).then(() => {
+        axios.delete(url+'/api/v1/batch/deleteBatch/' + id).then(() => {
             alert("deleted successfully!!");
             setBatches([...Batches, {}]);
             history.push('/admin/BatchRegistration')
@@ -38,15 +40,7 @@ function BatchViewTable() {
             alert(err);
         })
     };
-
-    // //Edit the specific column
-    // const editConference = (id) => {
-    //     console.log(id)
-
-
-    // };
-
-    console.log(JSON.stringify(Batches))
+    
     return (
         <>
             <Container fluid>
@@ -85,9 +79,6 @@ function BatchViewTable() {
                                                             className="fa fa-trash"
                                                             onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(Batch.batchID_regBch) }; }} /></a>
                                                         &nbsp;&nbsp;
-                                                        {/* <a className="btn btn-success" id="icon"><em
-                                                            className="far fa-edit"
-                                                            onClick={() => { if (window.confirm("Are you sure you want to Edit this ?")) { editConference(Batch.batchID_regBch) }; }} /></a> */}
                                                         <Link  id="icon" className="btn btn-success" to={`/admin/updateBatch/${Batch.batchID_regBch}` }
                                                            >
                                                             <em

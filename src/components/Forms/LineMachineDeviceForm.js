@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
 // import "assets/css/Popup.css";
 
@@ -21,6 +22,7 @@ import { DropdownItem } from "reactstrap";
 function LineMachineDeviceForm() {
     const userId = localStorage.getItem("userId");
     const [lineDetails, setLineDetails] = useState([]);
+    const [url, seturl] = useState('');
 
     //Hook
     const batchDetails = useFormik({
@@ -45,7 +47,9 @@ function LineMachineDeviceForm() {
     })
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/line/getAllLines').then((response) => {
+        const myurl = getLocalhostUrl();
+         seturl(myurl)
+        axios.get(myurl+'/api/v1/line/getAllLines').then((response) => {
             setLineDetails(response.data.content);
         });
     }, []);

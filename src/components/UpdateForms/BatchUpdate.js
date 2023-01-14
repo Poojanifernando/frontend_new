@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { useFormik, Formik } from "formik";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
-
-
 import {
     Button,
     Card,
@@ -19,35 +18,36 @@ function BatchUpdate({ match }) {
     const userid = localStorage.getItem('userId')
     const [Batchdetails111, setBatchdetails] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
-
     const [userid_reg_bch, setuserid_reg_bch] = useState(userid);
     const [batchid, setbatchid] = useState("");
     const [batchName_regBch, setbatchName_regBch] = useState("");
     const [count_regBch, setcount_regBch] = useState("");
     const [productCategory, setproductCategory] = useState("");
     const [product_id, setproduct_id] = useState("");
+    const [url, seturl] = useState('');
+
 
 
     const [batchDetails] = useState({
-
         userid_reg_bch: userid,
         batchID_regBch: '',
         batchName_regBch: '',
         count_regBch: '',
         productCategory: '',
         product_id: ''
-
     })
 
 
 
     useEffect(() => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
 
-        axios.get('http://localhost:8082/api/v1/product/getAllProducts').then((response) => {
+        axios.get(myurl + '/api/v1/product/getAllProducts').then((response) => {
             setProductDetails(response.data.content);
         });
 
-        axios.get('http://localhost:8082/api/v1/batch/searchBatch/' + match.params.id).then((response) => {
+        axios.get(myurl + '/api/v1/batch/searchBatch/' + match.params.id).then((response) => {
             setBatchdetails(response.data.content);
 
             setbatchid(response.data.content.batchID_regBch);
@@ -70,34 +70,33 @@ function BatchUpdate({ match }) {
         formData.append("product_id", product_id);
 
 
-        batchDetails.userid_reg_bch=formData.get('userid_reg_bch');
-        batchDetails.batchID_regBch=formData.get('batchID_regBch');
-        batchDetails.batchName_regBch=formData.get('batchName_regBch');
-        batchDetails.count_regBch=formData.get('count_regBch');
-        batchDetails.productCategory=formData.get('productCategory');
-        batchDetails.product_id=formData.get('product_id');
+        batchDetails.userid_reg_bch = formData.get('userid_reg_bch');
+        batchDetails.batchID_regBch = formData.get('batchID_regBch');
+        batchDetails.batchName_regBch = formData.get('batchName_regBch');
+        batchDetails.count_regBch = formData.get('count_regBch');
+        batchDetails.productCategory = formData.get('productCategory');
+        batchDetails.product_id = formData.get('product_id');
         console.log(batchDetails);
 
-        await axios.put(`http://localhost:8082/api/v1/batch/updateBatch/${match.params.id}`,batchDetails)
-        .then(res=>{
-          console.log("Return Data",res);
-          alert("Update Success!!");
-          history.push('/admin/BatchRegistration')
-        
-        })
-        .catch(err=>{
-          alert("Update Failed!!");
-          console.log(err);
-        });
+        await axios.put(url + `/api/v1/batch/updateBatch/${match.params.id}`, batchDetails)
+            .then(res => {
+                console.log("Return Data", res);
+                alert("Update Success!!");
+                history.push('/admin/BatchRegistration')
+
+            })
+            .catch(err => {
+                alert("Update Failed!!");
+                console.log(err);
+            });
 
     }
 
-  
     const CancelOnClick = async (e) => {
         e.preventDefault();
         history.push('/admin/BatchRegistration')
     }
-    
+
     return (
         <>
             <Container >
@@ -211,15 +210,15 @@ function BatchUpdate({ match }) {
                                                 Update Customer
                                             </Button>
                                             &nbsp;&nbsp;
-                                        <Button
-                                            className="btn-fill center"
-                                            type="submit"
-                                            variant="danger"
-                                            onClick={(e) => CancelOnClick(e)}
+                                            <Button
+                                                className="btn-fill center"
+                                                type="submit"
+                                                variant="danger"
+                                                onClick={(e) => CancelOnClick(e)}
 
-                                        >
-                                           Cancel 
-                                        </Button>
+                                            >
+                                                Cancel
+                                            </Button>
                                         </Row>
                                         <div className="clearfix"></div>
                                     </Form>

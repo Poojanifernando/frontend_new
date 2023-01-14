@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
 // react-bootstrap components
 import {
-    Badge,
-    Button,
     Card,
-    Navbar,
-    Nav,
     Table,
     Container,
     Row,
@@ -17,22 +14,22 @@ import {
 
 function LineViewTable() {
     const history = useHistory();
-
-
     const [lines, setLines] = useState([]);
-
+    const [url, seturl] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/line/getAllLines').then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl + '/api/v1/line/getAllLines').then((response) => {
             setLines(response.data.content);
         });
     }, [])
 
     //delete the specific column
     const deleteConference = (id) => {
-        axios.delete('http://localhost:8082/api/v1/line/deleteRegisteredLine/' + id).then(() => {
+        axios.delete(url + '/api/v1/line/deleteRegisteredLine/' + id).then(() => {
             alert("deleted successfully!!");
-            setLines([...lines, { }]);
+            setLines([...lines, {}]);
             history.push('/admin/ProductLineRegistration')
             window.location.reload(false);
         }).catch((err) => {
@@ -40,16 +37,6 @@ function LineViewTable() {
         })
     };
 
-    // //Edit the specific column
-    // const editConference = (id) => {
-    //     console.log(id)
-    //     // axios.delete('' + id).then(() => {
-    //     //     alert("Edit successfully!!");
-    //     // }).catch((err) => {
-    //     //     alert(err);
-    //     // })
-
-    // };
 
     console.log(JSON.stringify(lines))
     return (
@@ -68,12 +55,12 @@ function LineViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold" >line_id</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">line_name</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">description</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">start_time</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">end_time</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold" >line_id</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">line_name</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">description</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">start_time</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">end_time</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -85,16 +72,7 @@ function LineViewTable() {
                                                     <td>{line.description}</td>
                                                     <td>{line.startTime}</td>
                                                     <td>{line.endTime}</td>
-                                                    {/* <td>
-                                                        <a className="btn btn-danger" id="icon"><em
-                                                            className="fa fa-trash"
-                                                            onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(line.lineId) }; }} /></a>
-                                                        &nbsp;&nbsp;
-                                                        <Link  id="icon" className="btn btn-success" to={`/admin/updateLine/${line.lineId}` }>
-                                                            <em className="far fa-edit"/>
-                                                        </Link>
-                                                    </td> */}
-                                                     <td>
+                                                    <td>
                                                         <a className="btn btn-danger" id="icon"><em
                                                             className="fa fa-trash"
                                                             onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(line.lineId) }; }} /></a>
@@ -102,10 +80,10 @@ function LineViewTable() {
                                                         {/* <a className="btn btn-success" id="icon"><em
                                                             className="far fa-edit"
                                                             onClick={() => { if (window.confirm("Are you sure you want to Edit this ?")) { editConference(Batch.batchID_regBch) }; }} /></a> */}
-                                                        <Link  id="icon" className="btn btn-success" to={`/admin/updateLine/${line.lineId}` }
-                                                           >
+                                                        <Link id="icon" className="btn btn-success" to={`/admin/updateLine/${line.lineId}`}
+                                                        >
                                                             <em
-                                                            className="far fa-edit"/>
+                                                                className="far fa-edit" />
                                                         </Link>
                                                     </td>
                                                 </tr>

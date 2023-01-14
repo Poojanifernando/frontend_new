@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
@@ -21,8 +22,8 @@ function DeviceUpdate({ match }) {
     const userId = localStorage.getItem("userId");
     const [lineDetails, setLineDetails] = useState([]);
     const [detail, setdetail] = useState([]);
-
-
+    const [url, seturl] = useState('');
+    
     const [userid_reg_bch, setuserid_reg_bch] = useState(userId);
     const [LineId, setlineId] = useState("");
     const [MachineID, setMachineID] = useState("");
@@ -68,14 +69,13 @@ function DeviceUpdate({ match }) {
 
     useEffect(() => {
 
-
-        axios.get('http://localhost:8082/api/v1/line/getAllLineAndId').then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl+'/api/v1/line/getAllLineAndId').then((response) => {
             setLineDetails(response.data);
         });
-        axios.get('http://localhost:8082/api/v1/admin/getalldeviceregistration/' + match.params.id).then((response) => {
+        axios.get(myurl+'/api/v1/admin/getalldeviceregistration/' + match.params.id).then((response) => {
             setdetail(response.data);
-
-
             setlineId(response.data.line_id);
             setMachineID(response.data.machine_id);
             setMachineName(response.data.machine_name);
@@ -142,7 +142,7 @@ function DeviceUpdate({ match }) {
         deviceDetails.message = formData.get('message');
        console.log(deviceDetails);
 
-        await axios.get('http://localhost:8082/api/v1/admin/DeviceRegistration/'+deviceDetails.LineId+'/'+deviceDetails.MachineID+'/'+deviceDetails.MachineName+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.deviceid_dvc_reg+'/'+deviceDetails.parameter_id+'/'+deviceDetails.description+'/'+deviceDetails.alarm_alert_type+'/'+deviceDetails.completed_prod_count+'/'+deviceDetails.is_it_starter_value+'/'+deviceDetails.min_value+'/'+deviceDetails.max_value+'/'+deviceDetails.measuring_unit+'/'+deviceDetails.message+'/'+deviceDetails.devicegpslocation+'/'+deviceDetails.device_ip_address+'/'+deviceDetails.device_name_dvc_reg+'/3')
+        await axios.get(url+'/api/v1/admin/DeviceRegistration/'+deviceDetails.LineId+'/'+deviceDetails.MachineID+'/'+deviceDetails.MachineName+'/'+deviceDetails.MachineDiscription+'/'+deviceDetails.deviceid_dvc_reg+'/'+deviceDetails.parameter_id+'/'+deviceDetails.description+'/'+deviceDetails.alarm_alert_type+'/'+deviceDetails.completed_prod_count+'/'+deviceDetails.is_it_starter_value+'/'+deviceDetails.min_value+'/'+deviceDetails.max_value+'/'+deviceDetails.measuring_unit+'/'+deviceDetails.message+'/'+deviceDetails.devicegpslocation+'/'+deviceDetails.device_ip_address+'/'+deviceDetails.device_name_dvc_reg+'/3')
         .then(res=>{deviceid_dvc_reg
           console.log("Return Data",res);
         alert("Update Success!!");

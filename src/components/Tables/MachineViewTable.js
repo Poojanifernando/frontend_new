@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom';
+import { getLocalhostUrl } from 'components/url/Url.js'
 import axios from "axios";
 // react-bootstrap components
 import {
-    Badge,
-    Button,
     Card,
-    Navbar,
-    Nav,
     Table,
     Container,
     Row,
@@ -15,39 +12,30 @@ import {
 } from "react-bootstrap";
 
 function MachineViewTable() {
+
     const history = useHistory();
-
-
     const [machines, setMachines] = useState([]);
-
+    const [url, seturl] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/machine/getAllMachines').then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl + '/api/v1/machine/getAllMachines').then((response) => {
             setMachines(response.data.content);
         });
     }, [])
 
     //delete the specific column
     const deleteConference = (id) => {
-        axios.delete('http://localhost:8082/api/v1/machine/deleteRegisteredMachine/' + id).then(() => {
+        axios.delete(url + '/api/v1/machine/deleteRegisteredMachine/' + id).then(() => {
             alert("deleted successfully!!");
-            setBatches([...machines, { }]);
+            setBatches([...machines, {}]);
             history.push('/admin/MachineRegistration')
         }).catch((err) => {
             alert(err);
         })
     };
 
-    //Edit the specific column
-    const editConference = (id) => {
-        console.log(id)
-        // axios.delete('' + id).then(() => {
-        //     alert("Edit successfully!!");
-        // }).catch((err) => {
-        //     alert(err);
-        // })
-
-    };
 
     console.log(JSON.stringify(machines))
     return (
@@ -66,10 +54,10 @@ function MachineViewTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Id</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Name</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Discription</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Id</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Name</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Discription</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
 
 // react-bootstrap components
@@ -19,13 +20,14 @@ import { DropdownItem } from "reactstrap";
 
 function MachineRegistrationForm() {
     const userId = "userLocaleStorage"
+    const [url, seturl] = useState('');
 
     // const [MachineDetails, setMachines] = useState([]);
 
     //Hook
     const machDetails = useFormik({
         initialValues: {
-            user_id_para:'userId From LocaleStorage',
+            user_id_para: 'userId From LocaleStorage',
             machine_id: '',
             machine_name: '',
             machine_description: '',
@@ -34,15 +36,18 @@ function MachineRegistrationForm() {
         onSubmit: values => {
             console.log(JSON.stringify(machDetails.values))
 
-            axios.post('http://localhost:8082/api/v1/machine/saveMachine', machDetails.values).then(() => {
+            axios.post(url+'/api/v1/machine/saveMachine', machDetails.values).then(() => {
                 alert("Machine added successfully!!!");
-                
+
             }).catch((err) => {
                 alert(err);
             })
         }
     })
-
+    useEffect(() => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+    }, []);
 
     return (
         <>
@@ -81,7 +86,7 @@ function MachineRegistrationForm() {
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    
+
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
@@ -106,10 +111,10 @@ function MachineRegistrationForm() {
                                                     value={machDetails.values.machine_image}
                                                 ></Form.Control>
                                             </Form.Group>
-                                        </Col>   
+                                        </Col>
                                     </Row>
-                                  
-                              
+
+
                                     {/* <Col className="pl-1" md="6">
                       <Form.Group>
                         <label>Last Name</label>
