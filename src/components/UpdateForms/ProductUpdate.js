@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
-import { useFormik } from 'formik';
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
@@ -20,27 +20,25 @@ import { DropdownItem } from "reactstrap";
 function ProductUpdate({ match }) {
     const history = useHistory();
     const userid_pro = localStorage.getItem('userId');
-
-
+    const [url, seturl] = useState('');
     const [product_id, setproduct_id] = useState('');
     const [product_name, setproduct_name] = useState("");
     const [description, setdescription] = useState("");
     const [image, setimage] = useState("");
 
     const [ProductDetails] = useState({
-
         userID_pro: userid_pro,
         productId: '',
         productName: '',
         description: '',
         image: '',
-
     })
 
 
     useEffect(() => {
-
-        axios.get('http://localhost:8082/api/v1/product/searchRegisteredProduct/' + match.params.id).then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl + '/api/v1/product/searchRegisteredProduct/' + match.params.id).then((response) => {
 
             // setBatchdetails(response.data.content);
             setproduct_id(response.data.content.productId);
@@ -59,24 +57,24 @@ function ProductUpdate({ match }) {
         formData.append("image", image);
 
 
-        ProductDetails.userID_pro=userid_pro;
-        ProductDetails.productId=formData.get('product_id');
-        ProductDetails.productName=formData.get('product_name');
-        ProductDetails.description=formData.get('description');
-        ProductDetails.image=formData.get('image');
+        ProductDetails.userID_pro = userid_pro;
+        ProductDetails.productId = formData.get('product_id');
+        ProductDetails.productName = formData.get('product_name');
+        ProductDetails.description = formData.get('description');
+        ProductDetails.image = formData.get('image');
         console.log(ProductDetails);
 
-        await axios.put(`http://localhost:8082/api/v1/product/updateRegisteredProduct/${match.params.id}`,ProductDetails)
-        .then(res=>{
-          console.log("Return Data",res);
-          alert("Update Success!!");
-          history.push('/admin/ProductRegistration')
-        
-        })
-        .catch(err=>{
-          alert("Update Failed!!");
-          console.log(err);
-        });
+        await axios.put(url + `/api/v1/product/updateRegisteredProduct/${match.params.id}`, ProductDetails)
+            .then(res => {
+                console.log("Return Data", res);
+                alert("Update Success!!");
+                history.push('/admin/ProductRegistration')
+
+            })
+            .catch(err => {
+                alert("Update Failed!!");
+                console.log(err);
+            });
 
     }
     const CancelOnClick = async (e) => {
@@ -168,7 +166,7 @@ function ProductUpdate({ match }) {
                                             onClick={(e) => CancelOnClick(e)}
 
                                         >
-                                           Cancel 
+                                            Cancel
                                         </Button>
                                     </Row>
                                     <div className="clearfix"></div>

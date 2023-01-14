@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
 // react-bootstrap components
 import {
-    Badge,
-    Button,
     Card,
-    Navbar,
-    Nav,
     Table,
     Container,
     Row,
@@ -17,16 +14,15 @@ import {
 function ProcessRegistrationTable() {
 
     const userid = localStorage.getItem("userId");
-
     const [progerss, setProgerss] = useState([]);
+    const [url, seturl] = useState('');
 
-    console.log(progerss)
+
     useEffect(() => {
-        // axios.get('http://localhost:8082/api/v1/admin/getAllAdmins').then((response) => {
-        //     setProgerss(response.data.content);
-        // });
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
 
-        axios.get('http://localhost:8082/api/v1/admin/postcurrentdata/JOB_101/MY JOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/2/' + userid).then((response) => {
+        axios.get(myurl + '/api/v1/admin/postcurrentdata/JOB_101/MY JOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/2/' + userid).then((response) => {
             setProgerss(response.data);
         });
 
@@ -36,25 +32,13 @@ function ProcessRegistrationTable() {
     const deleteConference = (id) => {
         console.log(id)
         //axios.get('http://localhost:8082/api/v1/admin/postcurrentdata/JOB_101/MYJOB/BCH_101/12:00:00/12:00:00/PRD_0056/800/LID_1001/2023-01-03/1/1/4/' + id).then(() => {
-            alert("You cant delete Process");
-            window.location.reload(false);
+        alert("You cant delete Process");
+        window.location.reload(false);
         //}).catch((err) => {
-         //   alert(err);
+        //   alert(err);
         //x})
     };
 
-    //Edit the specific column
-    const editConference = (id) => {
-        console.log(id)
-        // axios.delete('' + id).then(() => {
-        //     alert("Edit successfully!!");
-        // }).catch((err) => {
-        //     alert(err);
-        // })
-
-    };
-
-    // console.log(JSON.stringify(progerss))
     return (
         <>
             <Container fluid>
@@ -71,16 +55,16 @@ function ProcessRegistrationTable() {
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">JOB ID</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Batch Id</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Batch Start Time</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Batch End Time</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Count</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Line Id</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Date</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">ORDER</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Customer ID</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">JOB ID</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Batch Id</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Batch Start Time</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Batch End Time</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Count</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Line Id</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Date</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">ORDER</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Customer ID</th>
+                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,7 +83,7 @@ function ProcessRegistrationTable() {
                                                     <td>
                                                         <a className="btn btn-danger" id="icon">
                                                             <em className="fa fa-trash"
-                                                            onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(progers.admin_id) }; }} /></a>
+                                                                onClick={() => { if (window.confirm("Are you sure you want to delete this?")) { deleteConference(progers.admin_id) }; }} /></a>
                                                         &nbsp;&nbsp;
                                                         <Link id="icon" className="btn btn-success" to={`/admin/CurrentProcessUpdate/${progers.admin_id}`}
                                                         >

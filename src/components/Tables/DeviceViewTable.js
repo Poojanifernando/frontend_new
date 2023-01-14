@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
 // react-bootstrap components
 import {
@@ -17,31 +18,17 @@ import {
 
 function DeviceViewTable() {
     const history = useHistory();
-
-
+     const [url, seturl] = useState('');
     const [Batches, setBatches] = useState([]);
 
-
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/admin/DeviceRegistration/{lineId}/{machineId_2}/{machineName}/{machineDescription}/{deviceId}/{parameterId}/{des}/1/1/1/20/25/{mesuringUnit}/{massage}/{deviceLocation}/{deviceIpAddress}/{deviceName}/'+2).then((response) => {
+        const myurl = getLocalhostUrl();
+         seturl(myurl)
+        axios.get(myurl+'/api/v1/admin/DeviceRegistration/{lineId}/{machineId_2}/{machineName}/{machineDescription}/{deviceId}/{parameterId}/{des}/1/1/1/20/25/{mesuringUnit}/{massage}/{deviceLocation}/{deviceIpAddress}/{deviceName}/'+2).then((response) => {
             setBatches(response.data);
         });
     }, [])
 
-    // //delete the specific column
-    const deleteConference = (id) => {
-        // axios.delete('http://localhost:8082/api/v1/batch/deleteBatch/' + id).then(() => {
-            alert("you cant delete Devices");
-        //     setBatches([...Batches, { }]);
-        //     history.push('/admin/BatchRegistration')
-        // }).catch((err) => {
-        //     alert(err);
-        // })
-    };
-
-
-
-    // console.log(JSON.stringify(Batches))
     return (
         <>
             <Container fluid>

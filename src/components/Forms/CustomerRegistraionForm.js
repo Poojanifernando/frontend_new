@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
 // react-bootstrap components
 import {
@@ -18,6 +19,13 @@ function CustomerRegistraionForm() {
 
     const userId = localStorage.getItem("userId");
     const [productDetails, setProductDetails] = useState([]);
+    const [url, seturl] = useState('');
+
+    useEffect(() => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+    }, []);
+
 
     //Hook
     const cus_reg = useFormik({
@@ -50,18 +58,18 @@ function CustomerRegistraionForm() {
         },
         onSubmit: values => {
             if (cus_reg.isValid) {
-            console.log(JSON.stringify(cus_reg.values))
+                console.log(JSON.stringify(cus_reg.values))
 
-            axios.post('http://localhost:8082/api/v1/customerRegistration/saveCustomerRegistration', cus_reg.values).then(() => {
-                alert("Customer added successfully!!!");
-                window.location.reload(false);
+                axios.post(url+'/api/v1/customerRegistration/saveCustomerRegistration', cus_reg.values).then(() => {
+                    alert("Customer added successfully!!!");
+                    window.location.reload(false);
 
-            }).catch((err) => {
-                alert(err);
-            })
-        } else {
-            console.log('Not all fields are filled in');
-        }
+                }).catch((err) => {
+                    alert(err);
+                })
+            } else {
+                console.log('Not all fields are filled in');
+            }
         }
     })
 

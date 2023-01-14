@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
 
 // react-bootstrap components
@@ -19,6 +20,7 @@ import { DropdownItem } from "reactstrap";
 
 function ProductRegistrationForm() {
     const userid_pro = "UID_005"
+    const [url, seturl] = useState('');
 
     //Hook
     const ProDetails = useFormik({
@@ -46,8 +48,8 @@ function ProductRegistrationForm() {
         },
         onSubmit: values => {
             if (ProDetails.isValid) {
-              
-                axios.post('http://localhost:8082/api/v1/product/saveProduct', ProDetails.values).then(() => {
+
+                axios.post(url+'/api/v1/product/saveProduct', ProDetails.values).then(() => {
                     alert("Product added successfully!!!");
                     window.location.reload(false);
 
@@ -60,7 +62,10 @@ function ProductRegistrationForm() {
             }
         }
     })
-
+    useEffect(() => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+    }, []);
     return (
         <>
             <Container >

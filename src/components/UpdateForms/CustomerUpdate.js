@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
-import { useFormik } from 'formik';
+import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
 // react-bootstrap components
 import {
@@ -18,8 +18,8 @@ import {
 function CustomerUpdate({ match }) {
     const history = useHistory();
     const userId = "UID_005";
-
     const cusid = match.params.id;
+    const [url, seturl] = useState('');
 
     const [user_id, setuser_id] = useState('userId From LocaleStorage');
     const [customer_name, setcustomer_name] = useState('userId From LocaleStorage');
@@ -42,8 +42,10 @@ function CustomerUpdate({ match }) {
     })
 
     useEffect(() => {
+        const myurl = getLocalhostUrl();
+         seturl(myurl)
 
-        axios.get('http://localhost:8082/api/v1/customerRegistration/searchCustomerRegistration/' + match.params.id).then((response) => {
+        axios.get(myurl+'/api/v1/customerRegistration/searchCustomerRegistration/' + match.params.id).then((response) => {
 
             setuser_id(response.data.content.cus_id);
             setcustomer_name(response.data.content.customer_name);
@@ -77,7 +79,7 @@ function CustomerUpdate({ match }) {
         CustomerDetails.customer_email = formData.get('customer_email');
         console.log(CustomerDetails);
 
-        await axios.put(`http://localhost:8082/api/v1/customerRegistration/updateCustomerRegistration/${match.params.id}`, CustomerDetails)
+        await axios.put(url+`/api/v1/customerRegistration/updateCustomerRegistration/${match.params.id}`, CustomerDetails)
             .then(res => {
                 console.log("Return Data", res);
                 alert("Update Success!!");

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Button, Card, Row, Col, Form, } from "react-bootstrap";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import axios from "axios";
 
 function DashboardForm() {
@@ -10,9 +11,10 @@ function DashboardForm() {
     const [BatchId, setBatchId] = useState("");
     const [LineId, setLineId] = useState("");
     const [Lines, setLines] = useState([]);
+    const [url, seturl] = useState('');
+
     //retrive all data array
     const [AllJobs, SetAllJobs] = useState([]);
-
     const JobIdSetter = (e) => {
         setJobId(e.target.value);
     }
@@ -43,12 +45,14 @@ function DashboardForm() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/line/getAllLines').then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl+'/api/v1/line/getAllLines').then((response) => {
             setLines(response.data.content);
 
         });
 
-        axios.get('http://localhost:8082/api/v1/job/getAllJobs').then((response) => {
+        axios.get(myurl+'/api/v1/job/getAllJobs').then((response) => {
             SetAllJobs(response.data.content);
 
         });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
+import { getLocalhostUrl } from 'components/url/Url.js'
 import "../../assets/css/CardInsideBody.css";
 
 // import ChartistGraph from "react-chartist";
@@ -23,29 +24,27 @@ function PerameterValueView(props) {
     const current_date = props.date;
     const colorfromprop = props.color;
     const msg = props.msg;
-    // console.log("current_date " + current_date + "and line id " + current_Line +"current_pOrder "+current_pOrder+
-    // " current_Machine "+current_Machine)
 
     const [Values, setValues] = useState([]);
-    const [color, setcolor] = useState(`rgb(182,251,213)`);
     const [value123, setValue] = useState(0);
-    const [previousValue, setpreviousValue] = useState(0);
+    const [url, seturl] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8082/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
+        const myurl = getLocalhostUrl();
+        seturl(myurl)
+        axios.get(myurl+'/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
             setValues(response.data);
             console.log('sad',response.data)
         });
         
-        axios.get('http://localhost:8082/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
+        axios.get(myurl+'/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
             
             setValue(response.data.IOT);
         });
 
-        setInterval(() => (new axios.get('http://localhost:8082/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
+        setInterval(() => (new axios.get(myurl+'/api/v1/admin/GetValueByDevice/' + current_Job + '/' + current_batch + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine + '/' + current_deviceId + '/' + current_pID + '/' + current_date).then((response) => {
             setValues(response.data);
-            // console.log('Interval triggered '+JSON. stringify(response.data));
-            axios.get('http://localhost:8082/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
+            axios.get(myurl+'/api/v1/admin/getsumofproduct/' + current_Line ).then((response) => {
             setValue(response.data.IOT);
            
         });
@@ -54,8 +53,6 @@ function PerameterValueView(props) {
 
     }, [])
     
-
-    const [lnth, setlnth] = useState(0);
     const changelength = (e) => {
         console.log(e)
     }

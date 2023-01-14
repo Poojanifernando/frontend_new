@@ -123,7 +123,7 @@ export default function Signup() {
                       >
                       </Form.Group>
                       <div className="d-grid">
-                        <Button variant="primary" type="submit" onClick={signup.handleSubmit}>>
+                        <Button variant="primary" type="submit" onClick={signup.handleSubmit}>
                           Create Account
                         </Button>
                       </div>

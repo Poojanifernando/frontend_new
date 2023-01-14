@@ -1,9 +1,8 @@
 
 import React, { useState, useEffect } from "react"
 import "../../assets/css/LineHeader.css"
+import { getLocalhostUrl } from 'components/url/Url.js'
 import axios from "axios";
-
-
 import {
     Card,
     Container,
@@ -13,43 +12,40 @@ import {
 import ScrollMenuMachines from "components/MachineCardView/ScrollMenuMachines.js";
 
 function LineHeader(props) {
+
     const current_date = props.date;
     const current_Line = props.line;
     const current_Line_name = props.lineName;
-
-
-
     const [lineCustomerDetails, setlineCustomerDetails] = useState([]);
-
     const [test, settest] = useState([]);
     const [customerprocess, setcustomerprocess] = useState('');
-
-
     // const [buttonstartstop, setbuttonstartstop] = useState('true');
-
     const [buttontest, setbuttontest] = useState('');
     const [isRunning, setIsRunning] = useState(false);
-
+    const [url, seturl] = useState('');
+    
     useEffect(() => {
-
-        axios.get('http://localhost:8082/api/v1/admin/GetDetailsByDateAndLineId/' + current_date + '/' + current_Line).then((response) => {
+         const myurl = getLocalhostUrl();
+         seturl(myurl)
+         console.log("urlurlurlurlurlurlurlurlurlurlurl", myurl)
+        axios.get(myurl+'/api/v1/admin/GetDetailsByDateAndLineId/' + current_date + '/' + current_Line).then((response) => {
             setlineCustomerDetails(response.data);
 
         });
 
         //initial value setter
-        axios.get('http://localhost:8082/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        axios.get(myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             settest(response.data);
         });
 
         //initial value setter
-        axios.get('http://localhost:8082/api/v1/admin/ButtonOnorNot/' + current_Line + '/' + current_date).then((response) => {
+        axios.get(myurl+'/api/v1/admin/ButtonOnorNot/' + current_Line + '/' + current_date).then((response) => {
             setIsRunning(response.data.result);
         });
 
 
         //loop
-        setInterval(() => (new axios.get('http://localhost:8082/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        setInterval(() => (new axios.get(myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             settest(response.data);
 
 
@@ -71,7 +67,7 @@ function LineHeader(props) {
                 setIsRunning(true);
                 try {
                     console.log("Are you want to start this?", current_date, current_Line, id);
-                    axios.get('http://localhost:8082/api/v1/admin/AddStartTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
+                    axios.get(url+'/api/v1/admin/AddStartTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
                     }).catch((err) => {
                         alert(err);
                     })
@@ -84,7 +80,8 @@ function LineHeader(props) {
                 setIsRunning(false);
                 try {
                     console.log("Are you want to stop this", current_date, current_Line, id);
-                    axios.get('http://localhost:8082/api/v1/admin/DeleteValuesByEndTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
+                    axios.get('/api/v1/admin/DeleteValuesByEndTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
+                        window.location.reload(false);
                     }).catch((err) => {
                         alert(err);
                     })
@@ -100,7 +97,7 @@ function LineHeader(props) {
     };
 
 
-    console.log("customerprocess", isRunning)
+    
 
     return (
 
