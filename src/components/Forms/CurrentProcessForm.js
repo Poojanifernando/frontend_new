@@ -39,6 +39,7 @@ function CurrentProcessForm() {
             batch_end_time: '',
             predicted_date: '',
             production_order: '',
+            count_reg_bch:'',
             product: '',
             job_description: '',
             Customer_id: '',
@@ -82,7 +83,7 @@ function CurrentProcessForm() {
             // console.log(JSON.stringify(processDetails.values.product))
             // console.log(JSON.stringify(processDetails.values.product_lineid_ad))  
     
-            axios.get(url+'/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + '/' + processDetails.values.batch_end_time + '/' + processDetails.values.product + '/' + processDetails.values.production_order + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad).then(() => {
+            axios.get(url+'/api/v1/admin/postcurrentdata/' + text + '/' + processDetails.values.job_description + '/' + processDetails.values.batchid_ad + '/' + processDetails.values.batch_start_time + '/' + processDetails.values.batch_end_time + '/' + processDetails.values.product + '/' + processDetails.values.count_reg_bch + '/' + processDetails.values.product_lineid_ad + '/' + processDetails.values.predicted_date + '/' + processDetails.values.production_order + '/' + processDetails.values.Customer_id + '/' + processDetails.values.Curd + '/' + processDetails.values.userid_ad).then(() => {
                 alert("Current Process added successfully!!!");
                 window.location.reload();
             }).catch((err) => {

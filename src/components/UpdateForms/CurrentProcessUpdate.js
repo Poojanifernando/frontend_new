@@ -112,6 +112,9 @@ function CurrentProcessUpdate({ match }) {
         details.Customer_id = formData.get('Customer_id');
         details.Curd = formData.get('Curd');
 
+        console.log('details.count',details)
+        
+
       await axios.get(url+'/api/v1/admin/postcurrentdata/' + details.job_id_ad + '/' + details.job_description + '/' + details.batchid_ad + '/' + details.batch_start_time + '/' + details.batch_end_time + '/' + details.product + '/' + details.count + '/' + details.product_lineid_ad + '/' + details.predicted_date + '/' + details.production_order + '/' + details.Customer_id + '/' + details.Curd + '/' + match.params.id)
             .then(res => {
                 console.log("Return Data", res);
@@ -128,6 +131,9 @@ function CurrentProcessUpdate({ match }) {
         e.preventDefault();
         history.push('/admin/CurrentProcessRegistration')
     }
+
+
+   
     return (
         <>
             <Container >
@@ -217,7 +223,7 @@ function CurrentProcessUpdate({ match }) {
                                                     onChange={e => setproduct(e.target.value)}
                                                 >
                                                     {productTable.map(item => {
-                                                        return (<option key={item.productId} value={item.productId}>{item.productName}</option>);
+                                                        return (<option key={item.productId} value={item.productId}>{item.productname}</option>);
                                                     })}
                                                 </Form.Select>
                                             </Form.Group>
