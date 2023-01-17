@@ -134,7 +134,7 @@ function CurrentProcessForm() {
                                 <Card.Title as="h4">Production Registration</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <Form>
+                                <Form >
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>

@@ -42,7 +42,7 @@ function ScrollMenuMachines(props) {
                 {AllMachines?.map((Machins, index) => {
                     return (
                         <Col
-                            lg="3"
+                            lg="test"
                             // sm="12"
                             className="aa">
                             <Card className="card-stats">

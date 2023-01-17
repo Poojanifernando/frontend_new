@@ -58,7 +58,6 @@ function LineHeader(props) {
     let firstOnline = true;
     let buttontruefalse = true;
 
-
     //button change
    
     const handleClick = async (id) => {
@@ -80,7 +79,7 @@ function LineHeader(props) {
                 setIsRunning(false);
                 try {
                     console.log("Are you want to stop this", current_date, current_Line, id);
-                    axios.get('/api/v1/admin/DeleteValuesByEndTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
+                    axios.get(url+'/api/v1/admin/DeleteValuesByEndTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
                         window.location.reload(false);
                     }).catch((err) => {
                         alert(err);
@@ -96,20 +95,12 @@ function LineHeader(props) {
         color: 'white'
     };
 
-
-    
-
     return (
 
         <div >
             {/* <h3 className="title">Line - line 1</h3> */}
-            {lineCustomerDetails?.map((cusDetails, index) => {
-
-                // setInterval(() => (new axios.get('http://localhost:8082/api/v1/admin/ButtonOnorNot/' + current_Line + '/' + current_date + '/' + cusDetails.production_order).then((response) => {
-                //     setbuttontest(response.data);
-                // })), 1000);
-                // console.log(buttontest)
-
+            {lineCustomerDetails.length !== 0 ?
+            lineCustomerDetails.map((cusDetails, index) => {
                 return (
                     <>
                         <div class="row1">
@@ -163,8 +154,9 @@ function LineHeader(props) {
                             {/* <div class="column1"><p className="linetitle">Done :</p></div> */}
                         </div>
                         <ScrollMenuMachines date={current_date} line={current_Line} pOrder={cusDetails.production_order} />
-                    </>)
-            })}
+                    </> )
+            }) : <p className="no-data-msg">Enter new production to  <b>{current_Line_name}</b></p>
+        }
 
         </div>
 
