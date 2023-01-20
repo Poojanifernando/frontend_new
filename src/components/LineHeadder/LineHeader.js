@@ -18,9 +18,6 @@ function LineHeader(props) {
     const current_Line_name = props.lineName;
     const [lineCustomerDetails, setlineCustomerDetails] = useState([]);
     const [test, settest] = useState([]);
-    const [customerprocess, setcustomerprocess] = useState('');
-    // const [buttonstartstop, setbuttonstartstop] = useState('true');
-    const [buttontest, setbuttontest] = useState('');
     const [isRunning, setIsRunning] = useState(false);
     const [url, seturl] = useState('');
     
@@ -56,7 +53,7 @@ function LineHeader(props) {
 
     let firstWarm = true;
     let firstOnline = true;
-    let buttontruefalse = true;
+    // let buttontruefalse = true;
 
     //button change
    
@@ -117,7 +114,7 @@ function LineHeader(props) {
                                 }
                                 if (Value.t_warmup === 'Online' && firstOnline) {
                                     firstOnline = false;
-                                    buttontruefalse = false;
+                                    // buttontruefalse = false;
 
                                     return (
                                         <div class="columnrow rightrow"
@@ -129,16 +126,13 @@ function LineHeader(props) {
                                 // return <>sss</>
                             })}
                             <div class="columnrow leftrow fontsize">
-                                {/* <button onClick={handleClick} className='btn btntest' style={style} disabled={buttontruefalse}>
-                                    {isRunning ? 'Stop' : 'Start'}
-                                </button> */}
-                                <button onClick={() => handleClick(cusDetails.production_order)} className='btn btntest' style={style} disabled={buttontruefalse}>
+                                <button onClick={() => handleClick(cusDetails.production_order)} className='btn btntest' style={style}
+                                //  disabled={buttontruefalse}
+                                 >
                                     {isRunning  ? 'Stop' : 'Start'}
                                 </button>
                                 &nbsp;&nbsp;&nbsp;
                                 LINE - {current_Line_name}
-
-
                             </div>
                             {/* <div class="columnrow rightrow"
                                 style={{ backgroundColor: test.color_code_st_out , textShadow:"2px -1px 0 #000" }}
