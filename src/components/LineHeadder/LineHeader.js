@@ -24,7 +24,6 @@ function LineHeader(props) {
     useEffect(() => {
          const myurl = getLocalhostUrl();
          seturl(myurl)
-         console.log("urlurlurlurlurlurlurlurlurlurlurl", myurl)
         axios.get(myurl+'/api/v1/admin/GetDetailsByDateAndLineId/' + current_date + '/' + current_Line).then((response) => {
             setlineCustomerDetails(response.data);
 

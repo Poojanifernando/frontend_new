@@ -77,7 +77,7 @@ function CardParameterbody(props) {
 
                             <>
                             
-                                                <Row className="rowstest " style={{ backgroundColor:color  }}>
+                                                <Row className="rowstest " style={{ backgroundColor:"white"  }}>
                                                     <Col xs="6 ab">
                                                         {/* <div className="numbers"> */}
                                                         <p className=" textcolor">
