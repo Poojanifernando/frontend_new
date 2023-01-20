@@ -3,14 +3,8 @@ import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import "../../assets/css/CardInsideBody.css";
-
-// import ChartistGraph from "react-chartist";
-// react-bootstrap components
 import {
     Card,
-    Container,
-    Row,
-    Col,
 } from "react-bootstrap";
 
 function PerameterValueView(props) {
@@ -54,15 +48,17 @@ function PerameterValueView(props) {
         console.log(e)
     }
 
+//show the all values inside the parametrs 
     return (
         <>
             {Values?.map((Value, index) => {
+                //check only length
                 if (Value.parameter_id_in_iot_input_tra == "LNTH") {
                     return (
                         <Card.Title className="" style={{ backgroundColor: colorfromprop }}><p className="asd">{value123} {Value.measuring_unit} </p></Card.Title>
                     )
+                //other details
                 } else {
-
                     return (
                         // <Card.Title onChange={e => changelength(Value.value_tra)} className=""  style={{ backgroundColor: colorfromprop }}><p className="asd">{Value.value_tra} {Value.measuring_unit}
                         //  </p></Card.Title>
@@ -73,19 +69,15 @@ function PerameterValueView(props) {
                                 styles={buildStyles({
                                     // Rotation of path and trail, in number of turns (0-1)
                                     rotation: 0.65,
-
                                     // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                                     strokeLinecap: 'butt',
-
                                     // Text size
                                     textSize: '16px',
-
+                                   
                                     // How long animation takes to go from one percentage to another, in seconds
                                     pathTransitionDuration: 0.5,
-
                                     // Can specify path transition in more detail, or remove it entirely
                                     // pathTransition: 'none',
-
                                     // Colors
                                     pathColor: `${colorfromprop}`,
                                     textColor: 'black',

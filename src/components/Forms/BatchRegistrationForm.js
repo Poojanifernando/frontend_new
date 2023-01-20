@@ -3,21 +3,15 @@ import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
 // import "assets/css/Popup.css";
-
 // react-bootstrap components
 import {
-    Badge,
     Button,
     Card,
     Form,
-    Navbar,
-    Nav,
     Container,
     Row,
     Col,
-    Dropdown
 } from "react-bootstrap";
-import { DropdownItem } from "reactstrap";
 
 function BatchRegistrationForm() {
     const userId = "userLocaleStorage"

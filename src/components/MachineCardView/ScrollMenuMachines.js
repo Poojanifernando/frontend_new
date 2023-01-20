@@ -2,25 +2,17 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import "../../assets/css/ScrollView.css"
-
-
-
 import CardParameterbody from "components/MachineCardView/CardParameterbody.js";
-
 import {
     Card,
-    Container,
-    Row,
     Col,
+    Container
 } from "react-bootstrap";
-
 function ScrollMenuMachines(props) {
-
 
     const current_date = props.date;
     const current_Line = props.line;
     const current_pOrder = props.pOrder;
-
     const [AllMachines, setAllMachines] = useState([]);
     const [url, seturl] = useState('');
 
@@ -30,15 +22,13 @@ function ScrollMenuMachines(props) {
         axios.get(myurl + '/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder).then((response) => {
             setAllMachines(response.data);
         });
-
     }, [])
 
+    //scroll view in the machines
     return (
         <div>
             <br />
-            {/* <Row > */}
             <div class="scrollmenu">
-                {/* <a href="#work">Work</a> */}
                 {AllMachines?.map((Machins, index) => {
                     return (
                         <Col
@@ -47,11 +37,7 @@ function ScrollMenuMachines(props) {
                             className="aa">
                             <Card className="card-stats">
                                 <Card.Header >
-                                    {/* <div className="stats"> */}
-                                    {/* <i className="fas fa-redo mr-1"></i> */}
                                     {Machins.machine_name}
-                                    {/* {Machins?.machineID} */}
-                                    {/* </div> */}
                                 </Card.Header>
                                 <br />
                                 <CardParameterbody date={current_date} line={current_Line} POrder={current_pOrder} MachineId={Machins.machine_id} />
@@ -60,7 +46,6 @@ function ScrollMenuMachines(props) {
                     )
                 })}
             </div>
-            {/* </Row> */}
         </div>
     );
 }
