@@ -37,7 +37,8 @@ hr{
 
 .rowstest{
     /* background-color:#95D60A; */
-    width: calc(600% / 6);
+    text-align: left;
+    padding: 10px;
 
   }
 

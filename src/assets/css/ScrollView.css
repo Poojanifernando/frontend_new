@@ -48,9 +48,7 @@ hr {
   width: 190px;
 }
 .test{
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 columns */
-  grid-gap: 10px; /* 10px gap between columns */
+  position: relative;
 }
 .no-data-msg{
   font-size: large;
