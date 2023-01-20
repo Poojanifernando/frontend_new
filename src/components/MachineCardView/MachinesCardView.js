@@ -52,34 +52,34 @@ function MachinesCardView() {
   return (
     <div>
 
-<Form className="center-form">
-  <Row>
-    <Col className="pr-1" md="3">
-      <Form.Group>
-        <Form.Select size="lg" className="form-control min-width" name="product_lineid_ad"
-        //  value={processDetails.values.product_lineid_ad} onChange={processDetails.handleChange}
-         >
-          <option value="">Select</option>
-          {lineDetails.map(item => {
-            return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
-          })}
-        </Form.Select>
-      </Form.Group>
-    </Col>
-    <Col className="pr-5" md="6">
-    <Button
-      className="btn-fill center justify-content-center"
-      type="submit"
-      variant="primary"
-    // onClick={batchDetails.handleSubmit}
-    >
-      submit
-    </Button>
-    </Col>
-  </Row>
-</Form>
+      <Form className="center-form">
+        <Row>
+          <Col className="pr-1" md="3">
+            <Form.Group>
+              <Form.Select size="lg" className="form-control min-width" name="product_lineid_ad"
+              //  value={processDetails.values.product_lineid_ad} onChange={processDetails.handleChange}
+              >
+                <option value="">Select</option>
+                {lineDetails.map(item => {
+                  return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
+                })}
+              </Form.Select>
+            </Form.Group>
+          </Col>
+          <Col className="pr-5" md="6">
+            <Button
+              className="btn-fill center justify-content-center"
+              type="submit"
+              variant="primary"
+            // onClick={batchDetails.handleSubmit}
+            >
+              submit
+            </Button>
+          </Col>
+        </Row>
+      </Form>
 
-<br/>
+      <br />
       {Lines.length !== 0 ?
         Lines.map((Line, index) => {
           return (
@@ -87,9 +87,9 @@ function MachinesCardView() {
               <LineHeader date={a} line={Line.product_lineid_ad} lineName={Line.line_name} />
             </Container>
           )
-        }) :<div className="d-flex justify-content-center align-items-center centerContent">
-        <p className="no-data-msg" style={{color:"#5E5E5E"}}>Please select the line to show data</p>
-      </div>
+        }) : <div className="d-flex justify-content-center align-items-center centerContent">
+          <p className="no-data-msg" style={{ color: "#5E5E5E" }}>Please select the line to show data</p>
+        </div>
       }
     </div>
   );

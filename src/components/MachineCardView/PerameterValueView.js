@@ -72,7 +72,7 @@ function PerameterValueView(props) {
                                 text={`${Value.value_tra}${Value.measuring_unit}`}
                                 styles={buildStyles({
                                     // Rotation of path and trail, in number of turns (0-1)
-                                    rotation: 0.25,
+                                    rotation: 0.65,
 
                                     // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                                     strokeLinecap: 'butt',
@@ -87,12 +87,12 @@ function PerameterValueView(props) {
                                     // pathTransition: 'none',
 
                                     // Colors
-                                    pathColor: `red`,
+                                    pathColor: `${colorfromprop}`,
                                     textColor: 'black',
                                     trailColor: '#d6d6d6',
                                     backgroundColor: '#3e98c7',
                                 })}
-                            />;</>
+                            /></>
                     )
                 }
 
