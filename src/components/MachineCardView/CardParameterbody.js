@@ -34,7 +34,7 @@ function CardParameterbody(props) {
             setMachinePerameters(response.data);
         });
 
-        axios.get(myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        axios.get( myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date ).then((response) => {
             setlinecolor(response.data);
         });
 
@@ -50,7 +50,7 @@ function CardParameterbody(props) {
             < >
 
                 {machinePerameters?.map((machineperameter, index) => {
-                     let color="#C0C0C0";
+                     let color="#72b592";
                      let name;
                      let msg123='';
                      let variable = false;

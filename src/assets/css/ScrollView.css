@@ -10,7 +10,7 @@
   color: rgb(0, 0, 0);
   text-align: center; 
   border: none;
-  padding: 3px;
+  padding: 2px;
 }
 
 hr {
@@ -44,7 +44,35 @@ hr {
 .test {
   border-style: groove;
 }
+.card-stats{
+  width: 190px;
+}
+.test{
+  position: relative;
+}
+.no-data-msg{
+  font-size: large;
+  font-weight: bold;
+  align-content: center;
+}
+ /*.min-width {
+  min-width: 200px; or width: 150px; 
+}
 
+/*
+ .formInFrountPage{
+min-width: 30px;
+}
+
+.forminFirstpage{
+  display: block;
+  direction: ltr;
+} */
+/* .center-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 /* test */
 /* .column {
   float: left;
