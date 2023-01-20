@@ -30,81 +30,56 @@ function CardParameterbody(props) {
     useEffect(() => {
         const myurl = getLocalhostUrl();
         seturl(myurl)
-        axios.get(myurl+'/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine).then((response) => {
+        axios.get(myurl + '/api/v1/admin/GetDetailsByDateAndLineIdAndPOrder/' + current_date + '/' + current_Line + '/' + current_pOrder + '/' + current_Machine).then((response) => {
             setMachinePerameters(response.data);
         });
 
-        axios.get( myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date ).then((response) => {
+        axios.get(myurl + '/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             setlinecolor(response.data);
         });
 
-        setInterval(() => (new axios.get(myurl+'/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+        setInterval(() => (new axios.get(myurl + '/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
             setlinecolor(response.data);
         })), 7000);
 
     }, [])
 
-
+//show only the machine names in page 1 by one
     return (
         <Container style={{ paddingBottom: "10px", minHeight: "140px", minWidth: "100px" }}>
             < >
-
                 {machinePerameters?.map((machineperameter, index) => {
-                     let color="#72b592";
-                     let name;
-                     let msg123='';
-                     let variable = false;
+                    let color = "#72b592";
+                    let name;
+                    let msg123 = '';
+                    let variable = false;
                     return (
                         <>
                             {linecolors?.map((linecolor, index) => {
-                               
-                               if(variable == false){
-                                if(machineperameter.device_id ==linecolor.device_id){
-                                    name =  machineperameter.device_id
-                                    color = linecolor.t_color
-                                    msg123 = linecolor.high_or_low
-                                    variable = true;
-                                 }
-                               }
-                               
-
-                                // else{
-                                //     name =  machineperameter.device_id;
-                                //     color = "#C0C0C0"
-                                // }
-                              
+                                if (variable == false) {
+                                    if (machineperameter.device_id == linecolor.device_id) {
+                                        name = machineperameter.device_id
+                                        color = linecolor.t_color
+                                        msg123 = linecolor.high_or_low
+                                        variable = true;
+                                    }
+                                }
                             })}
 
                             <>
-                            
-                                                <Row className="rowstest " style={{ backgroundColor:"white"  }}>
-                                                    <Col xs="6 ab">
-                                                        {/* <div className="numbers"> */}
-                                                        <p className=" textcolor">
-                                                            {machineperameter.device_name_dvc_reg}
-                                                            {/* {Parameters?.paraId_PDM} */}
-                                                        </p>
-    
-    
-                                                        {/* <Card.Title className="h3">150 C</Card.Title> */}
-                                                        {/* </div> */}
-                                                    </Col>
-                                                    <Col xs="6 abc">
-                                                        {/* <div className="numbers"> */}
-                                                        {/* <p className="card-category">Device Name  - {Parameters?.paraId_PDM}</p> */}
-                                                        {/* <Card.Title className="h3">150 C</Card.Title> */}
-                                                        <PerameterValueView job={machineperameter.job_id_ad} batch={machineperameter.batchid_ad} lid={current_Line} proOder={current_pOrder} machine={current_Machine} deviceId={machineperameter.device_id} pID={machineperameter.parameter_id} date={current_date} color={color} msg={msg123}  />
-                                                        {/* </div> */}
-                                                    </Col>
-                                                    {/* <Col xs="2 a"> */}
-                                                    {/* <div className="icon-big text-center icon-warning" > */}
-                                                    {/* <img src={lenth} alt="horse" style={{ maxHeight: "50px" }} /> */}
-                                                    {/* <i class="fa-solid fa-temperature-quarter"></i> */}
-                                                    {/* <FontAwesomeIcon icon="fa-thin fa-ruler" /> */}
-                                                    {/* </div> */}
-                                                    {/* </Col> */}
-                                                </Row>
-                                   
+                                <Row className="rowstest " style={{ backgroundColor: "white" }}>
+                                    <Col xs="6 ab">
+                                        <p className=" textcolor">
+                                            {machineperameter.device_name_dvc_reg}
+                                        </p>
+                                    </Col>
+                                    <Col xs="6 abc">
+                                        {/* to show the parameter values  */}
+                                        <PerameterValueView job={machineperameter.job_id_ad} batch={machineperameter.batchid_ad} lid={current_Line} proOder={current_pOrder} machine={current_Machine} deviceId={machineperameter.device_id} pID={machineperameter.parameter_id} date={current_date} color={color} msg={msg123} />
+                                    </Col>
+
+                                </Row>
+
                             </>
                         </>
                     )

@@ -3,7 +3,7 @@ import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import "../../assets/css/ScrollView.css"
 import LineHeader from "components/LineHeadder/LineHeader.js";
-// import ChartistGraph from "react-chartist";
+import { useFormik } from 'formik';
 // react-bootstrap components
 import {
   Button,
@@ -20,24 +20,27 @@ function MachinesCardView() {
   const [lineDetails, setLineDetails] = useState([]);
 
 
+
   useEffect(() => {
     const myurl = getLocalhostUrl();
     seturl(myurl)
 
+    const lid = localStorage.getItem("LineId")
+    
     //call date 
     setInterval(() => setDateState(new Date()), 30000);
     console.log("new")
 
-    axios.get(myurl + '/api/v1/admin/getLineByDate/' + a).then((response) => {
+    axios.get(myurl + '/api/v1/admin/getLineByDate/' + lid).then((response) => {
       setLines(response.data);
-      console.log(response.data)
+      console.log("ado no",response.data)
     });
+    
     axios.get(myurl + '/api/v1/line/getAllLineAndId').then((response) => {
       setLineDetails(response.data);
     });
 
   }, [])
-
 
   //get date
   let a = dateState.toLocaleDateString('en-CA', {
@@ -46,18 +49,29 @@ function MachinesCardView() {
     year: 'numeric',
   })
 
-  console.log(JSON.stringify(Lines))
-
-  console.log("date " + a)
+  //Hook
+  const getlineDetails = useFormik({
+    initialValues: {
+        LineId: ''
+    },
+    onSubmit: values => {
+      //set line id to locle storage and refresh the page to show the line details.
+      console.log(values.LineId)
+      localStorage.setItem("LineId", values.LineId)
+      window.location.reload(false);
+    }
+    
+})
+ 
   return (
     <div>
-
       <Form className="center-form">
         <Row>
           <Col className="pr-1" md="3">
             <Form.Group>
-              <Form.Select size="lg" className="form-control min-width" name="product_lineid_ad"
-              //  value={processDetails.values.product_lineid_ad} onChange={processDetails.handleChange}
+              <Form.Select size="lg" className="form-control min-width" name="LineId"
+              onChange={getlineDetails.handleChange}
+              value={getlineDetails.values.LineId}
               >
                 <option value="">Select</option>
                 {lineDetails.map(item => {
@@ -71,23 +85,25 @@ function MachinesCardView() {
               className="btn-fill center justify-content-center"
               type="submit"
               variant="primary"
-            // onClick={batchDetails.handleSubmit}
+            onClick={getlineDetails.handleSubmit}
             >
-              submit
+              Submit
             </Button>
           </Col>
         </Row>
       </Form>
-
       <br />
       {Lines.length !== 0 ?
         Lines.map((Line, index) => {
+          // pass data to the LineHeader for get customer details.
           return (
             <Container fluid className="test">
               <LineHeader date={a} line={Line.product_lineid_ad} lineName={Line.line_name} />
             </Container>
           )
-        }) : <div className="d-flex justify-content-center align-items-center centerContent">
+        }) :
+        //if data is not there print this 
+         <div className="d-flex justify-content-center align-items-center centerContent">
           <p className="no-data-msg" style={{ color: "#5E5E5E" }}>Please select the line to show data</p>
         </div>
       }
