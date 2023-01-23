@@ -2,10 +2,21 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import ProgressBar from 'react-customizable-progressbar'
 import "../../assets/css/CardInsideBody.css";
 import {
     Card,
 } from "react-bootstrap";
+
+import Speedometer, {
+    Background,
+    Arc,
+    Needle,
+    Progress,
+    Marks,
+    Indicator,
+} from 'react-speedometer';
+
 
 function PerameterValueView(props) {
 
@@ -48,7 +59,7 @@ function PerameterValueView(props) {
         console.log(e)
     }
 
-//show the all values inside the parametrs 
+    //show the all values inside the parametrs 
     return (
         <>
             {Values?.map((Value, index) => {
@@ -57,15 +68,22 @@ function PerameterValueView(props) {
                     return (
                         <Card.Title className="" style={{ backgroundColor: colorfromprop }}><p className="asd">{value123} {Value.measuring_unit} </p></Card.Title>
                     )
-                //other details
+                    //other details
                 } else {
+                    let currentValue = Value.value_tra;
+                    let maxValue = 200;
+                    let percentage = (currentValue / maxValue) * 100;
+
+
                     return (
                         // <Card.Title onChange={e => changelength(Value.value_tra)} className=""  style={{ backgroundColor: colorfromprop }}><p className="asd">{Value.value_tra} {Value.measuring_unit}
                         //  </p></Card.Title>
                         <>
-                            <CircularProgressbar
+                            {/* <CircularProgressbar
                                 value={Value.value_tra}
                                 text={`${Value.value_tra}${Value.measuring_unit}`}
+                                cut={120}
+                                
                                 styles={buildStyles({
                                     // Rotation of path and trail, in number of turns (0-1)
                                     rotation: 0.65,
@@ -83,8 +101,44 @@ function PerameterValueView(props) {
                                     textColor: 'black',
                                     trailColor: '#d6d6d6',
                                     backgroundColor: '#3e98c7',
+
                                 })}
-                            /></>
+                            /> */}
+
+                            {/* <div className="item">
+
+                               
+                                <ProgressBar className="ProgressBartest"
+                                    radius={100}
+                                    progress={percentage}
+                                    strokeWidth={28}
+                                    strokeColor={colorfromprop}
+                                    strokeLinecap="butt"
+                                    trackStrokeWidth={14}
+                                    trackStrokeLinecap="butt"
+                                    cut={115}
+                                    rotate={-210}
+                                >
+                                    <div className="indicator">
+                                        <div>{Value.value_tra} {Value.measuring_unit}</div>
+                                    </div>
+                                </ProgressBar>
+                            </div> */}
+
+                            <Speedometer
+                                value={percentage}
+                                fontFamily='squada-one'
+                                width={80}
+                            >
+                                <Background color={'white'} />
+                                <Arc />
+                                <Needle color={'black'} offset={15} baseWidth={4} circleRadius={10}/>
+                                <Progress />
+                                <Marks fontSize={10} lineSize={5} numbersRadius={8} lineColor={"black"} step={10} />
+                                {/* <Indicator /> */}
+                            </Speedometer>
+                        </>
+
                     )
                 }
 
