@@ -38,7 +38,7 @@ function CurrentProcessForm() {
             batch_start_time: '',
             batch_end_time: '',
             predicted_date: '',
-            production_order: '',
+            production_order: 1,
             count_reg_bch:'',
             product: '',
             job_description: '',
@@ -62,9 +62,9 @@ function CurrentProcessForm() {
             if (!values.predicted_date) {
                 errors.predicted_date = 'Date is required';
             }
-            if (!values.production_order) {
-                errors.production_order = 'Order is required';
-            }
+            // if (!values.production_order) {
+            //     errors.production_order = 'Order is required';
+            // }
             if (!values.product) {
                 errors.product = 'product is required';
             }
@@ -297,6 +297,7 @@ function CurrentProcessForm() {
                                                     name="production_order"
                                                     onChange={processDetails.handleChange}
                                                     value={processDetails.values.production_order}
+                                                    disabled={true}
                                                 ></Form.Control>
                                                 {processDetails.errors.production_order && (
                                                     <div className="text-danger">{processDetails.errors.production_order}</div>
