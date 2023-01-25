@@ -70,6 +70,11 @@ if(valuesinbutton == 2 || valuesinbutton==3){
                     )
                     //other details
                 } else {
+                    let currentValue = Value.value_tra;
+                    let maxValue = 200;
+                    let percentage = (currentValue / maxValue) * 100;
+
+
                     return (
                         <Card.Title  className=""  style={{ backgroundColor: colorfromprop }}><p className="asd">{Value.value_tra} {Value.measuring_unit}
                          </p></Card.Title>
