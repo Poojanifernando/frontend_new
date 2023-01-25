@@ -67,7 +67,7 @@ function CardParameterbody(props) {
                             })}
 
                             <>
-                                <Row className="rowstest " style={{ backgroundColor: "white" }}>
+                                <Row className="rowstest " style={{ backgroundColor: color }}>
                                     <Col xs="6 ab">
                                         <p className=" textcolor">
                                             {machineperameter.device_name_dvc_reg}

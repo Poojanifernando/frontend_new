@@ -381,7 +381,7 @@ function DeviceRegistrationForm() {
                                     </Row>
                                     <Row>
                                         <Col className="pr-1" md="6">
-                                            <label>Is length</label>
+                                            <label>Is Final Product</label>
                                             <Form.Group>
 
                                                 <Form.Check

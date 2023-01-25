@@ -7,6 +7,8 @@ import ScrollMenuMachines from "components/MachineCardView/ScrollMenuMachines.js
 
 function LineHeader(props) {
 
+
+    const UserId = localStorage.getItem("userId");
     const current_date = props.date;
     const current_Line = props.line;
     const current_Line_name = props.lineName;
@@ -14,6 +16,7 @@ function LineHeader(props) {
     const [test, settest] = useState([]);
     const [isRunning, setIsRunning] = useState(false);
     const [url, seturl] = useState('');
+    const [Wastage, setWastage] = useState();
 
     useEffect(() => {
         const myurl = getLocalhostUrl();
@@ -21,6 +24,7 @@ function LineHeader(props) {
 
         axios.get(myurl + '/api/v1/admin/GetDetailsByDateAndLineId/' + current_date + '/' + current_Line).then((response) => {
             setlineCustomerDetails(response.data);
+            // console.log(response.data[0].batchid_ad)
         });
 
         //initial value setter
@@ -30,40 +34,56 @@ function LineHeader(props) {
 
         //initial value setter
         axios.get(myurl + '/api/v1/admin/ButtonOnorNot/' + current_Line + '/' + current_date).then((response) => {
-            setIsRunning(response.data.result);
+            setIsRunning(response.data.ReturnVal);
+            // console.log(response.data.ReturnVal)
+            // setIsRunning(1);
+        });
+        //westage
+        axios.get(myurl + '/api/v1/admin/getSumOfProductWastage/' + current_Line).then((response) => {
+            setWastage(response.data.a_con);
         });
 
         //loop
-        setInterval(() => (new axios.get(myurl + '/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
-            settest(response.data);
-        })), 5000);
+        setInterval(() => (
+            new axios.get(myurl + '/api/v1/admin/getcolorcode/' + current_Line + '/' + current_date).then((response) => {
+                settest(response.data);
+                //westage
+                axios.get(myurl + '/api/v1/admin/getSumOfProductWastage/' + current_Line).then((response) => {
+                    setWastage(response.data.a_con);
+                });
+
+            }))
+            , 5000);
     }, []);
 
     let firstWarm = true;
     let firstOnline = true;
     // let buttontruefalse = true;
 
-    //button change
-    const handleClick = async (id) => {
-        if (!isRunning) {
-            if (confirm("Are you want to start this?")) {
-                setIsRunning(true);
+    //stop button disable or not
+    let stopbutton = true;
+    if (isRunning == 1) {
+        stopbutton = true
+    }
+    else if (isRunning == 2) {
+        stopbutton = true
+    }
+    else if (isRunning == 3) {
+        stopbutton = false
+    }
+    else if (isRunning == 4) {
+        stopbutton = false
+    }
+
+    //click event in 4 button
+    const handleClick1 = async (id) => {
+        //warmup
+        if (isRunning == 1) {
+            console.log("1", id)
+            if (confirm("Are you want to start warmup this?")) {
+                // setIsRunning(true);
                 try {
-                    console.log("Are you want to start this?", current_date, current_Line, id);
-                    axios.get(url + '/api/v1/admin/AddStartTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
-                    }).catch((err) => {
-                        alert(err);
-                    })
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-        } else {
-            if (confirm("Are you want to stop this?")) {
-                setIsRunning(false);
-                try {
-                    console.log("Are you want to stop this", current_date, current_Line, id);
-                    axios.get(url + '/api/v1/admin/DeleteValuesByEndTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
+                    axios.get(url + '/api/v1/admin/AddStartTime/' + current_Line + '/' + current_date + '/' + id + '/1').then(() => {
                         window.location.reload(false);
                     }).catch((err) => {
                         alert(err);
@@ -73,10 +93,91 @@ function LineHeader(props) {
                 }
             }
         }
-    };
+        //start
+        else if (isRunning == 2) {
+            console.log("2")
+            if (confirm("Are you want to start this?")) {
+                // setIsRunning(true);
+                try {
+                    console.log("Are you want to start this?", current_date, current_Line, id);
+                    axios.get(url + '/api/v1/admin/AddStartTime/' + current_Line + '/' + current_date + '/' + id + '/2').then(() => {
+                        window.location.reload(false);
+                    }).catch((err) => {
+                        alert(err);
+                    })
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+        //pause
+        else if (isRunning == 3) {
+            console.log("3")
+            if (confirm("Are you want to pause this?")) {
+                // setIsRunning(true);
+                try {
+                    axios.get(url + '/api/v1/admin/HoldProduction/' + current_Line + '/' + id + '/' + "1" + '/' + UserId + "/reson").then(() => {
+                        window.location.reload(false);
+                    }).catch((err) => {
+                        alert(err);
+                    })
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+        //resume
+        else if (isRunning == 4) {
+            console.log("4")
+            if (confirm("Are you want to resume this?")) {
+                // setIsRunning(true);
+                try {
+                    axios.get(url + '/api/v1/admin/HoldProduction/' + current_Line + '/' + id + '/' + "2" + '/' + UserId + "/reson").then(() => {
+                        window.location.reload(false);
+                    }).catch((err) => {
+                        alert(err);
+                    })
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+    }
+
+
+    //stop button
+    const handleClickStop = async (id) => {
+        if (confirm("Are you want to stop this?")) {
+            // setIsRunning(false);
+            try {
+                axios.get(url + '/api/v1/admin/DeleteValuesByEndTime/' + current_Line + '/' + current_date + '/' + id).then(() => {
+                    window.location.reload(false);
+                }).catch((err) => {
+                    alert(err);
+                })
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
     const style = {
-        backgroundColor: isRunning ? 'red' : 'green',
-        color: 'white'
+        // backgroundColor: isRunning ? 'red' : 'green',
+        backgroundColor: (() => {
+            switch (isRunning) {
+                case 1:
+                    return 'yellow';
+                case 2:
+                    return 'green';
+                case 3:
+                    return 'orange';
+                case 4:
+                    return 'orange';
+                default:
+                    return 'white';
+            }
+        })(),
+        color: 'black'
     };
 
     //show the all customer details in ths page
@@ -99,7 +200,7 @@ function LineHeader(props) {
                                     }
                                     if (Value.t_warmup === 'Online' && firstOnline) {
                                         firstOnline = false;
-                                        // buttontruefalse = false;
+                                        buttontruefalse = false;
 
                                         return (
                                             <div class="columnrow rightrow"
@@ -110,13 +211,31 @@ function LineHeader(props) {
                                     }
                                 })}
                                 <div class="columnrow leftrow fontsize">
-                                    <button onClick={() => handleClick(cusDetails.production_order)} className='btn btntest' style={style}
-                                    //  disabled={buttontruefalse}
-                                    >
+
+                                    {/* <button onClick={() => handleClick(cusDetails.production_order)} className='btn btntest' style={style}
+                                      >
                                         {isRunning ? 'Stop' : 'Start'}
-                                    </button>
+                                    </button> */}
+                                    <button className='btn btntest' style={style} onClick={() => handleClick1(cusDetails.production_order)}>
+                                        {isRunning == 1
+                                            ? 'Warmup'
+                                            : isRunning == 2
+                                                ? 'Start'
+                                                : isRunning == 3
+                                                    ? 'Pause'
+                                                    : isRunning == 4
+                                                        ? 'Resume'
+                                                        : ''
+                                        }</button>
+                                    {/* {isRunning == 1 && <div>This will show when isRunning is 1</div>}
+                                    {isRunning == 2 && <div>This will show when isRunning is 2</div>}
+                                    {isRunning == 3 && <div>This will show when isRunning is 3</div>} */}
+
+                                    {/* stop button */}
+                                    <button className='btn' style={{ color: 'white', backgroundColor: "red" }} disabled={stopbutton} onClick={() => handleClickStop(cusDetails.production_order)}>Stop</button>
                                     &nbsp;&nbsp;&nbsp;
-                                    LINE - {current_Line_name}
+
+                                    {current_Line_name}
                                 </div>
                             </div>
                             <div class="row1">
@@ -125,7 +244,7 @@ function LineHeader(props) {
                                 <div class="column1"><p className="linetitle">Quantity : <p className="ptagRemove"> {cusDetails.count_reg_bch}</p></p>  </div>
                                 <div class="column1"><p className="linetitle">Batch : <p className="ptagRemove"> {cusDetails.batchid_reg_bch}</p></p> </div>
                                 <div class="column1"><p className="linetitle">Customer : <p className="ptagRemove"> {cusDetails.customer_name}</p></p> </div>
-                                {/* <div class="column1"><p className="linetitle">Done :</p></div> */}
+                                <div class="column1"><p className="linetitle">Westage : <p className="ptagRemove"> {Wastage}</p></p></div>
                             </div>
                             {/* get to the ScrollMenuMachines to view all the machine view */}
                             <ScrollMenuMachines date={current_date} line={current_Line} pOrder={cusDetails.production_order} />
