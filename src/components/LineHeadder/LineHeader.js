@@ -58,11 +58,17 @@ function LineHeader(props) {
 
     let firstWarm = true;
     let firstOnline = true;
+    // let startbuttonhold =false;
+    
+    let startbuttonhold = localStorage.getItem("testbuton");
+    const boolValue = JSON.parse(startbuttonhold);
+    console.log(boolValue)
     // let buttontruefalse = true;
 
     //stop button disable or not
     let stopbutton = true;
     if (isRunning == 1) {
+        localStorage.setItem("testbuton" , false);
         stopbutton = true
     }
     else if (isRunning == 2) {
@@ -78,12 +84,15 @@ function LineHeader(props) {
     //click event in 4 button
     const handleClick1 = async (id) => {
         //warmup
+       
         if (isRunning == 1) {
             console.log("1", id)
             if (confirm("Are you want to start warmup this?")) {
                 // setIsRunning(true);
                 try {
+                    
                     axios.get(url + '/api/v1/admin/AddStartTime/' + current_Line + '/' + current_date + '/' + id + '/1').then(() => {
+                        localStorage.setItem("testbuton" , true);
                         window.location.reload(false);
                     }).catch((err) => {
                         alert(err);
@@ -143,7 +152,7 @@ function LineHeader(props) {
             }
         }
     }
-
+  
 
     //stop button
     const handleClickStop = async (id) => {
@@ -200,8 +209,9 @@ function LineHeader(props) {
                                     }
                                     if (Value.t_warmup === 'Online' && firstOnline) {
                                         firstOnline = false;
-                                        buttontruefalse = false;
-
+                                        // buttontruefalse = false;
+                                        // startbuttonhold = false;
+                                        localStorage.setItem("testbuton" , false);
                                         return (
                                             <div class="columnrow rightrow"
                                                 style={{ backgroundColor: "#027739", textShadow: "2px -1px 0 #000" }}
@@ -216,7 +226,8 @@ function LineHeader(props) {
                                       >
                                         {isRunning ? 'Stop' : 'Start'}
                                     </button> */}
-                                    <button className='btn btntest' style={style} onClick={() => handleClick1(cusDetails.production_order)}>
+
+                                    <button className='btn btntest' style={style} disabled={boolValue}  onClick={() => handleClick1(cusDetails.production_order)}>
                                         {isRunning == 1
                                             ? 'Warmup'
                                             : isRunning == 2
