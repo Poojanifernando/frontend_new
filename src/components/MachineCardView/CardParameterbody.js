@@ -49,7 +49,7 @@ function CardParameterbody(props) {
         <Container style={{ paddingBottom: "10px", minHeight: "140px", minWidth: "100px" }}>
             < >
                 {machinePerameters?.map((machineperameter, index) => {
-                    let color = "#72b592";
+                    let color = "#00A300";
                     let name;
                     let msg123 = '';
                     let variable = false;
