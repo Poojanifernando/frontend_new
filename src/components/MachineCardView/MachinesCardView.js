@@ -29,11 +29,10 @@ function MachinesCardView() {
     
     //call date 
     setInterval(() => setDateState(new Date()), 30000);
-    console.log("new")
 
     axios.get(myurl + '/api/v1/admin/getLineByDate/' + lid).then((response) => {
       setLines(response.data);
-      console.log("ado no",response.data)
+      // console.log("ado no",response.data)
     });
     
     axios.get(myurl + '/api/v1/line/getAllLineAndId').then((response) => {
