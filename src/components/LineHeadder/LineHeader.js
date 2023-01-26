@@ -40,7 +40,7 @@ function LineHeader(props) {
         });
         //westage
         axios.get(myurl + '/api/v1/admin/getSumOfProductWastage/' + current_Line).then((response) => {
-            setWastage(response.data.a_con);
+            setWastage(response.data.IOT);
         });
 
         //loop
@@ -49,7 +49,7 @@ function LineHeader(props) {
                 settest(response.data);
                 //westage
                 axios.get(myurl + '/api/v1/admin/getSumOfProductWastage/' + current_Line).then((response) => {
-                    setWastage(response.data.a_con);
+                    setWastage(response.data.IOT);
                 });
 
             }))
