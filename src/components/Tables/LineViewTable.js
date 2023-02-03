@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
+import "../../assets/css/allForms.css"
+import Pagination from "./Pagination"
 // react-bootstrap components
 import {
     Card,
@@ -16,6 +18,18 @@ function LineViewTable() {
     const history = useHistory();
     const [lines, setLines] = useState([]);
     const [url, seturl] = useState('');
+
+
+    const [currentPageState, setCurrentPageState] = useState(1);
+    const rowsPerPage = 1;
+
+    // get the current rows to display
+    const indexOfLastRow = currentPageState * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = lines.slice(indexOfFirstRow, indexOfLastRow);
+
+    // change page number
+    const handlePageChange = (pageNumber) => setCurrentPageState(pageNumber);
 
     useEffect(() => {
         const myurl = getLocalhostUrl();
@@ -53,18 +67,18 @@ function LineViewTable() {
                             </Card.Header> */}
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
-                                    <thead>
+                                    <thead style={{backgroundColor:"#EFEFEF"}}>
                                         <tr>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold" >line_id</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">line_name</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">description</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">start_time</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">end_time</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"24px 0 0 0"}}>line_id</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>line_name</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>description</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>start_time</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>end_time</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 24px 0 0"}}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {lines?.map((line, index) => {
+                                        {currentRows?.map((line, index) => {
                                             return (
                                                 <tr>
                                                     <td>{line.lineId}</td>
@@ -96,6 +110,12 @@ function LineViewTable() {
                     </Col>
                 </Row>
             </Container>
+            <Pagination
+                rowsPerPage={rowsPerPage}
+                totalRows={lines.length}
+                currentPage={currentPageState}
+                handlePageChange={handlePageChange}
+            />
         </>
     );
 }

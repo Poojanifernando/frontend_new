@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Badge,
@@ -43,19 +44,18 @@ function DeviceViewTable() {
                             </Card.Header> */}
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
-                                    <thead>
+                                    <thead style={{backgroundColor:"#EFEFEF"}}>
                                         <tr>
 
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Line ID</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Machine ID</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Device ID</th>
-                                            {/* <th style={{color:'black'}} className="border-0 font-weight-bold">Parameter ID</th> */}
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Alarm</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Starter</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">MIN</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">MAX</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Unit</th>
-                                            <th style={{color:'black'}} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"24px 0 0 0"}}>Line ID</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>Machine ID</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>Device ID</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>Alarm</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>Starter</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>MIN</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>MAX</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 0 0 0"}}>Unit</th>
+                                            <th style={{ color: 'black', fontSize:"1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign:"flex-start", borderRadius:"0 24px 0 0"}}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

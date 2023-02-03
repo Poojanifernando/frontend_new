@@ -88,18 +88,16 @@ function ProductUpdate({ match }) {
         <>
             <Container >
                 <div className="cardDesign ">
-                    {/* <Col md="8">
-                        <Card> */}
                     <Card.Header style={{ border: "none", backgroundColor: "white" }}>
-                        <Card.Title as="h4">Product Update</Card.Title>
-                        <hr/>
+                        <Card.Title style={{ color: "#3D3D3D", fontSize: "1.2rem", fontWeight: "500px", lineHeight: "32px" }}>Product Update</Card.Title>
+                        <hr />
                     </Card.Header>
                     <Card.Body>
                         <Form>
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Product ID</label>
+                                        <label className="lblDesign">Product ID</label>
                                         <Form.Control
                                             placeholder="Product ID"
                                             type="text"
@@ -112,7 +110,7 @@ function ProductUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Product Name</label>
+                                        <label className="lblDesign">Product Name</label>
                                         <Form.Control
                                             placeholder="Product Name"
                                             type="text"
@@ -128,7 +126,7 @@ function ProductUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Product Description</label>
+                                        <label className="lblDesign">Product Description</label>
                                         <Form.Control
                                             placeholder="Product Description"
                                             type="text"
@@ -141,7 +139,7 @@ function ProductUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Product Image</label>
+                                        <label className="lblDesign">Product Image</label>
                                         <Form.Control
                                             placeholder="Product Image"
                                             type="file"

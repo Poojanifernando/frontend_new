@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
+import "../../assets/css/allForms.css"
+import Paginate from "components/Forms/Paginate";
 // react-bootstrap components
 import {
     Card,
@@ -45,26 +47,20 @@ function ProcessRegistrationTable() {
                 <Row>
                     <Col md="12">
                         <Card className="card-plain table-plain-bg">
-                            {/* <Card.Header>
-                                <Card.Title as="h4">Production Registration</Card.Title>
-                                <p className="card-category">
-                                    View all Process details
-                                </p>
-                            </Card.Header> */}
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
-                                    <thead>
+                                    <thead style={{ backgroundColor: "#EFEFEF" }}>
                                         <tr>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">JOB ID</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Batch Id</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Batch Start Time</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Batch End Time</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Count</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Line Id</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Date</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">ORDER</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "24px 0 0 0" }}>JOB ID</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Batch Id</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Batch Start Time</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Batch End Time</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Count</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Line Id</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Date</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>ORDER</th>
                                             {/* <th style={{ color: 'black' }} className="border-0 font-weight-bold">Customer Name</th> */}
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 24px 0 0" }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -100,6 +96,9 @@ function ProcessRegistrationTable() {
                         </Card>
                     </Col>
                 </Row>
+                <div>
+                    <Paginate />
+                </div>
             </Container>
         </>
     );

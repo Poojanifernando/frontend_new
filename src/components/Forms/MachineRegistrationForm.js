@@ -56,11 +56,11 @@ function MachineRegistrationForm() {
                 <div className="cardDesign ">
                     {/* <Col md="8">
                         <Card> */}
-                    <Card.Header style={{ border: "none", backgroundColor: "white" }}>
-                        <Card.Title as="h4">Machine Registration</Card.Title>
-                        <hr />
-                    </Card.Header>
-                    <Card.Body>
+                    <Card.Header style={{ border:"none", backgroundColor: "white" }}>
+                                <Card.Title style={{color:"#3D3D3D", fontSize:"1.2rem", fontWeight:"500px",lineHeight:"32px"}}>Customer Registration</Card.Title>
+                                <hr style={{padding:"0", margin:"0" }}/>
+                            </Card.Header>
+                    <Card.Body style={{paddingTop:"0"}}>
                         <Form>
                             <Row>
                                 <Col className="pr-1" md="6">

@@ -168,18 +168,16 @@ function DeviceUpdate({ match }) {
         <>
             <Container >
                 <div className="cardDesign ">
-                    {/* <Col md="8">
-                        <Card> */}
                     <Card.Header style={{ border: "none", backgroundColor: "white" }}>
-                        <Card.Title as="h4">Device Registration</Card.Title>
-                        <hr/>
+                        <Card.Title style={{ color: "#3D3D3D", fontSize: "1.2rem", fontWeight: "500px", lineHeight: "32px" }}>Device Registration Update</Card.Title>
+                        <hr />
                     </Card.Header>
                     <Card.Body>
                         <Form>
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Production Line Name</label>
+                                        <label className="lblDesign">Production Line Name</label>
                                         <Form.Select size="lg" className="form-control" name="LineId"
                                             value={LineId}
                                             onChange={e => setlineId(e.target.value)}
@@ -193,7 +191,7 @@ function DeviceUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Machine ID</label>
+                                        <label className="lblDesign">Machine ID</label>
                                         <Form.Control
                                             placeholder="Machine ID"
                                             type="text"
@@ -209,7 +207,7 @@ function DeviceUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Machine Name</label>
+                                        <label className="lblDesign">Machine Name</label>
                                         <Form.Control
                                             placeholder="Machine Name"
                                             type="text"
@@ -223,7 +221,7 @@ function DeviceUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Machine Discription</label>
+                                        <label className="lblDesign">Machine Discription</label>
                                         <Form.Control
                                             placeholder="Machine Discription"
                                             type="text"
@@ -239,7 +237,7 @@ function DeviceUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Device ID</label>
+                                        <label className="lblDesign">Device ID</label>
                                         <Form.Control
                                             placeholder="Device ID"
                                             type="text"
@@ -253,7 +251,7 @@ function DeviceUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Device Name</label>
+                                        <label className="lblDesign">Device Name</label>
                                         <Form.Control
                                             placeholder="Device Name"
                                             type="text"
@@ -269,7 +267,7 @@ function DeviceUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Device Description</label>
+                                        <label className="lblDesign">Device Description</label>
                                         <Form.Control
                                             placeholder="Device Description"
                                             type="text"
@@ -283,7 +281,7 @@ function DeviceUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Device Location</label>
+                                        <label className="lblDesign">Device Location</label>
                                         <Form.Control
                                             placeholder="Device Location"
                                             type="text"
@@ -299,7 +297,7 @@ function DeviceUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Device IP Address</label>
+                                        <label className="lblDesign">Device IP Address</label>
                                         <Form.Control
                                             placeholder="Device IP Address"
                                             type="text"
@@ -314,7 +312,7 @@ function DeviceUpdate({ match }) {
                             <Row>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Min Value</label>
+                                        <label className="lblDesign">Min Value</label>
                                         <Form.Control
                                             placeholder="Min value"
                                             type="number"
@@ -328,7 +326,7 @@ function DeviceUpdate({ match }) {
                                 </Col>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Max Value</label>
+                                        <label className="lblDesign">Max Value</label>
                                         <Form.Control
                                             placeholder="Max value"
                                             type="number"
@@ -344,7 +342,7 @@ function DeviceUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Measuring Unit</label>
+                                        <label className="lblDesign">Measuring Unit</label>
                                         <Form.Control
                                             placeholder="Mesuring Unit"
                                             type="text"
@@ -357,7 +355,7 @@ function DeviceUpdate({ match }) {
                                 </Col>
                                 <Col className="pr-1" md="6">
 
-                                    <label>Start-up Parameter/Not</label>
+                                    <label className="lblDesign">Start-up Parameter/Not</label>
                                     <Form.Group>
                                         <Form.Check
                                             label="Yes"
@@ -409,7 +407,7 @@ function DeviceUpdate({ match }) {
                                     </Row> */}
                             <Row>
                                 <Col className="pr-1" md="6">
-                                    <label>Alarm Alert Type { }</label>
+                                    <label className="lblDesign">Alarm Alert Type { }</label>
                                     <Form.Group>
 
                                         <Form.Check
@@ -435,7 +433,7 @@ function DeviceUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Message</label>
+                                        <label className="lblDesign">Message</label>
                                         <Form.Control
                                             placeholder="message"
                                             type="text"

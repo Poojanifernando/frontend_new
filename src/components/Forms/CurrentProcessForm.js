@@ -129,18 +129,16 @@ function CurrentProcessForm() {
         <>
             <Container >
                 <div className="cardDesign ">
-                    {/* <Col md="8">
-                        <Card> */}
                     <Card.Header style={{ border:"none", backgroundColor: "white" }}>
-                        <Card.Title as="h3">Production Registration</Card.Title>
-                        <hr/>
-                    </Card.Header>
-                    <Card.Body>
+                                <Card.Title style={{color:"#3D3D3D", fontSize:"1.2rem", fontWeight:"500px",lineHeight:"32px"}}>Production Registration</Card.Title>
+                                <hr style={{padding:"0", margin:"0" }}/>
+                            </Card.Header>
+                    <Card.Body style={{paddingTop:"0"}}>
                         <Form >
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Job ID</label>
+                                        <label className="lblDesign">Job ID</label>
                                         <div className="lblDesign">
                                             <input type="search" list="list" autoComplete="on" value={text} onChange={onChange} className="form-control" placeholder="Job ID" style={{ borderRadius: "10px" }} />
                                             <datalist id="list">
@@ -155,7 +153,7 @@ function CurrentProcessForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Job Discription</label>
+                                        <label className="lblDesign">Job Discription</label>
                                         <Form.Control
                                             placeholder="Job Discription"
                                             type="text"
@@ -173,7 +171,7 @@ function CurrentProcessForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>BATCH ID</label>
+                                        <label className="lblDesign">BATCH ID</label>
                                         <Form.Control
                                             placeholder="BATCH ID"
                                             type="text"
@@ -193,7 +191,7 @@ function CurrentProcessForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Batch Start Time</label>
+                                        <label className="lblDesign">Batch Start Time</label>
                                         <Form.Control
                                             placeholder="Start Time"
                                             type="time"
@@ -209,7 +207,7 @@ function CurrentProcessForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Batch End Time</label>
+                                        <label className="lblDesign">Batch End Time</label>
                                         <Form.Control
                                             placeholder="End Time"
                                             type="time"
@@ -228,7 +226,7 @@ function CurrentProcessForm() {
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
 
-                                        <label>Product</label>
+                                        <label className="lblDesign">Product</label>
                                         <Form.Select
                                             size="lg"
                                             className="form-control"
@@ -248,7 +246,7 @@ function CurrentProcessForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Count</label>
+                                        <label className="lblDesign">Product Count</label>
                                         <Form.Control
                                             placeholder="Count"
                                             type="number"
@@ -267,7 +265,7 @@ function CurrentProcessForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Production Line Name</label>
+                                        <label className="lblDesign">Production Line Name</label>
                                         <Form.Select size="lg" className="form-control" name="product_lineid_ad" value={processDetails.values.product_lineid_ad} onChange={processDetails.handleChange} style={{ borderRadius: "10px" }}>
                                             <option value="">Choose</option>
                                             {lineDetails.map(item => {
@@ -281,7 +279,7 @@ function CurrentProcessForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Predicted Date</label>
+                                        <label className="lblDesign">Predicted Date</label>
                                         <Form.Control
                                             placeholder="Date"
                                             type="date"
@@ -299,7 +297,7 @@ function CurrentProcessForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Production Order</label>
+                                        <label className="lblDesign">Production Order</label>
                                         <Form.Control
                                             placeholder="Production Order"
                                             type="number"
@@ -316,7 +314,7 @@ function CurrentProcessForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Customer Id</label>
+                                        <label className="lblDesign">Customer Id</label>
                                         <Form.Select size="lg" className="form-control" name="Customer_id" value={processDetails.values.Customer_id} onChange={processDetails.handleChange}>
                                             <option value="">Choose</option>
                                             {cusDetails.map(item => {

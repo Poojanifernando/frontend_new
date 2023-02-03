@@ -128,18 +128,16 @@ function DeviceRegistrationForm() {
         <>
             <Container >
                 <div className="cardDesign ">
-                    {/* <Col md="8">
-                        <Card> */}
                     <Card.Header style={{ border: "none", backgroundColor: "white" }}>
-                        <Card.Title as="h4">Device Registration</Card.Title>
-                        <hr/>
+                        <Card.Title style={{ color: "#3D3D3D", fontSize: "1.2rem", fontWeight: "500px", lineHeight: "32px" }}>Device Registration</Card.Title>
+                        <hr style={{padding:"0", margin:"0" }} />
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body style={{paddingTop:"0"}}>
                         <Form>
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Production Line Name</label>
+                                        <label className="lblDesign">Production Line Name</label>
                                         <Form.Select size="lg" className="form-control" name="LineId" value={Devicereg.values.LineId} onChange={Devicereg.handleChange} style={{ borderRadius: "10px" }}>
                                             <option value="">Choose</option>
                                             {lineDetails.map(item => {
@@ -153,7 +151,7 @@ function DeviceRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Machine ID</label>
+                                        <label className="lblDesign">Machine ID</label>
                                         <Form.Control
                                             placeholder="Machine ID"
                                             type="text"
@@ -171,7 +169,7 @@ function DeviceRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Machine Name</label>
+                                        <label className="lblDesign">Machine Name</label>
                                         <Form.Control
                                             placeholder="Machine Name"
                                             type="text"
@@ -187,7 +185,7 @@ function DeviceRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Machine Discription</label>
+                                        <label className="lblDesign">Machine Discription</label>
                                         <Form.Control
                                             placeholder="Machine Discription"
                                             type="text"
@@ -205,7 +203,7 @@ function DeviceRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Device ID</label>
+                                        <label className="lblDesign">Device ID</label>
                                         <Form.Control
                                             placeholder="Device ID"
                                             type="text"
@@ -221,7 +219,7 @@ function DeviceRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Device Name</label>
+                                        <label className="lblDesign">Device Name</label>
                                         <Form.Control
                                             placeholder="Device Name"
                                             type="text"
@@ -239,7 +237,7 @@ function DeviceRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Device Description</label>
+                                        <label className="lblDesign">Device Description</label>
                                         <Form.Control
                                             placeholder="Device Description"
                                             type="text"
@@ -255,7 +253,7 @@ function DeviceRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Device Location</label>
+                                        <label className="lblDesign">Device Location</label>
                                         <Form.Control
                                             placeholder="Device Location"
                                             type="text"
@@ -273,7 +271,7 @@ function DeviceRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Device IP Address</label>
+                                        <label className="lblDesign">Device IP Address</label>
                                         <Form.Control
                                             placeholder="Device IP Address"
                                             type="text"
@@ -290,7 +288,7 @@ function DeviceRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Parameter ID</label>
+                                        <label className="lblDesign">Parameter ID</label>
                                         {/* <Form.Control
                                                     placeholder="Parameter ID"
                                                     type="text"
@@ -314,7 +312,7 @@ function DeviceRegistrationForm() {
                             <Row>
                                 <Col className="pr -1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Min Value</label>
+                                        <label className="lblDesign">Min Value</label>
                                         <Form.Control
                                             placeholder="Min value"
                                             type="number"
@@ -331,7 +329,7 @@ function DeviceRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Max Value</label>
+                                        <label className="lblDesign">Max Value</label>
                                         <Form.Control
                                             placeholder="Max value"
                                             type="number"
@@ -351,7 +349,7 @@ function DeviceRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Measuring Unit</label>
+                                        <label className="lblDesign">Measuring Unit</label>
                                         <Form.Control
                                             placeholder="Mesuring Unit"
                                             type="text"
@@ -418,7 +416,7 @@ function DeviceRegistrationForm() {
                             </Row> */}
                             <Row>
                                 <Col className="pr-1" md="6">
-                                    <label>Alarm Alert Type</label>
+                                    <label className="lblDesign">Alarm Alert Type</label>
                                     <Form.Group className="formDesign">
                                         <Form.Check
                                             label="yes"
@@ -441,7 +439,7 @@ function DeviceRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Message</label>
+                                        <label className="lblDesign">Message</label>
                                         <Form.Control
                                             placeholder="message"
                                             type="text"

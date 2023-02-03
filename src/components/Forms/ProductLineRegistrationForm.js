@@ -80,14 +80,18 @@ function ProductLineRegistrationForm() {
                         <Card> */}
                     <Card.Header style={{ border: "none", backgroundColor: "white" }}>
                         <Card.Title as="h4">Product Line Registration</Card.Title>
-                        <hr />
+                        <hr style={{padding:"0", margin:"0" }} />
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Header style={{ border:"none", backgroundColor: "white" }}>
+                                <Card.Title style={{color:"#3D3D3D", fontSize:"1.2rem", fontWeight:"500px",lineHeight:"32px"}}>Product Line Registration</Card.Title>
+                                <hr/>
+                            </Card.Header>
+                    <Card.Body style={{paddingTop:"0"}}>
                         <Form>
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Line  ID</label>
+                                        <label className="lblDesign">Product Line  ID</label>
                                         <Form.Control
                                             placeholder="Line ID"
                                             type="text"
@@ -105,7 +109,7 @@ function ProductLineRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Line Description</label>
+                                        <label className="lblDesign">Product Line Description</label>
                                         <Form.Control
                                             placeholder="Line Description"
                                             type="text"
@@ -123,7 +127,7 @@ function ProductLineRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Line Name</label>
+                                        <label className="lblDesign">Product Line Name</label>
                                         <Form.Control
                                             placeholder="Line Name"
                                             type="text"
@@ -139,7 +143,7 @@ function ProductLineRegistrationForm() {
                                 </Col>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Line Image</label>
+                                        <label className="lblDesign">Product Line Image</label>
                                         <Form.Control
                                             placeholder="Line Image"
                                             type="file"
@@ -155,7 +159,7 @@ function ProductLineRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Line Start Time</label>
+                                        <label className="lblDesign">Product Line Start Time</label>
                                         <Form.Control
                                             placeholder="Line Start"
                                             type="time"
@@ -171,7 +175,7 @@ function ProductLineRegistrationForm() {
                                 </Col>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Line End Time</label>
+                                        <label className="lblDesign">Product Line End Time</label>
                                         <Form.Control
                                             placeholder="Line End"
                                             type="time"

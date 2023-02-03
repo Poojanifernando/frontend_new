@@ -14,7 +14,7 @@ import {
 } from "react-bootstrap";
 
 function CurrentProcessUpdate({ match }) {
-    
+
     const iserId = localStorage.getItem("userId");
     const history = useHistory();
     const [url, seturl] = useState('');
@@ -54,8 +54,8 @@ function CurrentProcessUpdate({ match }) {
 
     useEffect(() => {
         const myurl = getLocalhostUrl();
-         seturl(myurl)
-        axios.get(myurl+'/api/v1/admin/getcurrentprocess/' + match.params.id).then((response) => {
+        seturl(myurl)
+        axios.get(myurl + '/api/v1/admin/getcurrentprocess/' + match.params.id).then((response) => {
             setjob_id_ad(response.data.job_id_ad)
             setbatchid_ad(response.data.batchid_ad)
             setproduct_lineid_ad(response.data.product_lineid_ad)
@@ -69,15 +69,15 @@ function CurrentProcessUpdate({ match }) {
             setcount(response.data.count_reg_bch)
         });
 
-        axios.get(myurl+'/api/v1/product/getAllProductsNameAndIds').then((response) => {
+        axios.get(myurl + '/api/v1/product/getAllProductsNameAndIds').then((response) => {
             setProductDetails(response.data);
         });
 
-        axios.get(myurl+'/api/v1/line/getAllLineAndId').then((response) => {
+        axios.get(myurl + '/api/v1/line/getAllLineAndId').then((response) => {
             setLineDetails(response.data);
         });
 
-        axios.get(myurl+'/api/v1/customerRegistration/getAllCusDetails').then((response) => {
+        axios.get(myurl + '/api/v1/customerRegistration/getAllCusDetails').then((response) => {
             setcusDetails(response.data);
         });
     }, []);
@@ -113,10 +113,10 @@ function CurrentProcessUpdate({ match }) {
         details.Customer_id = formData.get('Customer_id');
         details.Curd = formData.get('Curd');
 
-        console.log('details.count',details)
-        
+        console.log('details.count', details)
 
-      await axios.get(url+'/api/v1/admin/postcurrentdata/' + details.job_id_ad + '/' + details.job_description + '/' + details.batchid_ad + '/' + details.batch_start_time + '/' + details.batch_end_time + '/' + details.product + '/' + details.count + '/' + details.product_lineid_ad + '/' + details.predicted_date + '/' + details.production_order + '/' + details.Customer_id + '/' + details.Curd + '/' + match.params.id)
+
+        await axios.get(url + '/api/v1/admin/postcurrentdata/' + details.job_id_ad + '/' + details.job_description + '/' + details.batchid_ad + '/' + details.batch_start_time + '/' + details.batch_end_time + '/' + details.product + '/' + details.count + '/' + details.product_lineid_ad + '/' + details.predicted_date + '/' + details.production_order + '/' + details.Customer_id + '/' + details.Curd + '/' + match.params.id)
             .then(res => {
                 console.log("Return Data", res);
                 alert("Update Success!!");
@@ -134,209 +134,207 @@ function CurrentProcessUpdate({ match }) {
     }
 
 
-   
+
     return (
         <>
             <Container >
-            <div className="cardDesign ">
-                    {/* <Col md="8">
-                        <Card> */}
-                    <Card.Header style={{ border:"none", backgroundColor: "white" }}>
-                        <Card.Title as="h4">Production Registration Update</Card.Title>
-                        <hr/>
-                            </Card.Header>
-                            <Card.Body>
-                                <Form>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Job ID</label>
-                                                <Form.Control
-                                                    placeholder="Job ID"
-                                                    type="text"
-                                                    name="job_id_ad"
-                                                    value={job_id_ad}
-                                                    onChange={e => setjob_id_ad(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                    disabled={true}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Job Discription</label>
-                                                <Form.Control
-                                                    placeholder="Job Discription"
-                                                    type="text"
-                                                    name="job_description"
-                                                    value={job_description}
-                                                    onChange={e => setjob_description(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                    disabled={true}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>BATCH ID</label>
-                                                <Form.Control
-                                                    placeholder="BATCH ID"
-                                                    type="text"
-                                                    name="batchid_ad"
-                                                    value={batchid_ad}
-                                                    onChange={e => setbatchid_ad(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                    disabled={true}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Batch Start Time</label>
-                                                <Form.Control
-                                                    placeholder="Start Time"
-                                                    type="time"
-                                                    name="batch_start_time"
-                                                    value={batch_start_time}
-                                                    onChange={e => setbatch_start_time(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Batch End Time</label>
-                                                <Form.Control
-                                                    placeholder="End Time"
-                                                    type="time"
-                                                    name="batch_end_time"
-                                                    value={batch_end_time}
-                                                    onChange={e => setbatch_end_time(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product</label>
-                                                <Form.Select size="lg" className="form-control" name="product"
-                                                    value={product}
-                                                    onChange={e => setproduct(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                >
-                                                    {productTable.map(item => {
-                                                        return (<option key={item.productId} value={item.productId}>{item.productname}</option>);
-                                                    })}
-                                                </Form.Select>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Count</label>
-                                                <Form.Control
-                                                    placeholder="Count"
-                                                    type="number"
-                                                    name="count"
-                                                    value={count}
-                                                    onChange={e => setcount(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Production Line Name</label>
-                                                <Form.Select size="lg" className="form-control" name="product_lineid_ad"
-                                                    value={product_lineid_ad}
-                                                    onChange={e => setproduct_lineid_ad(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                >
-                                                    {lineDetails.map(item => {
-                                                        return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
-                                                    })}
-                                                </Form.Select>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Predicted Date</label>
-                                                <Form.Control
-                                                    placeholder="Date"
-                                                    type="date"
-                                                    name="predicted_date"
-                                                    value={predicted_date}
-                                                    onChange={e => setpredicted_date(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Production Order</label>
-                                                <Form.Control
-                                                    placeholder="AUTO"
-                                                    type="number"
-                                                    min="0"
-                                                    name="production_order"
-                                                    value={production_order}
-                                                    onChange={e => setproduction_order(e.target.value)}
-                                                    style={{ borderRadius: "10px" }}
-                                                    disabled="true"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Customer Id</label>
-                                                <Form.Select size="lg" className="form-control" name="Customer_id"
-                                                    // value={processDetails.values.Customer_id} onChange={processDetails.handleChange}
-                                                    value={Customer_id}
-                                                    onChange={e => setCustomer_id(e.target.value)}
-                                                    disabled={true}
-                                                    style={{ borderRadius: "10px" }}
-                                                >
-                                                    {cusDetails.map(item => {
-                                                        return (<option key={item.cus_id} value={item.cus_id}>{item.customer_name}</option>);
-                                                    })}
-                                                </Form.Select>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <div className="button">
-                                        &nbsp;&nbsp;
-                                        <button
-                                            className="btnSubmit"
-                                            type="submit"
-                                            variant="success"
-                                            onClick={(e) => ChangeOnClick(e)}
+                <div className="cardDesign ">
+                    <Card.Header style={{ border: "none", backgroundColor: "white" }}>
+                        <Card.Title style={{ color: "#3D3D3D", fontSize: "1.2rem", fontWeight: "500px", lineHeight: "32px" }}>Production Registration Update</Card.Title>
+                        <hr />
+                    </Card.Header>
+                    <Card.Body>
+                        <Form>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Job ID</label>
+                                        <Form.Control
+                                            placeholder="Job ID"
+                                            type="text"
+                                            name="job_id_ad"
+                                            value={job_id_ad}
+                                            onChange={e => setjob_id_ad(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                            disabled={true}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Job Discription</label>
+                                        <Form.Control
+                                            placeholder="Job Discription"
+                                            type="text"
+                                            name="job_description"
+                                            value={job_description}
+                                            onChange={e => setjob_description(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                            disabled={true}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">BATCH ID</label>
+                                        <Form.Control
+                                            placeholder="BATCH ID"
+                                            type="text"
+                                            name="batchid_ad"
+                                            value={batchid_ad}
+                                            onChange={e => setbatchid_ad(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                            disabled={true}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Batch Start Time</label>
+                                        <Form.Control
+                                            placeholder="Start Time"
+                                            type="time"
+                                            name="batch_start_time"
+                                            value={batch_start_time}
+                                            onChange={e => setbatch_start_time(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Batch End Time</label>
+                                        <Form.Control
+                                            placeholder="End Time"
+                                            type="time"
+                                            name="batch_end_time"
+                                            value={batch_end_time}
+                                            onChange={e => setbatch_end_time(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Product</label>
+                                        <Form.Select size="lg" className="form-control" name="product"
+                                            value={product}
+                                            onChange={e => setproduct(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
                                         >
-                                            Update Process
-                                        </button>
-                                        &nbsp;&nbsp;
-                                        <button
-                                            className="btnSubmit"
-                                            type="submit"
-                                            variant="danger"
-                                            onClick={(e) => CancelOnClick(e)}
+                                            {productTable.map(item => {
+                                                return (<option key={item.productId} value={item.productId}>{item.productname}</option>);
+                                            })}
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Product Count</label>
+                                        <Form.Control
+                                            placeholder="Count"
+                                            type="number"
+                                            name="count"
+                                            value={count}
+                                            onChange={e => setcount(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Production Line Name</label>
+                                        <Form.Select size="lg" className="form-control" name="product_lineid_ad"
+                                            value={product_lineid_ad}
+                                            onChange={e => setproduct_lineid_ad(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        >
+                                            {lineDetails.map(item => {
+                                                return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
+                                            })}
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Predicted Date</label>
+                                        <Form.Control
+                                            placeholder="Date"
+                                            type="date"
+                                            name="predicted_date"
+                                            value={predicted_date}
+                                            onChange={e => setpredicted_date(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Production Order</label>
+                                        <Form.Control
+                                            placeholder="AUTO"
+                                            type="number"
+                                            min="0"
+                                            name="production_order"
+                                            value={production_order}
+                                            onChange={e => setproduction_order(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                            disabled="true"
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label className="lblDesign">Customer Id</label>
+                                        <Form.Select size="lg" className="form-control" name="Customer_id"
+                                            // value={processDetails.values.Customer_id} onChange={processDetails.handleChange}
+                                            value={Customer_id}
+                                            onChange={e => setCustomer_id(e.target.value)}
+                                            disabled={true}
+                                            style={{ borderRadius: "10px" }}
+                                        >
+                                            {cusDetails.map(item => {
+                                                return (<option key={item.cus_id} value={item.cus_id}>{item.customer_name}</option>);
+                                            })}
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <div className="button">
+                                &nbsp;&nbsp;
+                                <button
+                                    className="btnSubmit"
+                                    type="submit"
+                                    variant="success"
+                                    onClick={(e) => ChangeOnClick(e)}
+                                >
+                                    Update Process
+                                </button>
+                                &nbsp;&nbsp;
+                                <button
+                                    className="btnCancel"
+                                    type="submit"
+                                    variant="danger"
+                                    onClick={(e) => CancelOnClick(e)}
 
-                                        >
-                                           Cancel 
-                                        </button>
-                                    </div>
-                                    <div className="clearfix"></div>
-                                </Form>
-                            </Card.Body>
-                        {/* </Card>
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                            <div className="clearfix"></div>
+                        </Form>
+                    </Card.Body>
+                    {/* </Card>
                     </Col> */}
                 </div>
             </Container>

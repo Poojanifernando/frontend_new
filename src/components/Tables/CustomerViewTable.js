@@ -4,6 +4,7 @@ import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
 import "../../assets/css/allForms.css"
+import Paginate from "components/Forms/Paginate";
 // react-bootstrap components
 import {
     Card,
@@ -62,19 +63,20 @@ function CustomerViewTable() {
                         <Card className="card-plain table-plain-bg">
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
-                                    <thead>
+                                    <thead style={{ backgroundColor: "#EFEFEF" }}>
                                         <tr>
-                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">ID</th>
-                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Name</th>
-                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">NIC</th>
-                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Contact Person</th>
-                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Number</th>
-                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Email</th>
-                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Action</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "24px 0 0 0" }}>ID</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Name</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>NIC</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Contact Person</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Number</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 0 0 0" }}>Email</th>
+                                            <th style={{ color: 'black', fontSize: "1.0rem", fontWeight: "bold", lineHeight: "24px", textAlign: "flex-start", borderRadius: "0 24px 0 0" }}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {Customers?.map((customer, index) => {
+
                                             return (
                                                 <tr key={customer.cus_id}>
                                                     <td>{customer.cus_id}</td>
@@ -95,6 +97,8 @@ function CustomerViewTable() {
                                                         </Link>
                                                     </td>
                                                 </tr>
+
+
                                             )
                                         })}
                                     </tbody>
@@ -103,6 +107,9 @@ function CustomerViewTable() {
                         </Card>
                     </Col>
                 </Row>
+                <div>
+                    <Paginate/>
+                </div>
             </Container>
         </>
     );

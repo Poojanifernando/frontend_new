@@ -71,18 +71,16 @@ function ProductRegistrationForm() {
         <>
             <Container >
                 <div className="cardDesign ">
-                    {/* <Col md="8">
-                        <Card> */}
                     <Card.Header style={{ border: "none", backgroundColor: "white" }}>
-                        <Card.Title as="h4">Product Registration</Card.Title>
-                        <hr />
+                        <Card.Title style={{ color: "#3D3D3D", fontSize: "1.2rem", fontWeight: "500px", lineHeight: "32px" }}>Product Registration</Card.Title>
+                        <hr style={{padding:"0", margin:"0" }}/>
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body style={{paddingTop:"0"}}>
                         <Form>
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product ID</label>
+                                        <label className="lblDesign">Product ID</label>
                                         <Form.Control
                                             placeholder="Product ID"
                                             type="text"
@@ -98,7 +96,7 @@ function ProductRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Name</label>
+                                        <label className="lblDesign">Product Name</label>
                                         <Form.Control
                                             placeholder="Product Name"
                                             type="text"
@@ -116,7 +114,7 @@ function ProductRegistrationForm() {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Description</label>
+                                        <label className="lblDesign">Product Description</label>
                                         <Form.Control
                                             placeholder="Product Description"
                                             type="text"
@@ -132,7 +130,7 @@ function ProductRegistrationForm() {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group className="formDesign">
-                                        <label>Product Image</label>
+                                        <label className="lblDesign">Product Image</label>
                                         <Form.Control
                                             placeholder="Product Image"
                                             type="file"

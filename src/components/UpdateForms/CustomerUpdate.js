@@ -104,18 +104,16 @@ function CustomerUpdate({ match }) {
         <>
             <Container >
                 <div className="cardDesign ">
-                    {/* <Col md="8">
-                        <Card> */}
                     <Card.Header style={{ border: "none", backgroundColor: "white" }}>
-                        <Card.Title as="h4">Customer Registration</Card.Title>
-                        <hr/>
+                        <Card.Title style={{ color: "#3D3D3D", fontSize: "1.2rem", fontWeight: "500px", lineHeight: "32px" }}>Customer Registration</Card.Title>
+                        <hr />
                     </Card.Header>
                     <Card.Body>
                         <Form>
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Customer Name</label>
+                                        <label className="lblDesign">Customer Name</label>
                                         <Form.Control
                                             placeholder="Customer Name"
                                             type="text"
@@ -128,7 +126,7 @@ function CustomerUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>NIC / Registration Number</label>
+                                        <label className="lblDesign">NIC / Registration Number</label>
                                         <Form.Control
                                             placeholder="NIC or Registration Number"
                                             type="text"
@@ -143,7 +141,7 @@ function CustomerUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Contact Person</label>
+                                        <label className="lblDesign">Contact Person</label>
                                         <Form.Control
                                             placeholder="Contact Person"
                                             type="text"
@@ -156,7 +154,7 @@ function CustomerUpdate({ match }) {
                                 </Col>
                                 <Col className="pl-1" md="6">
                                     <Form.Group>
-                                        <label>Contact Number</label>
+                                        <label className="lblDesign">Contact Number</label>
                                         <Form.Control
                                             placeholder="Contact Number"
                                             type="tel"
@@ -172,7 +170,7 @@ function CustomerUpdate({ match }) {
                             <Row>
                                 <Col className="pr-1" md="6">
                                     <Form.Group>
-                                        <label>Email</label>
+                                        <label className="lblDesign">Email</label>
                                         <Form.Control
                                             placeholder="Email"
                                             type="text"
@@ -190,7 +188,6 @@ function CustomerUpdate({ match }) {
                                     type="submit"
                                     variant="success"
                                     onClick={(e) => ChangeOnClick(e)}
-                                    style={{ borderRadius: "10px" }}
                                 >
                                     Update Customer
                                 </button>
@@ -200,7 +197,6 @@ function CustomerUpdate({ match }) {
                                     type="submit"
                                     variant="danger"
                                     onClick={(e) => CancelOnClick(e)}
-                                    style={{ borderRadius: "10px" }}
                                 >
                                     Cancel
                                 </button>
