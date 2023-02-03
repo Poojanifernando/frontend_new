@@ -1,0 +1,61 @@
+.logoimg{
+    margin-top: -80px;
+    margin-left: 80px;
+    align-items: center;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+}
+
+.testlalan{
+    text-align: center;
+    text-shadow: 0 2px 1px #7e817e, 
+    -1px 3px 1px #9c9999, 
+    -2px 5px 1px #f4f7f3;
+    font-family:Arial, Helvetica, sans-serif
+}
+
+.testyear{
+    text-align: center;
+    text-shadow: 0 2px 1px #7e817e, 
+    -1px 3px 1px #9c9999, 
+    -2px 5px 1px #f4f7f3;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: -10px;
+   
+}
+
+.emailtext{
+    width: 400px;
+    height: 50px;
+    border-radius: 20px;
+    margin-left: 20px;
+    align-items: center;
+    text-align: center;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  
+}
+
+.loginButton{
+    width: 400px;
+    height: 50px;
+    margin-left: 20px;
+    border-radius: 20px;
+    background-color: rgb(7, 78, 230);
+    color: white;
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+ 
+}
+
+
+.forgotpassword{
+    font-size: 20px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.formbackground{
+    border-radius: 30px;
+    height: 500px;
+    width: 450px;
+    padding-top: 100px;
+}
+

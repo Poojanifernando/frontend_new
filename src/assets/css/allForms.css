@@ -1,0 +1,91 @@
+.btnSubmit {
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #0084D9;
+    float: inline-end;
+    color: white;
+    /* padding: 5px; */
+    margin: 10px 10px 10px 5px;
+}
+
+.btnCancel {
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #0084D9;
+    float: inline-end;
+    color: white;
+    /* padding: 5px; */
+    margin: 10px 10px 10px 5px;
+}
+
+.cardDesign {
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: auto;
+    height: auto;
+    box-shadow: 0px 16px 27px rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    background-color: white;
+}
+
+/* .cardTitle{
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: bold;
+} */
+
+.lblDesign {
+    border: 0;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    background-color: white;
+    margin-top: 30px;
+    /* border-radius: 24px 24px 0px 0px; */
+    
+}
+
+thead tr {
+    background-color: lightgrey;
+    text-align: center !important;
+    /* border-radius: 25px; */
+    border-radius: 24px 24px 0px 0px;
+    height: 48px;
+}
+
+th{
+    /* border-radius: 25px; */
+    font-size: 1.0rem;
+}
+
+td {
+    padding: 8px;
+    /* border-radius: 25px; */
+    font-size: 1.0rem;
+}
+
+th {
+    /* background-color: black; */
+    color: white;
+}
+
+/* tr {
+    text-align: center !important;
+    align-items: center;
+    justify-content: center;
+} */
+
+
+.formDesign{
+    padding: 10px;
+    margin-bottom: 10px;
+}

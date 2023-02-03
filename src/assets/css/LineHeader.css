@@ -4,36 +4,52 @@
 
 }
 
-.columnrow {
-    float: left;
-    padding: 10px;
+.startBtn {
+    width: 100px;
+    height: 32px;
+    border-radius: 12px;
+    background-color: green;
+    font-size: 1.0rem;
+    padding: 0;
+    box-shadow: none;
+}
 
+.stopBtn {
+    width: 100px;
+    height: 32px;
+    border-radius: 12px;
+    background-color: red;
+    font-size: 1.0rem;
+    margin-left: 10px;
+    border: none;
+    box-shadow: none;
+}
 
+.columnrowbtnpadding {
+    float: right;
+    padding-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
 }
 
 .leftrow {
     width: 25%;
-    font-weight: bold;  
-
 }
 
 .rightrow {
-    width: 75%;
-    background-color: rgb(41, 138, 63);
-    font-weight: bold;
+    width: 262px;
+    height: 32px;
+    background-color: green;
     text-align: center;
-    color: azure;
-    font-size: large;
+    color: white;
+    font-size: 1.0rem;
     border: none;
-    /* -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black; */
+    border-radius: 32px;
+    padding: 8px, 24px, 8px, 24px;
+    left: 786px;
+    gap: 12px;
 
 }
-
-.row1 {
-    border-style: ridge;
-}
-
 
 .row1:after {
     content: "";
@@ -44,20 +60,12 @@
 
 .column1 {
     padding-top: 5px;
-    padding-left: 5px;
+    padding-left: 20px;
     padding-bottom: 5px;
     float: left;
-    width: 16.66%;
+    width: auto;
     border: 10px;
-    /* background-color: rgb(240, 228, 228); */
 }
-/* .column2 {
-    padding-left: 5px;
-    float: left;
-    width: 16.66%;
-    border: 10px;
-  
-} */
 
 /* Clear floats after the columns */
 .row1:after {
@@ -66,37 +74,41 @@
     clear: both;
 }
 
-@media screen and (max-width: 600px) {
-    .column1 {
-        width: 100%;
-    }
-}
-@media screen and (max-width: 600px) {
-    .column2 {
-        width: 100%;
-    }
-}
-
 .linetitle {
-    /* color: rgb(122, 124, 124); */
     margin: 0;
-    padding: 0;
+    padding: 12px;
     font-family: 'Courier New', Courier, monospace black;
-    font-size: 15px;
-    color: rgb(122, 124, 124);
+    color: black;
+    font-size: 1.0rem;
+    font-weight: bold;
 }
 
 .fontsize {
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-}
-.ptagRemove{
-    display: inline;
-     font-weight: normal;
     color: rgb(0, 0, 0);
 }
 
-.btntest{
-    /* border: none; */
-    /* padding: 3px; */
+.ptagRemove {
+    display: inline;
+    font-weight: normal;
+    color: rgb(0, 0, 0);
+    font-size: 1.0rem;
 }
+
+/* @media screen and (max-width: 600px) {
+    .column1 {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .column2 {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .rightrow {
+        margin-left: 10px;
+
+    }
+} */

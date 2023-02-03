@@ -2,6 +2,7 @@
   overflow: auto;
   white-space: nowrap;
   /* padding-left: 10px; */
+
   
 }
 
@@ -11,6 +12,8 @@
   text-align: center; 
   border: none;
   padding: 2px;
+  width:auto;
+  /* box-shadow: 2px 2px 2px 12px rgb(31, 44, 44); */
 }
 
 hr {
@@ -42,14 +45,19 @@ hr {
 }
 
 .test {
-  border-style: groove;
+  /* border-style:dotted; */
+  border-color: #ED1616;
+  border-radius: 10px;
+  padding-top: 10px;
+
 }
 .card-stats{
   width: 190px;
+  height: auto;
 }
-.test{
+/* .test{
   position: relative;
-}
+} */
 .no-data-msg{
   font-size: large;
   font-weight: bold;

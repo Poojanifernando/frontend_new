@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Badge,
@@ -91,11 +92,12 @@ function LineUpdate({ match }) {
     return (
         <>
             <Container >
-                <Row className="justify-content-center ">
-                    <Col md="8">
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h4">Product Line Update</Card.Title>
+            <div className="cardDesign ">
+                    {/* <Col md="8">
+                        <Card> */}
+                    <Card.Header style={{ border:"none", backgroundColor: "white" }}>
+                        <Card.Title as="h4">Product Line Update</Card.Title>
+                        <hr/>
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -109,6 +111,7 @@ function LineUpdate({ match }) {
                                                     name="line_id"
                                                     value={line_id}
                                                     onChange={e => setline_id(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                     disabled={true}
                                                 ></Form.Control>
                                             </Form.Group>
@@ -122,6 +125,7 @@ function LineUpdate({ match }) {
                                                     name="line_name"
                                                     value={description}
                                                     onChange={e => setdescription(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -136,6 +140,7 @@ function LineUpdate({ match }) {
                                                     name="description"
                                                     value={line_name}
                                                     onChange={e => setline_name(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -148,6 +153,7 @@ function LineUpdate({ match }) {
                                                     name="image"
                                                     value={image}
                                                     onChange={e => setimage(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -162,6 +168,7 @@ function LineUpdate({ match }) {
                                                     name="start_time"
                                                     value={start_time}
                                                     onChange={e => setstart_time(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -174,36 +181,37 @@ function LineUpdate({ match }) {
                                                     name="end_time"
                                                     value={endtime}
                                                     onChange={e => setendtime(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    <Row className="justify-content-center ">
-                                        <Button
-                                            className="btn-fill center"
+                                    <div className="button">
+                                        <button
+                                            className="btnSubmit"
                                             type="submit"
                                             variant="success"
                                             onClick={(e) => ChangeOnClick(e)}
                                         >
                                             Update Line
-                                        </Button>
+                                        </button>
                                         &nbsp;&nbsp;
-                                        <Button
-                                            className="btn-fill center"
+                                        <button
+                                            className="btnCancel"
                                             type="submit"
                                             variant="danger"
                                             onClick={(e) => CancelOnClick(e)}
 
                                         >
                                            Cancel 
-                                        </Button>
-                                    </Row>
+                                        </button>
+                                    </div>
                                     <div className="clearfix"></div>
                                 </Form>
                             </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                        {/* </Card>
+                    </Col> */}
+                </div>
             </Container>
         </>
     );

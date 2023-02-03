@@ -53,16 +53,16 @@ function LineMachineDevicetable() {
     console.log(JSON.stringify(Batches))
     return (
         <>
-            <Container fluid>
+            <Container>
                 <Row>
                     <Col md="12">
                         <Card className="card-plain table-plain-bg">
-                            <Card.Header>
+                            {/* <Card.Header>
                                 <Card.Title as="h4">Line-Machine-Device Table</Card.Title>
                                 <p className="card-category">
                                     View all details
                                 </p>
-                            </Card.Header>
+                            </Card.Header> */}
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
                                     <thead>

@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.28ac679d.css",
+    "main.js": "/static/js/main.e9760e43.js",
+    "static/media/photo-1431578500526-4d9613015464.jpeg": "/static/media/photo-1431578500526-4d9613015464.0c528dc7193509e0eef6.jpeg",
+    "static/media/login.png": "/static/media/login.e9ba702ccc7dce832844.png",
+    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.b1a653db79258eeccc5d.ttf",
+    "static/media/sidebar-1.jpg": "/static/media/sidebar-1.2ea74e53b4baa6bbae05.jpg",
+    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.450a5c898f0b184b968b.ttf",
+    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.41c0f706d8ce93933771.woff2",
+    "static/media/nucleo-icons.svg": "/static/media/nucleo-icons.6ff448a36d590360ffd6.svg",
+    "static/media/sidebar-2.jpg": "/static/media/sidebar-2.00b17713383fae1acce2.jpg",
+    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.3ac6859b28be946745f9.woff2",
+    "static/media/sidebar-3.jpg": "/static/media/sidebar-3.9992d0cef1150fe9146f.jpg",
+    "static/media/fa-regular-400.ttf": "/static/media/fa-regular-400.3cd9fb8fcec4ad0f99d4.ttf",
+    "static/media/sidebar-4.jpg": "/static/media/sidebar-4.b7eb4d1bec304bbb3795.jpg",
+    "static/media/length1.jpeg": "/static/media/length1.347179bc2f5d288a5a40.jpeg",
+    "static/media/nucleo-icons.eot": "/static/media/nucleo-icons.541f8898b990ff017268.eot",
+    "static/media/nucleo-icons.ttf": "/static/media/nucleo-icons.a30d0b0201482fcfffd3.ttf",
+    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.1f3772178d9e5bed38a6.woff2",
+    "static/media/logo_t.png": "/static/media/logo_t.061a82716e7bfa720402.png",
+    "static/media/face-3.jpg": "/static/media/face-3.62232de2613c3869ca4c.jpg",
+    "static/media/nucleo-icons.woff": "/static/media/nucleo-icons.141e0c4652975b501bab.woff",
+    "static/media/nucleo-icons.woff2": "/static/media/nucleo-icons.69d4ebfdc94eab6fdb6e.woff2",
+    "static/media/fa-v4compatibility.ttf": "/static/media/fa-v4compatibility.e314b618134d5be20996.ttf",
+    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.4ee7f902d88f819e251c.woff2",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.28ac679d.css",
+    "static/js/main.e9760e43.js"
+  ]
+}

@@ -32,14 +32,15 @@ function ScrollMenuMachines(props) {
                 {AllMachines?.map((Machins, index) => {
                     return (
                         <Col
-                            lg="test"
+                            // lg="test"
                             // sm="12"
-                            className="aa">
-                            <Card className="card-stats">
-                                <Card.Header >
+                            className="aa test"
+                            >
+                            <Card className="card-stats" style={{ borderShadow:'#555' }}>
+                                <Card.Header style={{ fontWeight: "bold", fontSize: '1.0rem' }}>
                                     {Machins.machine_name}
                                 </Card.Header>
-                                <br />
+                                {/* <br /> */}
                                 <CardParameterbody date={current_date} line={current_Line} POrder={current_pOrder} MachineId={Machins.machine_id} />
                             </Card>
                         </Col>

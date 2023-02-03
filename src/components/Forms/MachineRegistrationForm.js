@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
+import "../../assets/css/allForms.css"
 
 // react-bootstrap components
 import {
@@ -36,7 +37,7 @@ function MachineRegistrationForm() {
         onSubmit: values => {
             console.log(JSON.stringify(machDetails.values))
 
-            axios.post(url+'/api/v1/machine/saveMachine', machDetails.values).then(() => {
+            axios.post(url + '/api/v1/machine/saveMachine', machDetails.values).then(() => {
                 alert("Machine added successfully!!!");
 
             }).catch((err) => {
@@ -52,70 +53,73 @@ function MachineRegistrationForm() {
     return (
         <>
             <Container >
-                <Row className="justify-content-center ">
-                    <Col md="8">
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h4">Machine Registration</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <Form>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Machine ID</label>
-                                                <Form.Control
-                                                    placeholder="Machine ID"
-                                                    type="text"
-                                                    name="machine_id"
-                                                    onChange={machDetails.handleChange}
-                                                    value={machDetails.values.machine_id}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Machine Description</label>
-                                                <Form.Control
-                                                    placeholder="Machine Description"
-                                                    type="text"
-                                                    name="machine_description"
-                                                    onChange={machDetails.handleChange}
-                                                    value={machDetails.values.machine_description}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
+                <div className="cardDesign ">
+                    {/* <Col md="8">
+                        <Card> */}
+                    <Card.Header style={{ border: "none", backgroundColor: "white" }}>
+                        <Card.Title as="h4">Machine Registration</Card.Title>
+                        <hr />
+                    </Card.Header>
+                    <Card.Body>
+                        <Form>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Machine ID</label>
+                                        <Form.Control
+                                            placeholder="Machine ID"
+                                            type="text"
+                                            name="machine_id"
+                                            onChange={machDetails.handleChange}
+                                            value={machDetails.values.machine_id}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Machine Description</label>
+                                        <Form.Control
+                                            placeholder="Machine Description"
+                                            type="text"
+                                            name="machine_description"
+                                            onChange={machDetails.handleChange}
+                                            value={machDetails.values.machine_description}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
 
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Machine Name</label>
-                                                <Form.Control
-                                                    placeholder="Machine Name"
-                                                    type="text"
-                                                    name="machine_name"
-                                                    onChange={machDetails.handleChange}
-                                                    value={machDetails.values.machine_name}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Machine Image</label>
-                                                <Form.Control
-                                                    placeholder="Machine Image"
-                                                    type="file"
-                                                    name="machine_image"
-                                                    onChange={machDetails.handleChange}
-                                                    value={machDetails.values.machine_image}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-
-
-                                    {/* <Col className="pl-1" md="6">
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Machine Name</label>
+                                        <Form.Control
+                                            placeholder="Machine Name"
+                                            type="text"
+                                            name="machine_name"
+                                            onChange={machDetails.handleChange}
+                                            value={machDetails.values.machine_name}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Machine Image</label>
+                                        <Form.Control
+                                            placeholder="Machine Image"
+                                            type="file"
+                                            name="machine_image"
+                                            onChange={machDetails.handleChange}
+                                            value={machDetails.values.machine_image}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            {/* <Col className="pl-1" md="6">
                       <Form.Group>
                         <label>Last Name</label>
                         <Form.Control
@@ -124,17 +128,17 @@ function MachineRegistrationForm() {
                         ></Form.Control>
                       </Form.Group>
                     </Col> */}
-
-                                    <Row className="justify-content-center ">
-                                        <Button
-                                            className="btn-fill center"
-                                            type="submit"
-                                            variant="primary"
-                                            onClick={machDetails.handleSubmit}
-                                        >
-                                            Add New     Machine
-                                        </Button>
-                                        {/* &nbsp;&nbsp;
+                            <div className="button">
+                                <button
+                                    className="btnSubmit"
+                                    type="submit"
+                                    variant="primary"
+                                    onClick={machDetails.handleSubmit}
+                                    style={{ borderRadius: "10px" }}
+                                >
+                                    Add New Machine
+                                </button>
+                                {/* &nbsp;&nbsp;
                                         <Button
                                             className="btn-fill center"
                                             type="submit"
@@ -142,13 +146,13 @@ function MachineRegistrationForm() {
                                         >
                                             Update Machine
                                         </Button> */}
-                                    </Row>
-                                    <div className="clearfix"></div>
-                                </Form>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                            </div>
+                            <div className="clearfix"></div>
+                        </Form>
+                    </Card.Body>
+                    {/* </Card>
+                    </Col> */}
+                </div>
             </Container>
         </>
     );

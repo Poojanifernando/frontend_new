@@ -96,14 +96,14 @@ function MachinesCardView() {
         Lines.map((Line, index) => {
           // pass data to the LineHeader for get customer details.
           return (
-            <Container fluid className="test">
+            <Container className="test">
               <LineHeader date={a} line={Line.product_lineid_ad} lineName={Line.line_name} />
             </Container>
           )
         }) :
         //if data is not there print this 
          <div className="d-flex justify-content-center align-items-center centerContent">
-          <p className="no-data-msg" style={{ color: "#5E5E5E" }}>Please select the line to show data</p>
+          {/* <p className="no-data-msg" style={{ color: "#5E5E5E" }}>Please select the line to show data</p> */}
         </div>
       }
     </div>

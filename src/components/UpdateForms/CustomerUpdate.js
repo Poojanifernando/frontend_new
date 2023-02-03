@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Badge,
@@ -43,9 +44,9 @@ function CustomerUpdate({ match }) {
 
     useEffect(() => {
         const myurl = getLocalhostUrl();
-         seturl(myurl)
+        seturl(myurl)
 
-        axios.get(myurl+'/api/v1/customerRegistration/searchCustomerRegistration/' + match.params.id).then((response) => {
+        axios.get(myurl + '/api/v1/customerRegistration/searchCustomerRegistration/' + match.params.id).then((response) => {
 
             setuser_id(response.data.content.cus_id);
             setcustomer_name(response.data.content.customer_name);
@@ -79,7 +80,7 @@ function CustomerUpdate({ match }) {
         CustomerDetails.customer_email = formData.get('customer_email');
         console.log(CustomerDetails);
 
-        await axios.put(url+`/api/v1/customerRegistration/updateCustomerRegistration/${match.params.id}`, CustomerDetails)
+        await axios.put(url + `/api/v1/customerRegistration/updateCustomerRegistration/${match.params.id}`, CustomerDetails)
             .then(res => {
                 console.log("Return Data", res);
                 alert("Update Success!!");
@@ -93,7 +94,7 @@ function CustomerUpdate({ match }) {
 
     }
 
-    
+
     const CancelOnClick = async (e) => {
         e.preventDefault();
         history.push('/admin/CustomerRegister')
@@ -102,108 +103,115 @@ function CustomerUpdate({ match }) {
     return (
         <>
             <Container >
-                <Row className="justify-content-center ">
-                    <Col md="8">
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h4">Customer Registration</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <Form>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Customer Name</label>
-                                                <Form.Control
-                                                    placeholder="Customer Name"
-                                                    type="text"
-                                                    name="customer_name"
-                                                    value={customer_name}
-                                                    onChange={e => setcustomer_name(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>NIC / Registration Number</label>
-                                                <Form.Control
-                                                    placeholder="NIC or Registration Number"
-                                                    type="text"
-                                                    name="customer_NIC"
-                                                    value={customer_NIC}
-                                                    onChange={e => setcustomer_NIC(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Contact Person</label>
-                                                <Form.Control
-                                                    placeholder="Contact Person"
-                                                    type="text"
-                                                    name="contact_person"
-                                                    value={contact_person}
-                                                    onChange={e => setcontact_person(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Contact Number</label>
-                                                <Form.Control
-                                                    placeholder="Contact Number"
-                                                    type="tel"
-                                                    maxlength="10"  
-                                                    name="customer_contact_number"
-                                                    value={customer_contact_number}
-                                                    onChange={e => setcustomer_contact_number(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Email</label>
-                                                <Form.Control
-                                                    placeholder="Email"
-                                                    type="text"
-                                                    name="customer_email"
-                                                    value={customer_email}
-                                                    onChange={e => setcustomer_email(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row className="justify-content-center ">
-                                        <Button
-                                            className="btn-fill center"
-                                            type="submit"
-                                            variant="success"
-                                            onClick={(e) => ChangeOnClick(e)}
-                                        >
-                                            Update Customer
-                                        </Button>
-                                        &nbsp;&nbsp;
-                                        <Button
-                                            className="btn-fill center"
-                                            type="submit"
-                                            variant="danger"
-                                            onClick={(e) => CancelOnClick(e)}
+                <div className="cardDesign ">
+                    {/* <Col md="8">
+                        <Card> */}
+                    <Card.Header style={{ border: "none", backgroundColor: "white" }}>
+                        <Card.Title as="h4">Customer Registration</Card.Title>
+                        <hr/>
+                    </Card.Header>
+                    <Card.Body>
+                        <Form>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label>Customer Name</label>
+                                        <Form.Control
+                                            placeholder="Customer Name"
+                                            type="text"
+                                            name="customer_name"
+                                            value={customer_name}
+                                            onChange={e => setcustomer_name(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label>NIC / Registration Number</label>
+                                        <Form.Control
+                                            placeholder="NIC or Registration Number"
+                                            type="text"
+                                            name="customer_NIC"
+                                            value={customer_NIC}
+                                            onChange={e => setcustomer_NIC(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label>Contact Person</label>
+                                        <Form.Control
+                                            placeholder="Contact Person"
+                                            type="text"
+                                            name="contact_person"
+                                            value={contact_person}
+                                            onChange={e => setcontact_person(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label>Contact Number</label>
+                                        <Form.Control
+                                            placeholder="Contact Number"
+                                            type="tel"
+                                            maxlength="10"
+                                            name="customer_contact_number"
+                                            value={customer_contact_number}
+                                            onChange={e => setcustomer_contact_number(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label>Email</label>
+                                        <Form.Control
+                                            placeholder="Email"
+                                            type="text"
+                                            name="customer_email"
+                                            value={customer_email}
+                                            onChange={e => setcustomer_email(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <div className="button">
+                                <button
+                                    className="btnSubmit"
+                                    type="submit"
+                                    variant="success"
+                                    onClick={(e) => ChangeOnClick(e)}
+                                    style={{ borderRadius: "10px" }}
+                                >
+                                    Update Customer
+                                </button>
+                                &nbsp;&nbsp;
+                                <button
+                                    className="btnCancel"
+                                    type="submit"
+                                    variant="danger"
+                                    onClick={(e) => CancelOnClick(e)}
+                                    style={{ borderRadius: "10px" }}
+                                >
+                                    Cancel
+                                </button>
 
-                                        >
-                                           Cancel 
-                                        </Button>
-                                        
-                                    </Row>
-                                    <div className="clearfix"></div>
-                                </Form>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                            </div>
+                            <div className="clearfix"></div>
+                        </Form>
+                    </Card.Body>
+                    {/* </Card>
+                    </Col> */}
+                </div>
             </Container>
         </>
     );

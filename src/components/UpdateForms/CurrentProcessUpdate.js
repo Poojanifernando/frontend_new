@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Button,
@@ -137,11 +138,12 @@ function CurrentProcessUpdate({ match }) {
     return (
         <>
             <Container >
-                <Row className="justify-content-center ">
-                    <Col md="8">
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h4">Production Registration Update</Card.Title>
+            <div className="cardDesign ">
+                    {/* <Col md="8">
+                        <Card> */}
+                    <Card.Header style={{ border:"none", backgroundColor: "white" }}>
+                        <Card.Title as="h4">Production Registration Update</Card.Title>
+                        <hr/>
                             </Card.Header>
                             <Card.Body>
                                 <Form>
@@ -155,6 +157,7 @@ function CurrentProcessUpdate({ match }) {
                                                     name="job_id_ad"
                                                     value={job_id_ad}
                                                     onChange={e => setjob_id_ad(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                     disabled={true}
                                                 ></Form.Control>
                                             </Form.Group>
@@ -168,6 +171,7 @@ function CurrentProcessUpdate({ match }) {
                                                     name="job_description"
                                                     value={job_description}
                                                     onChange={e => setjob_description(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                     disabled={true}
                                                 ></Form.Control>
                                             </Form.Group>
@@ -183,6 +187,7 @@ function CurrentProcessUpdate({ match }) {
                                                     name="batchid_ad"
                                                     value={batchid_ad}
                                                     onChange={e => setbatchid_ad(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                     disabled={true}
                                                 ></Form.Control>
                                             </Form.Group>
@@ -198,6 +203,7 @@ function CurrentProcessUpdate({ match }) {
                                                     name="batch_start_time"
                                                     value={batch_start_time}
                                                     onChange={e => setbatch_start_time(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -210,6 +216,7 @@ function CurrentProcessUpdate({ match }) {
                                                     name="batch_end_time"
                                                     value={batch_end_time}
                                                     onChange={e => setbatch_end_time(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -221,6 +228,7 @@ function CurrentProcessUpdate({ match }) {
                                                 <Form.Select size="lg" className="form-control" name="product"
                                                     value={product}
                                                     onChange={e => setproduct(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 >
                                                     {productTable.map(item => {
                                                         return (<option key={item.productId} value={item.productId}>{item.productname}</option>);
@@ -237,6 +245,7 @@ function CurrentProcessUpdate({ match }) {
                                                     name="count"
                                                     value={count}
                                                     onChange={e => setcount(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -248,6 +257,7 @@ function CurrentProcessUpdate({ match }) {
                                                 <Form.Select size="lg" className="form-control" name="product_lineid_ad"
                                                     value={product_lineid_ad}
                                                     onChange={e => setproduct_lineid_ad(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 >
                                                     {lineDetails.map(item => {
                                                         return (<option key={item.lineId} value={item.lineId}>{item.lineName}</option>);
@@ -264,6 +274,7 @@ function CurrentProcessUpdate({ match }) {
                                                     name="predicted_date"
                                                     value={predicted_date}
                                                     onChange={e => setpredicted_date(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -279,6 +290,8 @@ function CurrentProcessUpdate({ match }) {
                                                     name="production_order"
                                                     value={production_order}
                                                     onChange={e => setproduction_order(e.target.value)}
+                                                    style={{ borderRadius: "10px" }}
+                                                    disabled="true"
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -290,6 +303,7 @@ function CurrentProcessUpdate({ match }) {
                                                     value={Customer_id}
                                                     onChange={e => setCustomer_id(e.target.value)}
                                                     disabled={true}
+                                                    style={{ borderRadius: "10px" }}
                                                 >
                                                     {cusDetails.map(item => {
                                                         return (<option key={item.cus_id} value={item.cus_id}>{item.customer_name}</option>);
@@ -298,33 +312,33 @@ function CurrentProcessUpdate({ match }) {
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    <Row className="justify-content-center ">
+                                    <div className="button">
                                         &nbsp;&nbsp;
-                                        <Button
-                                            className="btn-fill center"
+                                        <button
+                                            className="btnSubmit"
                                             type="submit"
                                             variant="success"
                                             onClick={(e) => ChangeOnClick(e)}
                                         >
                                             Update Process
-                                        </Button>
+                                        </button>
                                         &nbsp;&nbsp;
-                                        <Button
-                                            className="btn-fill center"
+                                        <button
+                                            className="btnSubmit"
                                             type="submit"
                                             variant="danger"
                                             onClick={(e) => CancelOnClick(e)}
 
                                         >
                                            Cancel 
-                                        </Button>
-                                    </Row>
+                                        </button>
+                                    </div>
                                     <div className="clearfix"></div>
                                 </Form>
                             </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                        {/* </Card>
+                    </Col> */}
+                </div>
             </Container>
         </>
     );

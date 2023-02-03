@@ -12,30 +12,31 @@ class Footer extends Component {
                 <a href="/admin/dashboard" 
                 // onClick={(e) => e.preventDefault()}
                 >
-                  Dashboard
+                 
                 </a>
               </li>
               <li>
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Company
+                  
                 </a>
               </li>
               <li>
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Portfolio
+                  
                 </a>
               </li>
               <li>
                 <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Blog
+                 
                 </a>
               </li>
             </ul>
-            <p className="copyright text-center">
-              © {new Date().getFullYear()}{" "}
-              <a href="http://www.creative-tim.com">Lalan Group</a>
-              {/* , made withlove for a better web */}
+           
+     
+            <p className="copyright" style={{textAlign:"center"}}>
+            <p>© {new Date().getFullYear()}{" "} All Rights Reserved. Solution by  <a href="http://www.siot.lk/">SIoT</a>Services (Pvt.) Ltd</p>
             </p>
+        
           </nav>
         </Container>
       </footer>

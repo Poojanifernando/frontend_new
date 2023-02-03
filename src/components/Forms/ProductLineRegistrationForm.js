@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Badge,
@@ -74,128 +75,134 @@ function ProductLineRegistrationForm() {
     return (
         <>
             <Container >
-                <Row className="justify-content-center ">
-                    <Col md="8">
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h4">Product Line Registration</Card.Title>
+                <div className="cardDesign ">
+                    {/* <Col md="8">
+                        <Card> */}
+                    <Card.Header style={{ border: "none", backgroundColor: "white" }}>
+                        <Card.Title as="h4">Product Line Registration</Card.Title>
+                        <hr />
+                    </Card.Header>
+                    <Card.Body>
+                        <Form>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Product Line  ID</label>
+                                        <Form.Control
+                                            placeholder="Line ID"
+                                            type="text"
+                                            name="lineId"
+                                            onChange={LineDetails.handleChange}
+                                            value={LineDetails.values.lineId}
+                                            style={{ borderRadius: "10px" }}
+                                            required={true}
 
-                            </Card.Header>
-                            <Card.Body>
-                                <Form>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Line  ID</label>
-                                                <Form.Control
-                                                    placeholder="Line ID"
-                                                    type="text"
-                                                    name="lineId"
-                                                    onChange={LineDetails.handleChange}
-                                                    value={LineDetails.values.lineId}
-                                                    required={true}
+                                        ></Form.Control>
+                                        {LineDetails.errors.lineId && (
+                                            <div className="text-danger">{LineDetails.errors.lineId}</div>
+                                        )}
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Product Line Description</label>
+                                        <Form.Control
+                                            placeholder="Line Description"
+                                            type="text"
+                                            name="description"
+                                            onChange={LineDetails.handleChange}
+                                            value={LineDetails.values.description}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                        {LineDetails.errors.description && (
+                                            <div className="text-danger">{LineDetails.errors.description}</div>
+                                        )}
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Product Line Name</label>
+                                        <Form.Control
+                                            placeholder="Line Name"
+                                            type="text"
+                                            name="lineName"
+                                            onChange={LineDetails.handleChange}
+                                            value={LineDetails.values.lineName}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                        {LineDetails.errors.lineName && (
+                                            <div className="text-danger">{LineDetails.errors.lineName}</div>
+                                        )}
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Product Line Image</label>
+                                        <Form.Control
+                                            placeholder="Line Image"
+                                            type="file"
+                                            name="image"
+                                            onChange={LineDetails.handleChange}
+                                            value={LineDetails.values.image}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
 
-                                                ></Form.Control>
-                                                {LineDetails.errors.lineId && (
-                                                    <div className="text-danger">{LineDetails.errors.lineId}</div>
-                                                )}
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Line Description</label>
-                                                <Form.Control
-                                                    placeholder="Line Description"
-                                                    type="text"
-                                                    name="description"
-                                                    onChange={LineDetails.handleChange}
-                                                    value={LineDetails.values.description}
-                                                ></Form.Control>
-                                                {LineDetails.errors.description && (
-                                                    <div className="text-danger">{LineDetails.errors.description}</div>
-                                                )}
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Line Name</label>
-                                                <Form.Control
-                                                    placeholder="Line Name"
-                                                    type="text"
-                                                    name="lineName"
-                                                    onChange={LineDetails.handleChange}
-                                                    value={LineDetails.values.lineName}
-                                                ></Form.Control>
-                                                {LineDetails.errors.lineName && (
-                                                    <div className="text-danger">{LineDetails.errors.lineName}</div>
-                                                )}
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Line Image</label>
-                                                <Form.Control
-                                                    placeholder="Line Image"
-                                                    type="file"
-                                                    name="image"
-                                                    onChange={LineDetails.handleChange}
-                                                    value={LineDetails.values.image}
-                                                ></Form.Control>
-
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Line Start Time</label>
-                                                <Form.Control
-                                                    placeholder="Line Start"
-                                                    type="time"
-                                                    name="startTime"
-                                                    onChange={LineDetails.handleChange}
-                                                    value={LineDetails.values.startTime}
-                                                ></Form.Control>
-                                                {LineDetails.errors.startTime && (
-                                                    <div className="text-danger">{LineDetails.errors.startTime}</div>
-                                                )}
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Line End Time</label>
-                                                <Form.Control
-                                                    placeholder="Line End"
-                                                    type="time"
-                                                    name="endTime"
-                                                    onChange={LineDetails.handleChange}
-                                                    value={LineDetails.values.endTime}
-                                                ></Form.Control>
-                                                {LineDetails.errors.endTime && (
-                                                    <div className="text-danger">{LineDetails.errors.endTime}</div>
-                                                )}
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row className="justify-content-center ">
-                                        <Button
-                                            className="btn-fill center"
-                                            type="submit"
-                                            variant="primary"
-                                            onClick={LineDetails.handleSubmit}
-                                        >
-                                            Add New Line
-                                        </Button>
-                                    </Row>
-                                    <div className="clearfix"></div>
-                                </Form>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Product Line Start Time</label>
+                                        <Form.Control
+                                            placeholder="Line Start"
+                                            type="time"
+                                            name="startTime"
+                                            onChange={LineDetails.handleChange}
+                                            value={LineDetails.values.startTime}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                        {LineDetails.errors.startTime && (
+                                            <div className="text-danger">{LineDetails.errors.startTime}</div>
+                                        )}
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group className="formDesign">
+                                        <label>Product Line End Time</label>
+                                        <Form.Control
+                                            placeholder="Line End"
+                                            type="time"
+                                            name="endTime"
+                                            onChange={LineDetails.handleChange}
+                                            value={LineDetails.values.endTime}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                        {LineDetails.errors.endTime && (
+                                            <div className="text-danger">{LineDetails.errors.endTime}</div>
+                                        )}
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                            <div className="button">
+                                <button
+                                    className="btnSubmit"
+                                    type="submit"
+                                    variant="primary"
+                                    onClick={LineDetails.handleSubmit}
+                                >
+                                    Add New Line
+                                </button>
+                            </div>
+                            <div className="clearfix"></div>
+                        </Form>
+                    </Card.Body>
+                    {/* </Card>
+            </Col> */}
+                </div>
+            </Container >
         </>
     );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useFormik } from 'formik';
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Badge,
@@ -76,17 +77,18 @@ function CustomerRegistraionForm() {
     return (
         <>
             <Container >
-                <Row className="justify-content-center ">
-                    <Col md="8">
-                        <Card>
-                            <Card.Header>
+                <div className="cardDesign ">
+                    {/* <Col md="8">
+                        <Card> */}
+                            <Card.Header style={{ border:"none", backgroundColor: "white" }}>
                                 <Card.Title as="h4">Customer Registration</Card.Title>
+                                <hr/>
                             </Card.Header>
                             <Card.Body>
                                 <Form>
                                     <Row>
                                         <Col className="pr-1" md="6">
-                                            <Form.Group>
+                                            <Form.Group className="formDesign">
                                                 <label>Customer Name</label>
                                                 <Form.Control
                                                     placeholder="Company Name"
@@ -94,6 +96,7 @@ function CustomerRegistraionForm() {
                                                     name="customer_name"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_name}
+                                                    style={{ borderRadius: "10px" }}
                                                     required
                                                 ></Form.Control>
                                                 {cus_reg.errors.customer_name && (
@@ -102,7 +105,7 @@ function CustomerRegistraionForm() {
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
-                                            <Form.Group>
+                                            <Form.Group className="formDesign">
                                                 <label>NIC / Registration Number</label>
                                                 <Form.Control
                                                     placeholder="NIC or Registration Number"
@@ -111,6 +114,7 @@ function CustomerRegistraionForm() {
                                                     maxlength="20"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_NIC}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                                 {cus_reg.errors.customer_NIC && (
                                                     <div className="text-danger">{cus_reg.errors.customer_NIC}</div>
@@ -120,7 +124,7 @@ function CustomerRegistraionForm() {
                                     </Row>
                                     <Row>
                                         <Col className="pr-1" md="6">
-                                            <Form.Group>
+                                            <Form.Group className="formDesign">
                                                 <label>Contact Person</label>
                                                 <Form.Control
                                                     placeholder="Contact Person Name"
@@ -128,6 +132,7 @@ function CustomerRegistraionForm() {
                                                     name="contact_person"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.contact_person}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                                 {cus_reg.errors.contact_person && (
                                                     <div className="text-danger">{cus_reg.errors.contact_person}</div>
@@ -135,7 +140,7 @@ function CustomerRegistraionForm() {
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="6">
-                                            <Form.Group>
+                                            <Form.Group className="formDesign">
                                                 <label>Contact Number</label>
                                                 <Form.Control
                                                     placeholder="0xx-xxxxxxxx"
@@ -144,6 +149,7 @@ function CustomerRegistraionForm() {
                                                     pattern="[0-9]{10}"
                                                     name="customer_contact_number"
                                                     onChange={cus_reg.handleChange}
+                                                    style={{ borderRadius: "10px" }}
                                                     value={cus_reg.values.customer_contact_number}
                                                 ></Form.Control>
                                                 {cus_reg.errors.customer_contact_number && (
@@ -154,7 +160,7 @@ function CustomerRegistraionForm() {
                                     </Row>
                                     <Row>
                                         <Col className="pr-1" md="6">
-                                            <Form.Group>
+                                            <Form.Group className="formDesign">
                                                 <label>Email</label>
                                                 <Form.Control
                                                     placeholder="example@email"
@@ -162,6 +168,7 @@ function CustomerRegistraionForm() {
                                                     name="customer_email"
                                                     onChange={cus_reg.handleChange}
                                                     value={cus_reg.values.customer_email}
+                                                    style={{ borderRadius: "10px" }}
                                                 ></Form.Control>
                                                 {cus_reg.errors.customer_email && (
                                                     <div className="text-danger">{cus_reg.errors.customer_email}</div>
@@ -169,22 +176,22 @@ function CustomerRegistraionForm() {
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    <Row className="justify-content-center ">
-                                        <Button
-                                            className="btn-fill center"
+                                    <div className="button">
+                                        <button
+                                            className="btnSubmit"
                                             type="submit"
                                             variant="primary"
                                             onClick={cus_reg.handleSubmit}
                                         >
                                             Add Customer
-                                        </Button>
-                                    </Row>
+                                        </button>
+                                    </div>
                                     <div className="clearfix"></div>
                                 </Form>
                             </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                        {/* </Card>
+                    </Col> */}
+                </div>
             </Container>
         </>
     );

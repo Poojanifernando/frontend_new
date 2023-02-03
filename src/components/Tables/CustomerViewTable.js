@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { Link } from "react-router-dom";
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Card,
@@ -13,6 +14,20 @@ import {
 } from "react-bootstrap";
 
 function CustomerViewTable() {
+
+    const [sortOrder, setSortOrder] = useState('desc');
+
+    const sortData = (key) => {
+        const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+        setSortOrder(newSortOrder);
+        data.sort((a, b) => {
+            if (newSortOrder === 'asc') {
+                return a[key] > b[key] ? 1 : -1;
+            } else {
+                return b[key] > a[key] ? 1 : -1;
+            }
+        });
+    };
 
     const history = useHistory();
     const [Customers, setCustomers] = useState([]);
@@ -41,27 +56,21 @@ function CustomerViewTable() {
     console.log(JSON.stringify(Customers))
     return (
         <>
-            <Container fluid>
+            <Container>
                 <Row>
                     <Col md="12">
                         <Card className="card-plain table-plain-bg">
-                            <Card.Header>
-                                <Card.Title as="h4">Customer Registration</Card.Title>
-                                <p className="card-category">
-                                    View all Customer details
-                                </p>
-                            </Card.Header>
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
                                     <thead>
                                         <tr>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">ID</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Name</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">NIC</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Contact Person</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Number</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Email</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
+                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">ID</th>
+                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Name</th>
+                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">NIC</th>
+                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Contact Person</th>
+                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Number</th>
+                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Email</th>
+                                            <th style={{ color: 'black' }} className="font-weight-bold" textAlign="center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -100,3 +109,4 @@ function CustomerViewTable() {
 }
 
 export default CustomerViewTable;
+

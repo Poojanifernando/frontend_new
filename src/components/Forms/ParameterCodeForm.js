@@ -27,6 +27,7 @@ function ParameterCodeForm() {
                         <Card>
                             <Card.Header>
                                 <Card.Title as="h4">Parameter Registration</Card.Title>
+                                <hr/>
                             </Card.Header>
                             <Card.Body>
                                 <Form>

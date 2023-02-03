@@ -1,137 +1,173 @@
-  /* .scrollmenu {
-      overflow: auto;
-      white-space: nowrap;
-    }
-    
-  .scrollmenu .aa {
-      display: inline-block;
-      color: rgb(0, 0, 0);
-      text-align: center;
-      border: none;
-    } */
-hr{
+  body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  hr {
     /* background-color: black; */
     /* border: none; */
-    size : 1;
-}
-.h3{
-  font-family: 'Courier New', Courier, monospace black;
-  font-size: 15px;
-  color: rgb(6, 6, 6);
-  text-align: left;
-  padding: none;
-  border: none;
-}
+    size: 1;
+  }
 
-.inside_card_padding{
-  padding: 5px;
-}
-.padnone{
-  padding: none;
-}
-
-/* .row{
-  background-color: rgb(157, 133, 133);
-  text-align: left;
-} */
-
-.rowstest{
-    /* background-color:#95D60A; */
+  .h3 {
+    font-family: 'Courier New', Courier, monospace black;
+    font-size: 1.2rem;
+    color: rgb(6, 6, 6);
     text-align: left;
-    padding: 10px;
+    padding: none;
+    border: none;
+  }
+
+  .inside_card_padding {
+    padding: 5px;
+  }
+
+  .padnone {
+    padding: none;
+  }
+
+  /* 
+  .row {
+    background-color: rgb(194, 135, 135);
+  } */
+
+  .rowstest {
+    /* background-color:#95D60A; */
+    text-align: center;
+    padding: 0;
+    align-items: center;
+    box-shadow: #555;
 
   }
 
-.test{
-  border-style: groove;
-}
+  .test {
+    border-style:solid;
+    background-color: white;
+  }
 
 
-.column {
-  float: left;
-}
+  .column {
+    float: left;
+  }
 
-.left  {
-  width: 50%;
-  /* height: 50px; */
-  /* align-content: center; */
-  
-}
+  .left {
+    width: 50%;
+    /* height: 50px; */
+    /* align-content: center; */
 
-.middle,.right {
-  width: 25%;
-}
+  }
 
+  .middle,
+  .right {
+    width: 25%;
+  }
 
-.abc{
+  .abc {
     /* background-color: rgb(236, 153, 153); */
-   /* height: 100px; */
-   white-space: pre-line;
+    /* height: 100px; */
+    white-space: pre-line;
 
-}
-.ab{
+  }
+
+  .ab {
     /* background-color: rgb(118, 107, 107); */
-   /* height: 100px; */
-   white-space: pre-line;
-   font-size: 10px;
- 
+    /* height: 100px; */
+    white-space: pre-line;
+    font-size: 10px;
 
-}
-.a{
+
+  }
+
+  .a {
     /* background-color: rgb(235, 11, 11); */
-   /* height: 100px; */
-   white-space: pre-line;
-   font-size: 35px;
-   
-}
+    /* height: 100px; */
+    white-space: pre-line;
+    font-size: 35px;
 
-.col-4{
+  }
+
+  .col-4 {
     /* border-style: double; */
     /* padding: 0; */
     padding-top: 10px;
     align-content: center;
-}
-.col-6{
+  }
+
+  .col-6 {
     /* border-style: double; */
     padding: 0;
     padding-left: 10px;
-}
-/* .col-2{
+  }
+
+  /* .col-2{
     border-style: double;
     padding: 0;
 } */
-/* .cardbody{
+  /* .cardbody{
   padding: 0;
 } */
 
-.textcolor{
-  color: #000000;
-}
-.asd{
-  font-weight:bold;
-  color: #0c0c0c;
-  
-}
-.ProgressBartest svg{
-  width: 80px;
-  height: 80px;
+  .Length {
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
+    font-size: 1.0rem;
+  }
 
-}
-.indicator {
-  display: flex;
-   align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  width: 85px;
-  height: 90px;
-  margin: 0 auto;
-  font-size: 0.9em;
-  font-weight: 20;
-  color: #555;
-  user-select: none; 
-}
-svg text {
-  fill: rgb(0, 0, 0);
-}
+  .textcolor {
+    color: blue;
+    align-items: center;
+    text-align: center;
+    margin-left: 60px;
+    margin-top: 5px;
+  }
+
+  .asd {
+    font-weight: bold;
+    color: #0c0c0c;
+
+  }
+
+  .ProgressBartest {
+    width: 100px;
+    height: 100px;
+
+  }
+
+  .indicator {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.0rem;
+    font-weight: 20;
+    color: #555;
+    user-select: none;
+  }
+
+  svg.CircularProgressbar {
+    width: 50%;
+    font-size: 1.0rem;
+  }
+
+  svg text {
+    fill: black;
+    font-weight: bold;
+    text-align: center;
+    /* align-items: center; */
+  }
+
+  .speedometer {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .svg {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .speed {
+    text-align: center;
+  }

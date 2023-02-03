@@ -46,7 +46,7 @@ function CardParameterbody(props) {
 
 //show only the machine names in page 1 by one
     return (
-        <Container style={{ paddingBottom: "10px", minHeight: "140px", minWidth: "100px" }}>
+        <Container style={{ minHeight: "182px", minWidth: "168px" }}>
             < >
                 {machinePerameters?.map((machineperameter, index) => {
                     let color = "#00A300";
@@ -67,16 +67,19 @@ function CardParameterbody(props) {
                             })}
 
                             <>
-                                <Row className="rowstest " style={{ backgroundColor: color }}>
-                                    <Col xs="6 ab">
-                                        <p className=" textcolor">
+                            <Row className="rowstest " style={{ backgroundColor: "white", padding:"0px", alignItems:'center'}}>
+                                    {/* <Col xs="6 ab"> */}
+                                    
+                                        <p className=" textcolor" style={{textAlign:"center" , paddingBottom:"none"}}>
+                                          
                                             {machineperameter.device_name_dvc_reg}
                                         </p>
-                                    </Col>
-                                    <Col xs="6 abc">
+                                        
+                                    {/* </Col> */}
+                                    {/* <Col xs="6 abc"> */}
                                         {/* to show the parameter values  */}
                                         <PerameterValueView job={machineperameter.job_id_ad} batch={machineperameter.batchid_ad} lid={current_Line} proOder={current_pOrder} machine={current_Machine} deviceId={machineperameter.device_id} pID={machineperameter.parameter_id} date={current_date} color={color} msg={msg123} />
-                                    </Col>
+                                    {/* </Col> */}
 
                                 </Row>
 

@@ -41,16 +41,16 @@ function ProcessRegistrationTable() {
 
     return (
         <>
-            <Container fluid>
+            <Container>
                 <Row>
                     <Col md="12">
                         <Card className="card-plain table-plain-bg">
-                            <Card.Header>
+                            {/* <Card.Header>
                                 <Card.Title as="h4">Production Registration</Card.Title>
                                 <p className="card-category">
                                     View all Process details
                                 </p>
-                            </Card.Header>
+                            </Card.Header> */}
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
                                     <thead>
@@ -63,7 +63,7 @@ function ProcessRegistrationTable() {
                                             <th style={{ color: 'black' }} className="border-0 font-weight-bold">Line Id</th>
                                             <th style={{ color: 'black' }} className="border-0 font-weight-bold">Date</th>
                                             <th style={{ color: 'black' }} className="border-0 font-weight-bold">ORDER</th>
-                                            <th style={{ color: 'black' }} className="border-0 font-weight-bold">Customer ID</th>
+                                            {/* <th style={{ color: 'black' }} className="border-0 font-weight-bold">Customer Name</th> */}
                                             <th style={{ color: 'black' }} className="border-0 font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
@@ -79,7 +79,7 @@ function ProcessRegistrationTable() {
                                                     <td>{progers.product_lineid_ad}</td>
                                                     <td>{progers.predicted_date}</td>
                                                     <td>{progers.production_order}</td>
-                                                    <td>{progers.customer_id}</td>
+                                                    {/* <td>{progers.customer_id}</td> */}
                                                     <td>
                                                         <a className="btn btn-danger" id="icon">
                                                             <em className="fa fa-trash"

@@ -40,16 +40,16 @@ function MachineViewTable() {
     console.log(JSON.stringify(machines))
     return (
         <>
-            <Container fluid>
+            <Container>
                 <Row>
                     <Col md="12">
                         <Card className="card-plain table-plain-bg">
-                            <Card.Header>
+                            {/* <Card.Header>
                                 <Card.Title as="h4">Batch Registration</Card.Title>
                                 <p className="card-category">
                                     View all Batch details
                                 </p>
-                            </Card.Header>
+                            </Card.Header> */}
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
                                     <thead>

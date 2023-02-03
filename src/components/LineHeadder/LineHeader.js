@@ -7,7 +7,6 @@ import ScrollMenuMachines from "components/MachineCardView/ScrollMenuMachines.js
 
 function LineHeader(props) {
 
-
     const UserId = localStorage.getItem("userId");
     const current_date = props.date;
     const current_Line = props.line;
@@ -40,7 +39,7 @@ function LineHeader(props) {
         });
         //westage
         axios.get(myurl + '/api/v1/admin/getSumOfProductWastage/' + current_Line).then((response) => {
-            setWastage(response.data.a_con);
+            setWastage(response.data.IOT);
         });
 
         //loop
@@ -49,17 +48,24 @@ function LineHeader(props) {
                 settest(response.data);
                 //westage
                 axios.get(myurl + '/api/v1/admin/getSumOfProductWastage/' + current_Line).then((response) => {
-                    setWastage(response.data.a_con);
+                    setWastage(response.data.IOT);
                 });
 
             }))
             , 5000);
-    }, []);
+
+        //check the results of button 
+        setInterval(() => (
+            new axios.get(myurl + '/api/v1/admin/ButtonOnorNot/' + current_Line + '/' + current_date).then((response) => {
+                setIsRunning(response.data.ReturnVal);
+            }))
+            , 1000);
+    }, [isRunning]);
 
     let firstWarm = true;
     let firstOnline = true;
     // let startbuttonhold =false;
-    
+
     let startbuttonhold = localStorage.getItem("testbuton");
     const boolValue = JSON.parse(startbuttonhold);
     console.log(boolValue)
@@ -68,7 +74,7 @@ function LineHeader(props) {
     //stop button disable or not
     let stopbutton = true;
     if (isRunning == 1) {
-        localStorage.setItem("testbuton" , false);
+        localStorage.setItem("testbuton", false);
         stopbutton = true
     }
     else if (isRunning == 2) {
@@ -84,15 +90,15 @@ function LineHeader(props) {
     //click event in 4 button
     const handleClick1 = async (id) => {
         //warmup
-       
+
         if (isRunning == 1) {
             console.log("1", id)
             if (confirm("Are you want to start warmup this?")) {
                 // setIsRunning(true);
                 try {
-                    
+
                     axios.get(url + '/api/v1/admin/AddStartTime/' + current_Line + '/' + current_date + '/' + id + '/1').then(() => {
-                        localStorage.setItem("testbuton" , true);
+                        localStorage.setItem("testbuton", true);
                         window.location.reload(false);
                     }).catch((err) => {
                         alert(err);
@@ -152,7 +158,7 @@ function LineHeader(props) {
             }
         }
     }
-  
+
 
     //stop button
     const handleClickStop = async (id) => {
@@ -196,67 +202,70 @@ function LineHeader(props) {
                 lineCustomerDetails.map((cusDetails, index) => {
                     return (
                         <>
-                            <div class="row1">
-                                {test.map((Value, index) => {
-                                    if (Value.t_warmup === 'Warming Up' && firstWarm) {
-                                        firstWarm = false;
-                                        return (
-                                            <div class="columnrow rightrow"
-                                                style={{ backgroundColor: Value.t_color }}
-                                            >{Value.t_warmup}
-                                            </div>
-                                        );
-                                    }
-                                    if (Value.t_warmup === 'Online' && firstOnline) {
-                                        firstOnline = false;
-                                        // buttontruefalse = false;
-                                        // startbuttonhold = false;
-                                        localStorage.setItem("testbuton" , false);
-                                        return (
-                                            <div class="columnrow rightrow"
-                                                style={{ backgroundColor: "#027739", textShadow: "2px -1px 0 #000" }}
-                                            >{Value.t_warmup}
-                                            </div>
-                                        );
-                                    }
-                                })}
-                                <div class="columnrow leftrow fontsize">
+                            {/* <div class="row1"> */}
 
-                                    {/* <button onClick={() => handleClick(cusDetails.production_order)} className='btn btntest' style={style}
-                                      >
-                                        {isRunning ? 'Stop' : 'Start'}
-                                    </button> */}
+                                <div >
+                                    {/* &nbsp;&nbsp;&nbsp; */}
+                                    <b style={{ fontSize: '1.0rem' }}>
+                                        LINE - {current_Line_name}</b>
+                                    {/* <div className="onlinrtestrow" > */}
+                                        {test.map((Value, index) => {
+                                            if (Value.t_warmup === 'Warming Up' && firstWarm) {
+                                                firstWarm = false;
+                                                if (isRunning == 2) {
+                                                    localStorage.setItem("testbuton", true);
+                                                }
+                                                return (
+                                                    <div class="columnrow rightrow"
+                                                        style={{ backgroundColor: Value.t_color }}
+                                                    >{Value.t_warmup}
+                                                    </div>
+                                                );
+                                            }
+                                            if (Value.t_warmup === 'Online' && firstOnline) {
+                                                firstOnline = false;
+                                                // buttontruefalse = false;
+                                                // startbuttonhold = false;
+                                                localStorage.setItem("testbuton", false);
+                                                return (
+                                                    <div class="columnrow rightrow"
+                                                        style={{ backgroundColor: "#027739", textShadow: "2px -1px 0 #000" }}
+                                                    >{Value.t_warmup}
+                                                    </div>
+                                                );
+                                            }
+                                        })}
+                                    {/* </div> */}
 
-                                    <button className='btn btntest' style={style} disabled={boolValue}  onClick={() => handleClick1(cusDetails.production_order)}>
-                                        {isRunning == 1
-                                            ? 'Warmup'
-                                            : isRunning == 2
-                                                ? 'Start'
-                                                : isRunning == 3
-                                                    ? 'Pause'
-                                                    : isRunning == 4
-                                                        ? 'Resume'
-                                                        : ''
-                                        }</button>
-                                    {/* {isRunning == 1 && <div>This will show when isRunning is 1</div>}
-                                    {isRunning == 2 && <div>This will show when isRunning is 2</div>}
-                                    {isRunning == 3 && <div>This will show when isRunning is 3</div>} */}
+                                    <div class="columnrowbtnpadding">
+                                        <button onClick={() => handleClick1(cusDetails.production_order)} className='startBtn' style={style} disabled={boolValue} >
+                                            {isRunning == 1
+                                                ? 'Warmup'
+                                                : isRunning == 2
+                                                    ? 'Start'
+                                                    : isRunning == 3
+                                                        ? 'Pause'
+                                                        : isRunning == 4
+                                                            ? 'Resume'
+                                                            : ''
+                                            }</button>
 
-                                    {/* stop button */}
-                                    <button className='btn' style={{ color: 'white', backgroundColor: "red" }} disabled={stopbutton} onClick={() => handleClickStop(cusDetails.production_order)}>Stop</button>
-                                    &nbsp;&nbsp;&nbsp;
-
-                                    {current_Line_name}
+                                        {/* stop button */}
+                                        <button className="stopBtn" style={{ color: 'white', backgroundColor: "red" }} disabled={stopbutton} onClick={() => handleClickStop(cusDetails.production_order)}>Stop</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row1">
+                            {/* </div> */}
+
+                            <br></br>
+                            <div class="row1" >
                                 <div class="column1"><p className="linetitle">Job no :<p className="ptagRemove"> {cusDetails.job_id_ad}</p></p></div>
-                                <div class="column1"><p className="linetitle" >Product :<p className="ptagRemove">  {cusDetails.product_name}</p></p> </div>
-                                <div class="column1"><p className="linetitle">Quantity : <p className="ptagRemove"> {cusDetails.count_reg_bch}</p></p>  </div>
+                                <div class="column1"><p className="linetitle">Product :<p className="ptagRemove">  {cusDetails.product_name}</p></p> </div>
+                                <div class="column1"><p className="linetitle">Quantity :<p className="ptagRemove"> {cusDetails.count_reg_bch}</p></p>  </div>
                                 <div class="column1"><p className="linetitle">Batch : <p className="ptagRemove"> {cusDetails.batchid_reg_bch}</p></p> </div>
-                                <div class="column1"><p className="linetitle">Customer : <p className="ptagRemove"> {cusDetails.customer_name}</p></p> </div>
+                                <div class="column1"><p className="linetitle">Customer :<p className="ptagRemove"> {cusDetails.customer_name}</p></p> </div>
                                 <div class="column1"><p className="linetitle">Westage : <p className="ptagRemove"> {Wastage}</p></p></div>
                             </div>
+                            <br></br>
                             {/* get to the ScrollMenuMachines to view all the machine view */}
                             <ScrollMenuMachines date={current_date} line={current_Line} pOrder={cusDetails.production_order} />
                         </>)

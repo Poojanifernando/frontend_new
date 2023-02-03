@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios";
 import { getLocalhostUrl } from 'components/url/Url.js'
 import { useHistory } from 'react-router-dom';
+import "../../assets/css/allForms.css"
 // react-bootstrap components
 import {
     Badge,
@@ -86,95 +87,99 @@ function ProductUpdate({ match }) {
     return (
         <>
             <Container >
-                <Row className="justify-content-center ">
-                    <Col md="8">
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h4">Product Update</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <Form>
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product ID</label>
-                                                <Form.Control
-                                                    placeholder="Product ID"
-                                                    type="text"
-                                                    name="product_id"
-                                                    value={product_id}
-                                                    onChange={e => setproduct_id(e.target.value)}
-                                                    disabled={true}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Name</label>
-                                                <Form.Control
-                                                    placeholder="Product Name"
-                                                    type="text"
-                                                    name="product_name"
-                                                    value={product_name}
-                                                    onChange={e => setproduct_name(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
+                <div className="cardDesign ">
+                    {/* <Col md="8">
+                        <Card> */}
+                    <Card.Header style={{ border: "none", backgroundColor: "white" }}>
+                        <Card.Title as="h4">Product Update</Card.Title>
+                        <hr/>
+                    </Card.Header>
+                    <Card.Body>
+                        <Form>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label>Product ID</label>
+                                        <Form.Control
+                                            placeholder="Product ID"
+                                            type="text"
+                                            name="product_id"
+                                            value={product_id}
+                                            onChange={e => setproduct_id(e.target.value)}
+                                            disabled={true}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label>Product Name</label>
+                                        <Form.Control
+                                            placeholder="Product Name"
+                                            type="text"
+                                            name="product_name"
+                                            value={product_name}
+                                            onChange={e => setproduct_name(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
 
-                                    <Row>
-                                        <Col className="pr-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Description</label>
-                                                <Form.Control
-                                                    placeholder="Product Description"
-                                                    type="text"
-                                                    name="description"
-                                                    value={description}
-                                                    onChange={e => setdescription(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Product Image</label>
-                                                <Form.Control
-                                                    placeholder="Product Image"
-                                                    type="file"
-                                                    name="image"
-                                                    value={image}
-                                                    onChange={e => setimage(e.target.value)}
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
+                            <Row>
+                                <Col className="pr-1" md="6">
+                                    <Form.Group>
+                                        <label>Product Description</label>
+                                        <Form.Control
+                                            placeholder="Product Description"
+                                            type="text"
+                                            name="description"
+                                            value={description}
+                                            onChange={e => setdescription(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" md="6">
+                                    <Form.Group>
+                                        <label>Product Image</label>
+                                        <Form.Control
+                                            placeholder="Product Image"
+                                            type="file"
+                                            name="image"
+                                            value={image}
+                                            onChange={e => setimage(e.target.value)}
+                                            style={{ borderRadius: "10px" }}
+                                        ></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
 
-                                    <Row className="justify-content-center ">
-                                        <Button
-                                            className="btn-fill center"
-                                            type="submit"
-                                            variant="success"
-                                            onClick={(e) => ChangeOnClick(e)}
-                                        >
-                                            Update Product
-                                        </Button>
-                                        &nbsp;&nbsp;
-                                        <Button
-                                            className="btn-fill center"
-                                            type="submit"
-                                            variant="danger"
-                                            onClick={(e) => CancelOnClick(e)}
+                            <div className="button">
+                                <button
+                                    className="btnSubmit"
+                                    type="submit"
+                                    variant="success"
+                                    onClick={(e) => ChangeOnClick(e)}
+                                >
+                                    Update Product
+                                </button>
+                                &nbsp;&nbsp;
+                                <button
+                                    className="btnCancel"
+                                    type="submit"
+                                    variant="danger"
+                                    onClick={(e) => CancelOnClick(e)}
 
-                                        >
-                                            Cancel
-                                        </Button>
-                                    </Row>
-                                    <div className="clearfix"></div>
-                                </Form>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                            <div className="clearfix"></div>
+                        </Form>
+                    </Card.Body>
+                    {/* </Card>
+                    </Col> */}
+                </div>
             </Container>
         </>
     );
